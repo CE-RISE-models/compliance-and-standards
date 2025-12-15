@@ -2,6 +2,11 @@
 
 All notable changes to the CE-RISE Compliance and Standards Data Model will be documented in this file.
 
+## [0.0.2] - 2025-12-15
+
+### Added
+- Missing relevant references from Beta data model release
+
 ## [0.0.1] - 2025-12-15
 
 ### Added

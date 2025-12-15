@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: CE-RISE Compliance and Standards
 message: >-
-  v0.0.1 - Complete implementation of compliance and standards data model with 5 stages.
+  v0.0.2 - Added refs from Beta data model release.
 type: software
 doi: 10.5281/zenodo.17938293
 authors:
