@@ -1474,7 +1474,7 @@ enums:
                 annotations:
                     sql_identifier: comp_cat_regulatory
                     owl.filler: schema:LegislationObject
-                    references: "ESPR; REACH; ROHS; Product Safety Directive; Ecodesign Directive"
+                    references: "ESPR; REACH Regulation (EC) No 1907/2006; RoHS Directive 2011/65/EU; Product Safety Directive; Ecodesign Directive 2009/125/EC; CLP Regulation (EC) No 1272/2008"
             VOLUNTARY:
                 description: Voluntary commitment beyond legal requirements
                 annotations:
@@ -1639,13 +1639,13 @@ enums:
                 annotations:
                     sql_identifier: comp_evidtype_doc
                     owl.filler: schema:ConformityDeclaration
-                    references: "ESPR; Battery Pass; Deliverable 1.1"
+                    references: "ESPR; EU Declaration of Conformity per Decision No 768/2008/EC"
             CERTIFICATE:
                 description: Certificate from third party
                 annotations:
                     sql_identifier: comp_evidtype_cert
                     owl.filler: schema:Certificate
-                    references: "ESPR; King et al.; Deliverable 1.1"
+                    references: "ESPR; Regulation (EC) No 765/2008 for Notified Body accreditation"
             TEST_REPORT:
                 description: Test report
                 annotations:
@@ -1888,7 +1888,7 @@ enums:
                 annotations:
                     sql_identifier: comp_stmttype_chemical
                     references: "REACH; ROHS; King et al."
-                    comment: "Includes REACH and ROHS compliance"
+                    comment: "Includes REACH and RoHS compliance; substances of concern above 0.1% weight by weight per SCIP database requirements"
             ENERGY:
                 description: Energy efficiency statement
                 annotations:
