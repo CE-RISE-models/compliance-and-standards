@@ -1,0 +1,1934 @@
+{
+    "$defs": {
+        "Amendment": {
+            "additionalProperties": false,
+            "description": "Record of an amendment to a requirement",
+            "properties": {
+                "amendment_date": {
+                    "description": "Date of amendment",
+                    "format": "date",
+                    "type": "string"
+                },
+                "amendment_description": {
+                    "description": "Description of changes",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "amendment_id": {
+                    "description": "Amendment identifier",
+                    "type": "string"
+                },
+                "amendment_type": {
+                    "description": "Type of amendment (correction, supplement, revision)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "amendment_id",
+                "amendment_date"
+            ],
+            "title": "Amendment",
+            "type": "object"
+        },
+        "ApplicabilityStatus": {
+            "additionalProperties": false,
+            "description": "Jurisdiction-specific applicability status for a requirement, allowing tracking of how requirements apply differently across markets.",
+            "properties": {
+                "derogations": {
+                    "description": "Any derogations or exemptions",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "effective_date": {
+                    "description": "Date when this status becomes effective",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "end_date": {
+                    "description": "Date when this status ends or changes",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "enforcement_level": {
+                    "description": "Level of enforcement in this jurisdiction",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "jurisdiction": {
+                    "description": "Jurisdiction where this status applies",
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/RequirementStatusType",
+                    "description": "Status in this jurisdiction"
+                },
+                "transition_period": {
+                    "description": "Transition period details if applicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "jurisdiction",
+                "status"
+            ],
+            "title": "ApplicabilityStatus",
+            "type": "object"
+        },
+        "ApplicableRegulationStandards": {
+            "additionalProperties": false,
+            "description": "Container for all applicable regulations, standards, and specifications with jurisdiction-aware requirements tracking and version management.",
+            "properties": {
+                "requirement_entries": {
+                    "description": "List of applicable requirements (regulations, standards, specifications)",
+                    "items": {
+                        "$ref": "#/$defs/RequirementEntry"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ApplicableRegulationStandards",
+            "type": "object"
+        },
+        "AuditRecord": {
+            "additionalProperties": false,
+            "description": "Record of an audit",
+            "properties": {
+                "audit_date": {
+                    "description": "Date of audit",
+                    "format": "date",
+                    "type": "string"
+                },
+                "audit_result": {
+                    "description": "Overall audit result",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "audit_type": {
+                    "$ref": "#/$defs/AuditType",
+                    "description": "Type of audit"
+                },
+                "auditor": {
+                    "description": "Auditor or audit organization",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "corrective_actions": {
+                    "description": "Corrective actions taken",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "findings": {
+                    "description": "Audit findings",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "audit_date"
+            ],
+            "title": "AuditRecord",
+            "type": "object"
+        },
+        "AuditType": {
+            "description": "Types of audits",
+            "enum": [
+                "INITIAL",
+                "SURVEILLANCE",
+                "RECERTIFICATION",
+                "SPECIAL",
+                "INTERNAL",
+                "CUSTOMER"
+            ],
+            "title": "AuditType",
+            "type": "string"
+        },
+        "AuthorityType": {
+            "description": "Types of issuing authorities",
+            "enum": [
+                "NOTIFIED_BODY",
+                "CERTIFICATION_BODY",
+                "TEST_LABORATORY",
+                "INSPECTION_BODY",
+                "MANUFACTURER",
+                "AUTHORIZED_REPRESENTATIVE",
+                "COMPETENT_AUTHORITY",
+                "ACCREDITATION_BODY"
+            ],
+            "title": "AuthorityType",
+            "type": "string"
+        },
+        "CertificationDetails": {
+            "additionalProperties": false,
+            "description": "Details about management system certification",
+            "properties": {
+                "accreditation_details": {
+                    "description": "Accreditation details of certification body",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "certificate_number": {
+                    "description": "Certificate number",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "certification_body": {
+                    "description": "Name of certification body",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "certification_status": {
+                    "$ref": "#/$defs/CertificationStatusType",
+                    "description": "Current certification status"
+                },
+                "validity_period": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ValidityPeriod"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Validity period of certification"
+                }
+            },
+            "title": "CertificationDetails",
+            "type": "object"
+        },
+        "CertificationStatusType": {
+            "description": "Status of certification",
+            "enum": [
+                "CERTIFIED",
+                "PENDING",
+                "EXPIRED",
+                "SUSPENDED",
+                "WITHDRAWN",
+                "IN_PROGRESS"
+            ],
+            "title": "CertificationStatusType",
+            "type": "string"
+        },
+        "Commitment": {
+            "additionalProperties": false,
+            "description": "A single commitment representing any type of product-related obligation, promise, or compliance requirement with flexible categorization and jurisdiction-specific status tracking.",
+            "properties": {
+                "commitment_categories": {
+                    "description": "Categories this commitment belongs to (can be multiple)",
+                    "items": {
+                        "$ref": "#/$defs/CommitmentCategory"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "commitment_description": {
+                    "description": "Detailed description or context of the commitment",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "commitment_identifier": {
+                    "description": "Unique identifier for this commitment",
+                    "type": "string"
+                },
+                "commitment_statement_value": {
+                    "description": "The actual commitment statement or text",
+                    "type": "string"
+                },
+                "compliance_statuses": {
+                    "description": "Status of this commitment in different jurisdictions",
+                    "items": {
+                        "$ref": "#/$defs/ComplianceStatus"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "evidence_references": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/EvidenceReferences"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "References to supporting evidence for this commitment"
+                },
+                "last_updated": {
+                    "description": "Last update timestamp for this commitment",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stakeholder_scope": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/StakeholderScope"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Scope of applicability for this commitment"
+                },
+                "validity_period": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ValidityPeriod"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Period during which this commitment is valid"
+                },
+                "version_info": {
+                    "description": "Version tracking for this commitment",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "commitment_identifier",
+                "commitment_statement_value"
+            ],
+            "title": "Commitment",
+            "type": "object"
+        },
+        "CommitmentCategory": {
+            "additionalProperties": false,
+            "description": "Category or type of commitment with external standard references",
+            "properties": {
+                "category_reference": {
+                    "description": "External ontology or standard reference for this category",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "category_type": {
+                    "$ref": "#/$defs/CommitmentCategoryType",
+                    "description": "Type of commitment category"
+                },
+                "priority_level": {
+                    "description": "Priority or importance level of this category",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "category_type"
+            ],
+            "title": "CommitmentCategory",
+            "type": "object"
+        },
+        "CommitmentCategoryType": {
+            "description": "Types of commitment categories",
+            "enum": [
+                "REGULATORY",
+                "VOLUNTARY",
+                "CONTRACTUAL",
+                "INDUSTRY_STANDARD",
+                "CUSTOMER_REQUIREMENT",
+                "ENVIRONMENTAL",
+                "SOCIAL",
+                "QUALITY"
+            ],
+            "title": "CommitmentCategoryType",
+            "type": "string"
+        },
+        "ComplianceAndStandards": {
+            "additionalProperties": false,
+            "description": "Root container for all compliance and standards related information, encompassing commitments, requirements, evidence, and regulatory data.",
+            "properties": {
+                "applicable_regulation_standards": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ApplicableRegulationStandards"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Applicable regulations, standards, and specifications"
+                },
+                "process_evidence": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ProcessEvidence"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Management system and process-related evidence"
+                },
+                "product_commitments": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ProductCommitments"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "All product-related commitments (regulatory, voluntary, contractual)"
+                },
+                "product_evidence": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ProductEvidence"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Documentary evidence supporting compliance claims"
+                },
+                "regulatory_information": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RegulatoryInformation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Structured regulatory information including safety, instructions, and identifiers"
+                }
+            },
+            "title": "ComplianceAndStandards",
+            "type": "object"
+        },
+        "ComplianceStatement": {
+            "additionalProperties": false,
+            "description": "A regulatory compliance statement",
+            "properties": {
+                "applicable_standards": {
+                    "description": "Standards this statement relates to",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "statement_content": {
+                    "description": "Content of the statement",
+                    "type": "string"
+                },
+                "statement_type": {
+                    "$ref": "#/$defs/StatementType",
+                    "description": "Type of statement"
+                },
+                "test_references": {
+                    "description": "References to supporting tests",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "valid_for_jurisdictions": {
+                    "description": "Jurisdictions where valid",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "statement_type",
+                "statement_content"
+            ],
+            "title": "ComplianceStatement",
+            "type": "object"
+        },
+        "ComplianceStatements": {
+            "additionalProperties": false,
+            "description": "Container for compliance statements",
+            "properties": {
+                "statements": {
+                    "description": "Individual compliance statements",
+                    "items": {
+                        "$ref": "#/$defs/ComplianceStatement"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ComplianceStatements",
+            "type": "object"
+        },
+        "ComplianceStatus": {
+            "additionalProperties": false,
+            "description": "Jurisdiction-specific compliance status for a commitment, allowing the same commitment to have different statuses in different markets.",
+            "properties": {
+                "effective_date": {
+                    "description": "Date when this status became effective",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "expiry_date": {
+                    "description": "Date when this status expires or changes",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "issuing_authority": {
+                    "description": "Authority that determined this status",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "jurisdiction": {
+                    "description": "Jurisdiction or market where this status applies",
+                    "type": "string"
+                },
+                "status_notes": {
+                    "description": "Additional notes or context about this status",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "status_value": {
+                    "$ref": "#/$defs/ComplianceStatusType",
+                    "description": "Current status in this jurisdiction"
+                }
+            },
+            "required": [
+                "status_value",
+                "jurisdiction"
+            ],
+            "title": "ComplianceStatus",
+            "type": "object"
+        },
+        "ComplianceStatusType": {
+            "description": "Types of compliance status",
+            "enum": [
+                "MANDATORY",
+                "VOLUNTARY",
+                "RECOMMENDED",
+                "OPTIONAL",
+                "NOT_APPLICABLE",
+                "PENDING",
+                "SUPERSEDED",
+                "TRANSITIONAL"
+            ],
+            "title": "ComplianceStatusType",
+            "type": "string"
+        },
+        "DigitalSignature": {
+            "additionalProperties": false,
+            "description": "Digital signature information for evidence authenticity",
+            "properties": {
+                "certificate_reference": {
+                    "description": "Reference to digital certificate",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signatory": {
+                    "description": "Person or entity who signed",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signature_date": {
+                    "description": "Date of digital signature",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signature_type": {
+                    "description": "Type of digital signature",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signature_value": {
+                    "description": "Digital signature value or hash",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "DigitalSignature",
+            "type": "object"
+        },
+        "DocumentAccess": {
+            "additionalProperties": false,
+            "description": "Information about document access and storage",
+            "properties": {
+                "access_restrictions": {
+                    "description": "Any access restrictions",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "checksum": {
+                    "description": "Checksum for integrity verification",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "document_format": {
+                    "description": "Format of the document",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "document_url": {
+                    "description": "URL where document can be accessed",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "retention_period": {
+                    "description": "How long document must be retained",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "storage_location": {
+                    "description": "Where document is stored",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "DocumentAccess",
+            "type": "object"
+        },
+        "EvidenceDocument": {
+            "additionalProperties": false,
+            "description": "A single piece of documentary evidence supporting compliance claims, with version tracking, digital signatures, and scope definition.",
+            "properties": {
+                "commitment_support": {
+                    "description": "Commitments that this evidence supports",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conformity_assessment_procedure": {
+                    "description": "Conformity assessment procedure used",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "digital_signature": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/DigitalSignature"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Digital signature information"
+                },
+                "document_access": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/DocumentAccess"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Document access and storage information"
+                },
+                "document_identifier": {
+                    "description": "Unique identifier for this document",
+                    "type": "string"
+                },
+                "document_language": {
+                    "description": "Language(s) of the document",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "document_title": {
+                    "description": "Title of the document",
+                    "type": "string"
+                },
+                "evidence_type": {
+                    "$ref": "#/$defs/EvidenceType",
+                    "description": "Type of evidence document"
+                },
+                "issue_date": {
+                    "description": "Date when document was issued",
+                    "format": "date",
+                    "type": "string"
+                },
+                "issuing_authority_details": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/IssuingAuthority"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Details about the issuing authority"
+                },
+                "scope_of_evidence": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ScopeOfEvidence"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Scope covered by this evidence"
+                },
+                "validity_period": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ValidityPeriod"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Validity period of this evidence"
+                }
+            },
+            "required": [
+                "evidence_type",
+                "document_identifier",
+                "document_title",
+                "issue_date"
+            ],
+            "title": "EvidenceDocument",
+            "type": "object"
+        },
+        "EvidenceReferences": {
+            "additionalProperties": false,
+            "description": "References to evidence supporting a commitment",
+            "properties": {
+                "audit_records": {
+                    "description": "References to audit records",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "certification_links": {
+                    "description": "Links to relevant certifications",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "supporting_documents": {
+                    "description": "URIs or identifiers of supporting documents",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "test_reports": {
+                    "description": "References to test reports",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "EvidenceReferences",
+            "type": "object"
+        },
+        "EvidenceType": {
+            "description": "Types of evidence documents",
+            "enum": [
+                "DECLARATION_OF_CONFORMITY",
+                "CERTIFICATE",
+                "TEST_REPORT",
+                "INSPECTION_REPORT",
+                "MARKING",
+                "ATTESTATION",
+                "TYPE_EXAMINATION",
+                "APPROVAL",
+                "TECHNICAL_FILE",
+                "VERIFICATION"
+            ],
+            "title": "EvidenceType",
+            "type": "string"
+        },
+        "ImprovementTarget": {
+            "additionalProperties": false,
+            "description": "An improvement target",
+            "properties": {
+                "target_date": {
+                    "description": "Target achievement date",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "target_description": {
+                    "description": "Description of target",
+                    "type": "string"
+                },
+                "target_value": {
+                    "description": "Target value",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "target_description"
+            ],
+            "title": "ImprovementTarget",
+            "type": "object"
+        },
+        "IssuingAuthority": {
+            "additionalProperties": false,
+            "description": "Details about the authority issuing evidence",
+            "properties": {
+                "accreditation_details": {
+                    "description": "Accreditation information",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "authority_country": {
+                    "description": "Country of the authority",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "authority_identifier": {
+                    "description": "Unique identifier for the authority",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "authority_name": {
+                    "description": "Name of the issuing authority",
+                    "type": "string"
+                },
+                "authority_type": {
+                    "$ref": "#/$defs/AuthorityType",
+                    "description": "Type of authority"
+                },
+                "notified_body_number": {
+                    "description": "Notified body number if applicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "authority_name"
+            ],
+            "title": "IssuingAuthority",
+            "type": "object"
+        },
+        "KeyPerformanceIndicator": {
+            "additionalProperties": false,
+            "description": "A key performance indicator",
+            "properties": {
+                "kpi_name": {
+                    "description": "Name of the KPI",
+                    "type": "string"
+                },
+                "kpi_unit": {
+                    "description": "Unit of measurement",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "kpi_value": {
+                    "description": "Current value",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "measurement_period": {
+                    "description": "Period of measurement",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "kpi_name"
+            ],
+            "title": "KeyPerformanceIndicator",
+            "type": "object"
+        },
+        "ManagementSystem": {
+            "additionalProperties": false,
+            "description": "A management system certification or implementation with audit history and performance tracking.",
+            "properties": {
+                "audit_history": {
+                    "description": "Audit history records",
+                    "items": {
+                        "$ref": "#/$defs/AuditRecord"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "certification_details": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CertificationDetails"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Certification information"
+                },
+                "commitment_alignment": {
+                    "description": "Links to related commitments",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "evidence_documents": {
+                    "description": "References to certificates and reports",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "performance_metrics": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PerformanceMetrics"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Performance metrics and targets"
+                },
+                "scope_description": {
+                    "description": "Scope of the management system",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "standard_reference": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/StandardReference"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Reference to the standard"
+                },
+                "system_type": {
+                    "$ref": "#/$defs/ManagementSystemType",
+                    "description": "Type of management system"
+                }
+            },
+            "required": [
+                "system_type"
+            ],
+            "title": "ManagementSystem",
+            "type": "object"
+        },
+        "ManagementSystemType": {
+            "description": "Types of management systems",
+            "enum": [
+                "QMS",
+                "EMS",
+                "OHS",
+                "ISMS",
+                "ENERGY",
+                "CSR",
+                "FSMS",
+                "BCM"
+            ],
+            "title": "ManagementSystemType",
+            "type": "string"
+        },
+        "PartyRoleType": {
+            "description": "Types of party roles",
+            "enum": [
+                "MANUFACTURER",
+                "IMPORTER",
+                "AUTHORIZED_REPRESENTATIVE",
+                "DISTRIBUTOR",
+                "FULFILMENT_SERVICE_PROVIDER",
+                "ECONOMIC_OPERATOR",
+                "RESPONSIBLE_PERSON"
+            ],
+            "title": "PartyRoleType",
+            "type": "string"
+        },
+        "PerformanceMetrics": {
+            "additionalProperties": false,
+            "description": "Performance metrics and improvement targets",
+            "properties": {
+                "improvement_targets": {
+                    "description": "Improvement targets",
+                    "items": {
+                        "$ref": "#/$defs/ImprovementTarget"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kpis": {
+                    "description": "Key performance indicators",
+                    "items": {
+                        "$ref": "#/$defs/KeyPerformanceIndicator"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "PerformanceMetrics",
+            "type": "object"
+        },
+        "ProcessEvidence": {
+            "additionalProperties": false,
+            "description": "Container for management system and process-related evidence demonstrating organizational compliance capabilities.",
+            "properties": {
+                "management_systems": {
+                    "description": "List of management systems",
+                    "items": {
+                        "$ref": "#/$defs/ManagementSystem"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ProcessEvidence",
+            "type": "object"
+        },
+        "ProductCommitments": {
+            "additionalProperties": false,
+            "description": "Container for all product-related commitments, providing a flexible framework for regulatory, voluntary, and contractual obligations that can evolve over time and vary by jurisdiction.",
+            "properties": {
+                "commitments": {
+                    "description": "List of individual product commitments",
+                    "items": {
+                        "$ref": "#/$defs/Commitment"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ProductCommitments",
+            "type": "object"
+        },
+        "ProductEvidence": {
+            "additionalProperties": false,
+            "description": "Container for all documentary evidence supporting product compliance claims, including declarations, certificates, test reports, and markings.",
+            "properties": {
+                "evidence_documents": {
+                    "description": "List of evidence documents",
+                    "items": {
+                        "$ref": "#/$defs/EvidenceDocument"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ProductEvidence",
+            "type": "object"
+        },
+        "RegistrationNumber": {
+            "additionalProperties": false,
+            "description": "A registration number",
+            "properties": {
+                "number_type": {
+                    "description": "Type of registration number",
+                    "type": "string"
+                },
+                "number_value": {
+                    "description": "The registration number",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "number_type",
+                "number_value"
+            ],
+            "title": "RegistrationNumber",
+            "type": "object"
+        },
+        "RegulatoryIdentifier": {
+            "additionalProperties": false,
+            "description": "A market-specific regulatory identifier",
+            "properties": {
+                "identifier_type": {
+                    "description": "Type of identifier",
+                    "type": "string"
+                },
+                "identifier_value": {
+                    "description": "Value of the identifier",
+                    "type": "string"
+                },
+                "issuing_authority": {
+                    "description": "Authority that issued this identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "validity_scope": {
+                    "description": "Scope where this identifier is valid",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "identifier_type",
+                "identifier_value"
+            ],
+            "title": "RegulatoryIdentifier",
+            "type": "object"
+        },
+        "RegulatoryIdentifiers": {
+            "additionalProperties": false,
+            "description": "Container for regulatory identifiers",
+            "properties": {
+                "identifiers": {
+                    "description": "Individual regulatory identifiers",
+                    "items": {
+                        "$ref": "#/$defs/RegulatoryIdentifier"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "RegulatoryIdentifiers",
+            "type": "object"
+        },
+        "RegulatoryInformation": {
+            "additionalProperties": false,
+            "description": "Structured regulatory information including safety warnings, usage instructions, compliance statements, responsible parties, and regulatory identifiers.",
+            "properties": {
+                "compliance_statements": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ComplianceStatements"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Regulatory compliance statements"
+                },
+                "regulatory_identifiers": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RegulatoryIdentifiers"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Market-specific regulatory identifiers"
+                },
+                "responsible_parties": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ResponsibleParties"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Responsible parties by jurisdiction"
+                },
+                "safety_information": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SafetyInformation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Safety warnings and instructions"
+                },
+                "usage_instructions": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/UsageInstructions"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Product usage and maintenance instructions"
+                }
+            },
+            "title": "RegulatoryInformation",
+            "type": "object"
+        },
+        "RequirementEntry": {
+            "additionalProperties": false,
+            "description": "A single regulation, standard, or specification requirement with multi-jurisdictional applicability and version tracking.",
+            "properties": {
+                "amendment_history": {
+                    "description": "History of amendments to this requirement",
+                    "items": {
+                        "$ref": "#/$defs/Amendment"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "applicability_statuses": {
+                    "description": "Status of this requirement in different jurisdictions",
+                    "items": {
+                        "$ref": "#/$defs/ApplicabilityStatus"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "commitment_links": {
+                    "description": "References to related commitments",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "compliance_evidence_links": {
+                    "description": "References to supporting evidence",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "harmonized_standards": {
+                    "description": "List of harmonized or equivalent standards",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "issuing_authority": {
+                    "description": "Authority that issued this requirement",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "publication_date": {
+                    "description": "Date when this requirement was published",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "requirement_identifier": {
+                    "description": "Unique identifier for this requirement",
+                    "type": "string"
+                },
+                "requirement_scope": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RequirementScope"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Scope and applicability details"
+                },
+                "requirement_type": {
+                    "$ref": "#/$defs/RequirementType",
+                    "description": "Type of requirement (regulation, standard, specification)"
+                },
+                "successor_reference": {
+                    "description": "Reference to newer requirement if this is superseded",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "title_value": {
+                    "description": "Official title of the requirement",
+                    "type": "string"
+                },
+                "version_value": {
+                    "description": "Version or revision of the requirement",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "requirement_identifier",
+                "requirement_type",
+                "title_value"
+            ],
+            "title": "RequirementEntry",
+            "type": "object"
+        },
+        "RequirementScope": {
+            "additionalProperties": false,
+            "description": "Defines the scope and applicability of a requirement",
+            "properties": {
+                "exclusions": {
+                    "description": "Specific exclusions from scope",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "industry_sectors": {
+                    "description": "Industry sectors where this applies",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "product_categories": {
+                    "description": "Product categories covered by this requirement",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "special_conditions": {
+                    "description": "Special conditions or limitations",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "technical_domains": {
+                    "description": "Technical domains covered (EMC, safety, environmental, etc.)",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "RequirementScope",
+            "type": "object"
+        },
+        "RequirementStatusType": {
+            "description": "Status types for requirements in different jurisdictions",
+            "enum": [
+                "MANDATORY",
+                "PRESUMPTION_OF_CONFORMITY",
+                "RECOMMENDED",
+                "VOLUNTARY",
+                "SUPERSEDED",
+                "WITHDRAWN",
+                "DRAFT",
+                "UNDER_REVIEW"
+            ],
+            "title": "RequirementStatusType",
+            "type": "string"
+        },
+        "RequirementType": {
+            "description": "Types of requirements",
+            "enum": [
+                "REGULATION",
+                "DIRECTIVE",
+                "STANDARD",
+                "SPECIFICATION",
+                "GUIDELINE",
+                "TECHNICAL_REPORT",
+                "CODE_OF_PRACTICE"
+            ],
+            "title": "RequirementType",
+            "type": "string"
+        },
+        "ResponsibleParties": {
+            "additionalProperties": false,
+            "description": "Container for responsible parties",
+            "properties": {
+                "responsible_party_entries": {
+                    "description": "Individual responsible party entries",
+                    "items": {
+                        "$ref": "#/$defs/ResponsibleParty"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ResponsibleParties",
+            "type": "object"
+        },
+        "ResponsibleParty": {
+            "additionalProperties": false,
+            "description": "A responsible party for a specific jurisdiction",
+            "properties": {
+                "contact_details": {
+                    "description": "Contact information",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "jurisdiction": {
+                    "description": "Jurisdiction for this responsible party",
+                    "type": "string"
+                },
+                "legal_entity_name": {
+                    "description": "Legal name of the entity",
+                    "type": "string"
+                },
+                "party_role": {
+                    "$ref": "#/$defs/PartyRoleType",
+                    "description": "Role of this party"
+                },
+                "registered_address": {
+                    "description": "Registered address",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "registration_numbers": {
+                    "description": "Registration numbers (EORI, FDA, etc.)",
+                    "items": {
+                        "$ref": "#/$defs/RegistrationNumber"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "jurisdiction",
+                "party_role",
+                "legal_entity_name"
+            ],
+            "title": "ResponsibleParty",
+            "type": "object"
+        },
+        "SafetyInformation": {
+            "additionalProperties": false,
+            "description": "Container for safety warnings and instructions",
+            "properties": {
+                "safety_items": {
+                    "description": "Individual safety items",
+                    "items": {
+                        "$ref": "#/$defs/SafetyItem"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SafetyInformation",
+            "type": "object"
+        },
+        "SafetyItem": {
+            "additionalProperties": false,
+            "description": "A single safety warning, instruction, or prohibition",
+            "properties": {
+                "applicable_jurisdictions": {
+                    "description": "Jurisdictions where this applies",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "content_value": {
+                    "description": "Content of the safety item",
+                    "type": "string"
+                },
+                "item_type": {
+                    "$ref": "#/$defs/SafetyItemType",
+                    "description": "Type of safety item"
+                },
+                "languages": {
+                    "description": "Languages for this safety item",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "pictogram_reference": {
+                    "description": "Reference to safety pictogram",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "severity_level": {
+                    "description": "Severity level if applicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "item_type",
+                "content_value"
+            ],
+            "title": "SafetyItem",
+            "type": "object"
+        },
+        "SafetyItemType": {
+            "description": "Types of safety items",
+            "enum": [
+                "WARNING",
+                "INSTRUCTION",
+                "PROHIBITION",
+                "CAUTION",
+                "DANGER",
+                "NOTICE"
+            ],
+            "title": "SafetyItemType",
+            "type": "string"
+        },
+        "ScopeOfEvidence": {
+            "additionalProperties": false,
+            "description": "Defines what is covered by the evidence",
+            "properties": {
+                "exclusions": {
+                    "description": "What is explicitly excluded from scope",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "modules_procedures": {
+                    "description": "Assessment modules or procedures applied",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "products_covered": {
+                    "description": "Products or product families covered",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "requirement_references": {
+                    "description": "References to specific requirements covered",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "standards_versions": {
+                    "description": "Specific versions of standards covered",
+                    "items": {
+                        "$ref": "#/$defs/StandardVersion"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "technical_specifications": {
+                    "description": "Technical specifications covered",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ScopeOfEvidence",
+            "type": "object"
+        },
+        "StakeholderScope": {
+            "additionalProperties": false,
+            "description": "Defines the scope of applicability for a commitment including markets, customer segments, and product variants.",
+            "properties": {
+                "applicable_markets": {
+                    "description": "Markets or regions where this commitment applies",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "customer_segments": {
+                    "description": "Customer segments this commitment applies to",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "exclusions": {
+                    "description": "Specific exclusions from scope",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "product_variants": {
+                    "description": "Product variants or models covered by this commitment",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "StakeholderScope",
+            "type": "object"
+        },
+        "StandardReference": {
+            "additionalProperties": false,
+            "description": "Reference to a management system standard",
+            "properties": {
+                "standard_identifier": {
+                    "description": "Standard identifier (e.g., ISO 9001)",
+                    "type": "string"
+                },
+                "standard_version": {
+                    "description": "Version of the standard",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "standard_year": {
+                    "description": "Year of the standard",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "standard_identifier"
+            ],
+            "title": "StandardReference",
+            "type": "object"
+        },
+        "StandardVersion": {
+            "additionalProperties": false,
+            "description": "Specific version of a standard",
+            "properties": {
+                "standard_identifier": {
+                    "description": "Standard identifier",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Version of the standard",
+                    "type": "string"
+                },
+                "year": {
+                    "description": "Year of the standard",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "standard_identifier",
+                "version"
+            ],
+            "title": "StandardVersion",
+            "type": "object"
+        },
+        "StatementType": {
+            "description": "Types of compliance statements",
+            "enum": [
+                "EMC",
+                "SAFETY",
+                "ENVIRONMENTAL",
+                "RADIO",
+                "CHEMICAL",
+                "ENERGY",
+                "PRIVACY",
+                "ACCESSIBILITY"
+            ],
+            "title": "StatementType",
+            "type": "string"
+        },
+        "UsageInstructions": {
+            "additionalProperties": false,
+            "description": "Product usage and maintenance instructions",
+            "properties": {
+                "disposal_instructions": {
+                    "description": "Disposal instructions",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "emergency_procedures": {
+                    "description": "Emergency procedures",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "intended_use": {
+                    "description": "Intended use of the product",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "maintenance_requirements": {
+                    "description": "Maintenance requirements",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "operating_guidelines": {
+                    "description": "Operating guidelines",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "storage_conditions": {
+                    "description": "Storage conditions",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "UsageInstructions",
+            "type": "object"
+        },
+        "ValidityPeriod": {
+            "additionalProperties": false,
+            "description": "Time period during which something is valid",
+            "properties": {
+                "end_date": {
+                    "description": "End date of validity",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "is_perpetual": {
+                    "description": "Whether this has no defined end date",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "start_date": {
+                    "description": "Start date of validity",
+                    "format": "date",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "start_date"
+            ],
+            "title": "ValidityPeriod",
+            "type": "object"
+        }
+    },
+    "$id": "https://ce-rise-models.codeberg.page/compliance-and-standards/",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "metamodel_version": "1.7.0",
+    "title": "compliance_and_standards",
+    "type": "object",
+    "version": "0.0.1"
+}
+
