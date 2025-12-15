@@ -1,66 +1,217 @@
-# CE-RISE Data Model Template
+# CE-RISE Compliance and Standards
 
-[![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/<repo-name>/)
+[![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/compliance-and-standards/)
 
-This repository provides the **official template** for creating CE-RISE data models.  
-It defines the standard structure, tooling, and workflow used across all model projects.
+Repository for the data model covering regulatory compliance, standards, and conformity-related information for products, including applicable regulations and standards, product commitments, documentary evidence (e.g., DoC, certificates, CE marking), process evidence, and structured regulatory information sheets with safety warnings, legally required safe-use instructions, EMC statements, EU Responsible Person details, and market- or regulation-specific identifiers.
 
 
 ---
 
 ## Data Model Structure
-Put here description of data model structure.
+
+The Compliance and Standards data model provides a comprehensive framework for capturing all regulatory, certification, and normative requirements for products. It enables tracking of legal compliance across different markets, documentation of conformity assessments, management of certifications and declarations, and structured storage of legally required information including safety instructions, responsible person details, and market-specific regulatory identifiers.
 
 ### Key Design Principles
 
+1. **Multi-Jurisdictional Support**: Captures compliance requirements across different regulatory regions (EU, US, Asia-Pacific, etc.)
+2. **Evidence Traceability**: Complete documentation trail from commitments to certificates and declarations
+3. **Regulatory Completeness**: Structured storage of all legally required information and disclosures
+4. **Standards Alignment**: Direct references to applicable standards and regulations with version control
+5. **Market-Specific Flexibility**: Supports region-specific requirements and identifiers
 
 ### Core Hierarchy
 
 ```
-JustAnExample (root)
-├── 1. GeneralProductInformation
-│   ├── LotBatchNumber
-│   ├── GTIN14
-│   ├── SerialNumber
-│   ├── ProductImages
-│   ├── ProductType
-│   └── UniqueProductIdentifier
-
+ComplianceAndStandards (root)
+├── 1. ProductCommitments
+│   └── Commitment (repeatable)
+│       ├── CommitmentIdentifier
+│       ├── CommitmentStatement
+│       ├── CommitmentDescription
+│       ├── CommitmentCategories (multivalued)
+│       │   ├── Regulatory
+│       │   ├── Voluntary
+│       │   ├── Contractual
+│       │   ├── IndustryStandard
+│       │   └── CustomerRequirement
+│       ├── ComplianceStatus
+│       │   ├── Status (mandatory/voluntary/recommended/optional)
+│       │   ├── Jurisdiction
+│       │   ├── EffectiveDate
+│       │   └── ExpiryDate
+│       ├── ValidityPeriod
+│       │   ├── StartDate
+│       │   └── EndDate
+│       ├── StakeholderScope
+│       │   ├── ApplicableMarkets
+│       │   ├── CustomerSegments
+│       │   └── ProductVariants
+│       └── EvidenceReferences
+│           ├── SupportingDocuments
+│           ├── CertificationLinks
+│           └── AuditRecords
+├── 2. ApplicableRegulationStandards
+│   └── RequirementEntry (repeatable)
+│       ├── RequirementIdentifier
+│       ├── RequirementType (Regulation/Standard/Specification)
+│       ├── Title
+│       ├── IssuingAuthority
+│       ├── Version
+│       ├── ApplicabilityStatus (multivalued by jurisdiction)
+│       │   ├── Jurisdiction
+│       │   ├── Status (mandatory/voluntary/recommended/superseded)
+│       │   ├── EffectiveDate
+│       │   └── EndDate
+│       ├── SuccessorReference (if superseded)
+│       ├── CommitmentLinks (references to related commitments)
+│       └── ComplianceEvidence (references to supporting evidence)
+├── 3. ProductEvidence
+│   └── EvidenceDocument (repeatable)
+│       ├── EvidenceType (DoC/Certificate/TestReport/Marking/Other)
+│       ├── DocumentIdentifier
+│       ├── DocumentTitle
+│       ├── IssueDate
+│       ├── ValidityPeriod
+│       │   ├── ValidFrom
+│       │   └── ValidUntil
+│       ├── IssuingAuthority
+│       │   ├── AuthorityName
+│       │   ├── AuthorityType
+│       │   └── AccreditationDetails
+│       ├── ScopeOfEvidence
+│       │   ├── ProductsCovered
+│       │   ├── StandardsVersions (with specific versions)
+│       │   └── RequirementReferences
+│       ├── CommitmentSupport (which commitments this proves)
+│       ├── DigitalSignature
+│       └── DocumentAccess
+│           ├── DocumentURL
+│           ├── AccessRestrictions
+│           └── RetentionPeriod
+├── 4. ProcessEvidence
+│   └── ManagementSystem (repeatable)
+│       ├── SystemType (QMS/EMS/OHS/CSR/Other)
+│       ├── StandardReference
+│       │   ├── StandardIdentifier
+│       │   └── StandardVersion
+│       ├── CertificationDetails
+│       │   ├── CertificationStatus
+│       │   ├── CertificationBody
+│       │   ├── CertificateNumber
+│       │   └── ValidityPeriod
+│       ├── AuditHistory
+│       │   ├── AuditDate
+│       │   ├── AuditType
+│       │   ├── Findings
+│       │   └── CorrectiveActions
+│       ├── PerformanceMetrics
+│       │   ├── KPIs
+│       │   └── ImprovementTargets
+│       ├── CommitmentAlignment (links to related commitments)
+│       └── EvidenceDocuments (references to certificates/reports)
+└── 5. RegulatoryInformation
+    ├── SafetyInformation
+    │   └── SafetyItem (repeatable)
+    │       ├── ItemType (Warning/Instruction/Prohibition)
+    │       ├── Content (text/pictogram)
+    │       ├── Severity (if applicable)
+    │       ├── ApplicableJurisdictions
+    │       └── Languages
+    ├── UsageInstructions
+    │   ├── IntendedUse
+    │   ├── OperatingGuidelines
+    │   ├── MaintenanceRequirements
+    │   ├── DisposalInstructions
+    │   └── EmergencyProcedures
+    ├── ComplianceStatements
+    │   └── Statement (repeatable)
+    │       ├── StatementType (EMC/Safety/Environmental/Other)
+    │       ├── StatementContent
+    │       ├── ApplicableStandards
+    │       ├── TestReferences
+    │       └── ValidForJurisdictions
+    ├── ResponsibleParties
+    │   └── ResponsibleParty (repeatable)
+    │       ├── Jurisdiction
+    │       ├── PartyRole (Manufacturer/Importer/AuthorizedRep/Distributor)
+    │       ├── LegalEntityName
+    │       ├── RegisteredAddress
+    │       ├── ContactDetails
+    │       └── RegistrationNumbers (EORI/FDA/Other)
+    └── RegulatoryIdentifiers
+        └── Identifier (repeatable key-value pairs)
+            ├── IdentifierType
+            ├── IdentifierValue
+            ├── IssuingAuthority
+            └── ValidityScope
 ```
 
 ### Workflow Sequence
 
-#### **Step 1: Just another example** 
-Basic product identification with multiple identifier types:
-- **LotBatchNumber**: Lot/batch tracking information
-- **GTIN14**: Global Trade Item Number (14-digit format with GS1 integration)
-- **SerialNumber**: Individual product serial numbers
-- **ProductImages**: Product images for branding/visual identification (comma-separated URLs)
-- **ProductType**: Product classification (3-digit GTIN prefix or alphanumeric code)
-- **UniqueProductIdentifier**: Enables web link to product passport
+#### **Step 1: ProductCommitments**
+Flexible framework for all types of product-related commitments:
+- **Commitment Structure**: Generic, repeatable commitment container
+- **Multi-Category Support**: Each commitment can be tagged as regulatory, voluntary, contractual, or multiple categories simultaneously
+- **Jurisdictional Flexibility**: Same commitment can have different statuses in different markets
+- **Temporal Evolution**: Tracks how commitment status changes over time (voluntary becoming regulatory)
+- **Stakeholder Scope**: Defines which markets, customers, or product variants the commitment applies to
+- **Evidence Linking**: Direct references to supporting documentation and certifications
+
+#### **Step 2: ApplicableRegulationStandards**
+Flexible framework for all types of requirements with jurisdictional awareness:
+- **RequirementEntry**: Generic, repeatable structure for any regulation, standard, or specification
+- **Multi-Jurisdictional Status**: Same requirement can have different status across markets
+- **Version Tracking**: Handles superseded standards with successor references
+- **Commitment Integration**: Links requirements to related commitments and evidence
+- **Evolution Support**: Tracks effective dates and end dates for changing requirements
+
+#### **Step 3: ProductEvidence**
+Unified evidence framework supporting multiple document types:
+- **EvidenceDocument**: Generic structure for any type of compliance evidence
+- **Version-Aware**: Links to specific versions of standards/regulations
+- **Commitment Linkage**: Explicitly references which commitments the evidence supports
+- **Digital Trust**: Includes digital signature and document retention information
+- **Flexible Scope**: Can cover products, processes, or organizational compliance
+
+#### **Step 4: ProcessEvidence**
+Integrated management systems evidence with commitment alignment:
+- **ManagementSystem**: Flexible structure for any management system type
+- **Audit Trail**: Complete audit history with findings and corrective actions
+- **Performance Tracking**: KPIs and improvement targets
+- **Commitment Links**: Shows how management systems support product commitments
+- **Evidence Integration**: References to supporting certificates and documents
+
+#### **Step 5: RegulatoryInformation**
+Market-agnostic regulatory information framework:
+- **SafetyInformation**: Flexible, repeatable safety items for any jurisdiction
+- **ComplianceStatements**: Generic statements adaptable to different regulatory requirements
+- **ResponsibleParties**: Jurisdiction-specific responsible party information (not just EU)
+- **RegulatoryIdentifiers**: Flexible key-value pairs for any market-specific identifier
+- **Global Applicability**: Works for EU, US, Asia, and emerging markets without restructuring
 
 ### Data Properties
 
-Each class has a corresponding value property (e.g., `name_value`, `company_id_value`) that holds the actual data. All value properties are string type except where specified otherwise.
+Each class has a corresponding value property (e.g., `regulation_name_value`, `certificate_number_value`) that holds the actual data. All value properties are string type except where specified otherwise (dates, booleans, numbers).
 
 #### SQL Identifiers
 
 Every data point in the model includes a `sql_identifier` annotation that serves as a unique, machine-friendly database identifier. These identifiers follow a structured namespace pattern to ensure uniqueness across the entire data model:
 
-**Pattern**: `MODEL_[category]_[specific_name]`
+**Pattern**: `comp_[category]_[specific_name]`
 
 **Features:**
-- **Product Profile Prefix**: All identifiers start, for instance, with `pro_` to clearly identify them as belonging to the Product Profile data model
-- **Hierarchical Namespacing**: Uses category prefixes (`gen_info_`, `mfr_info_`, `imp_info_`, `spec_info_`) to provide context and prevent naming conflicts
+- **Compliance Prefix**: All identifiers start with `comp_` to clearly identify them as belonging to the Compliance and Standards data model
+- **Hierarchical Namespacing**: Uses category prefixes (`commit_`, `reg_`, `evid_`, `proc_`, `info_`) to provide context and prevent naming conflicts
 - **Database-Friendly**: Uses underscores and avoids special characters for SQL compatibility
 - **Unique Across Model**: No duplicate identifiers, even when similar concepts appear in different parts of the hierarchy
 - **Reasonable Length**: Abbreviated but meaningful names that balance clarity with practical database usage
 
 **Examples:**
-- `pro_gen_info_gtin14` - GTIN-14 identifier in General Product Information
-- `pro_mfr_info_facility` - Manufacturing facility in Manufacturer Information  
-- `pro_imp_info_eori` - EORI number in Import/Export Information
-- `pro_spec_info_materials` - Material composition in Product Specifications
+- `comp_commit_regulatory_type` - Type of regulatory commitment
+- `comp_reg_standard_identifier` - Standard identification number
+- `comp_evid_doc_number` - Declaration of Conformity number
+- `comp_proc_qms_standard` - Quality management system standard
+- `comp_info_responsible_person_name` - EU responsible person name
 
 This identifier system enables seamless integration with databases and ensures clear data model composition when combining with other CE-RISE data models.
 
@@ -70,10 +221,21 @@ This identifier system enables seamless integration with databases and ensures c
 
 | Step | Component | Criticalities Identified | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------------|----------------------|--------|--------------|
-| **1** | **ExampleExampleExample** | • Unique product identifier lacks precision and standards<br>• No reference integration with discoverability/registries<br>• Missing serial number and lot number storage<br>• No connection to standard product nomenclature<br>• No product description and branding<br>• No classification for grouping products | • Added GS1 prefix and ontology integration<br>• Implemented GTIN-14 + serial number approach<br>• Added Schema.org prefix<br>• Created GTIN-14, Serial number, Lot/batch number subclasses<br>• Added ProductImages (comma-separated image URLs with format validation)<br>• Added ProductType (3-digit GTIN prefix or alphanumeric classification)<br>• Referenced UNTP framework for discoverability | **COMPLETED** | • UNTP Identity Resolver integration 
+| **1** | **ProductCommitments** | • Evolving regulatory landscape<br>• Multi-jurisdictional complexity<br>• Overlapping commitment categories<br>• Temporal status changes | • Flexible tagging system<br>• Multi-category support<br>• Jurisdiction-specific status<br>• Timeline tracking<br>• Generic commitment structure | **PLANNED** | • Automated status updates<br>• Regulatory change monitoring<br>• Cross-jurisdiction mapping |
+| **2** | **ApplicableRegulationStandards** | • Evolving requirements<br>• Multi-jurisdiction complexity<br>• Standards supersession<br>• Version tracking | • Flexible requirement structure<br>• Jurisdiction-specific status<br>• Successor references<br>• Commitment integration | **PLANNED** | • Regulatory change monitoring<br>• Automated supersession tracking<br>• Standards database APIs |
+| **3** | **ProductEvidence** | • Evidence-commitment linking<br>• Version specificity<br>• Digital authenticity<br>• Document lifecycle | • Generic evidence framework<br>• Commitment references<br>• Version-aware scope<br>• Digital signature support | **PLANNED** | • Automated commitment matching<br>• Blockchain anchoring<br>• Retention management |
+| **4** | **ProcessEvidence** | • System-commitment alignment<br>• Audit integration<br>• Performance tracking<br>• Multi-standard coverage | • Flexible system types<br>• Commitment linkage<br>• Audit trail capture<br>• KPI framework | **PLANNED** | • Management system APIs<br>• Automated KPI collection<br>• Audit scheduling |
+| **5** | **RegulatoryInformation** | • Global market support<br>• Flexible identifiers<br>• Multi-party roles<br>• Evolving requirements | • Market-agnostic structure<br>• Repeatable components<br>• Jurisdiction-aware parties<br>• Key-value identifiers | **PLANNED** | • Market requirement APIs<br>• Translation management<br>• Regulatory updates |
 
 ### Integration Opportunities
 
+- **Regulatory Databases**: Integration with EU NANDO, FDA databases, standards bodies repositories
+- **Certification Bodies**: APIs with TÜV, SGS, Bureau Veritas, Intertek systems
+- **Standards Organizations**: ISO, CEN, CENELEC, IEC online standards access
+- **Legal Platforms**: Regulatory intelligence services, compliance monitoring tools
+- **Document Management**: Digital signature platforms, blockchain notarization services
+- **Translation Services**: Multi-language compliance documentation systems
+- **Market Surveillance**: RAPEX, CPSC, product recall databases
 
 
 ---
@@ -83,7 +245,7 @@ This identifier system enables seamless integration with databases and ensures c
 Release artifacts for each version (`schema.json`, `shacl.ttl`, `model.owl`)  
 are served directly from this URL:
 ```
-https://ce-rise-models.codeberg.page/<repo-name>/
+https://ce-rise-models.codeberg.page/compliance-and-standards/
 ```
 
 
@@ -94,7 +256,7 @@ https://ce-rise-models.codeberg.page/<repo-name>/
 If you want to view the files published for version `v1.2.0`, open:
 
 ```
-https://codeberg.org/CE-RISE-models/<repo-name>/src/tag/pages-v1.2.0/generated/
+https://codeberg.org/CE-RISE-models/compliance-and-standards/src/tag/pages-v1.2.0/generated/
 ```
 
 Files available in that directory typically include:
@@ -123,7 +285,4 @@ Attribution: CE-RISE project (Grant Agreement No. 101092281) and the individual 
   <img src="https://nilu.no/wp-content/uploads/2023/12/nilu-logo-seagreen-rgb-300px.png" alt="NILU logo" width="40"/>
 </a>
 
-Developed by NILU (Riccardo Boero — ribo@nilu.no) within the CE-RISE project.  
-
-
-
+Developed by NILU (Riccardo Boero — ribo@nilu.no) within the CE-RISE project.
