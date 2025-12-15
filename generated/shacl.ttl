@@ -1,0 +1,1265 @@
+@prefix comp: <https://ce-rise-models.codeberg.page/compliance-and-standards/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+comp:ComplianceAndStandards a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Root container for all compliance and standards related information, encompassing commitments, requirements, evidence, and regulatory data." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:ApplicableRegulationStandards ;
+            sh:description "Applicable regulations, standards, and specifications" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path comp:applicable_regulation_standards ],
+        [ sh:class comp:ProductEvidence ;
+            sh:description "Documentary evidence supporting compliance claims" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path comp:product_evidence ],
+        [ sh:class comp:RegulatoryInformation ;
+            sh:description "Structured regulatory information including safety, instructions, and identifiers" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path comp:regulatory_information ],
+        [ sh:class comp:ProcessEvidence ;
+            sh:description "Management system and process-related evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path comp:process_evidence ],
+        [ sh:class comp:ProductCommitments ;
+            sh:description "All product-related commitments (regulatory, voluntary, contractual)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:product_commitments ] ;
+    sh:targetClass comp:ComplianceAndStandards .
+
+comp:Amendment a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Record of an amendment to a requirement" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Amendment identifier" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:amendment_id ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date of amendment" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:amendment_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "Type of amendment (correction, supplement, revision)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:amendment_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Description of changes" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:amendment_description ] ;
+    sh:targetClass comp:Amendment .
+
+comp:ApplicabilityStatus a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Jurisdiction-specific applicability status for a requirement, allowing tracking of how requirements apply differently across markets." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Any derogations or exemptions" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path comp:derogations ],
+        [ sh:datatype xsd:string ;
+            sh:description "Jurisdiction where this status applies" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:jurisdiction ],
+        [ sh:description "Status in this jurisdiction" ;
+            sh:in ( "MANDATORY" "PRESUMPTION_OF_CONFORMITY" "RECOMMENDED" "VOLUNTARY" "SUPERSEDED" "WITHDRAWN" "DRAFT" "UNDER_REVIEW" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path comp:status ],
+        [ sh:datatype xsd:string ;
+            sh:description "Level of enforcement in this jurisdiction" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:enforcement_level ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date when this status ends or changes" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:end_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "Transition period details if applicable" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:transition_period ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date when this status becomes effective" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:effective_date ] ;
+    sh:targetClass comp:ApplicabilityStatus .
+
+comp:ApplicableRegulationStandards a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for all applicable regulations, standards, and specifications with jurisdiction-aware requirements tracking and version management." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:RequirementEntry ;
+            sh:description "List of applicable requirements (regulations, standards, specifications)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:requirement_entries ] ;
+    sh:targetClass comp:ApplicableRegulationStandards .
+
+comp:AuditRecord a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Record of an audit" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:date ;
+            sh:description "Date of audit" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:audit_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "Corrective actions taken" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:corrective_actions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Audit findings" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:findings ],
+        [ sh:datatype xsd:string ;
+            sh:description "Overall audit result" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:audit_result ],
+        [ sh:datatype xsd:string ;
+            sh:description "Auditor or audit organization" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:auditor ],
+        [ sh:description "Type of audit" ;
+            sh:in ( "INITIAL" "SURVEILLANCE" "RECERTIFICATION" "SPECIAL" "INTERNAL" "CUSTOMER" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path comp:audit_type ] ;
+    sh:targetClass comp:AuditRecord .
+
+comp:CertificationDetails a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Details about management system certification" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:ValidityPeriod ;
+            sh:description "Validity period of certification" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path comp:validity_period ],
+        [ sh:datatype xsd:string ;
+            sh:description "Accreditation details of certification body" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:accreditation_details ],
+        [ sh:description "Current certification status" ;
+            sh:in ( "CERTIFIED" "PENDING" "EXPIRED" "SUSPENDED" "WITHDRAWN" "IN_PROGRESS" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path comp:certification_status ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of certification body" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:certification_body ],
+        [ sh:datatype xsd:string ;
+            sh:description "Certificate number" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:certificate_number ] ;
+    sh:targetClass comp:CertificationDetails .
+
+comp:Commitment a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A single commitment representing any type of product-related obligation, promise, or compliance requirement with flexible categorization and jurisdiction-specific status tracking." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:StakeholderScope ;
+            sh:description "Scope of applicability for this commitment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path comp:stakeholder_scope ],
+        [ sh:datatype xsd:string ;
+            sh:description "Detailed description or context of the commitment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:commitment_description ],
+        [ sh:class comp:EvidenceReferences ;
+            sh:description "References to supporting evidence for this commitment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path comp:evidence_references ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Last update timestamp for this commitment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path comp:last_updated ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for this commitment" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:commitment_identifier ],
+        [ sh:class comp:CommitmentCategory ;
+            sh:description "Categories this commitment belongs to (can be multiple)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path comp:commitment_categories ],
+        [ sh:class comp:ComplianceStatus ;
+            sh:description "Status of this commitment in different jurisdictions" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path comp:compliance_statuses ],
+        [ sh:class comp:ValidityPeriod ;
+            sh:description "Period during which this commitment is valid" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path comp:validity_period ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version tracking for this commitment" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path comp:version_info ],
+        [ sh:datatype xsd:string ;
+            sh:description "The actual commitment statement or text" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:commitment_statement_value ] ;
+    sh:targetClass comp:Commitment .
+
+comp:CommitmentCategory a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Category or type of commitment with external standard references" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:integer ;
+            sh:description "Priority or importance level of this category" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:priority_level ],
+        [ sh:description "Type of commitment category" ;
+            sh:in ( "REGULATORY" "VOLUNTARY" "CONTRACTUAL" "INDUSTRY_STANDARD" "CUSTOMER_REQUIREMENT" "ENVIRONMENTAL" "SOCIAL" "QUALITY" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path comp:category_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "External ontology or standard reference for this category" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:category_reference ] ;
+    sh:targetClass comp:CommitmentCategory .
+
+comp:ComplianceStatement a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A regulatory compliance statement" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Jurisdictions where valid" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:valid_for_jurisdictions ],
+        [ sh:description "Type of statement" ;
+            sh:in ( "EMC" "SAFETY" "ENVIRONMENTAL" "RADIO" "CHEMICAL" "ENERGY" "PRIVACY" "ACCESSIBILITY" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path comp:statement_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Content of the statement" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:statement_content ],
+        [ sh:datatype xsd:string ;
+            sh:description "Standards this statement relates to" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:applicable_standards ],
+        [ sh:datatype xsd:string ;
+            sh:description "References to supporting tests" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:test_references ] ;
+    sh:targetClass comp:ComplianceStatement .
+
+comp:ComplianceStatements a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for compliance statements" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:ComplianceStatement ;
+            sh:description "Individual compliance statements" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:statements ] ;
+    sh:targetClass comp:ComplianceStatements .
+
+comp:ComplianceStatus a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Jurisdiction-specific compliance status for a commitment, allowing the same commitment to have different statuses in different markets." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:date ;
+            sh:description "Date when this status expires or changes" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:expiry_date ],
+        [ sh:description "Current status in this jurisdiction" ;
+            sh:in ( "MANDATORY" "VOLUNTARY" "RECOMMENDED" "OPTIONAL" "NOT_APPLICABLE" "PENDING" "SUPERSEDED" "TRANSITIONAL" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path comp:status_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Authority that determined this status" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:issuing_authority ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date when this status became effective" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:effective_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "Jurisdiction or market where this status applies" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:jurisdiction ],
+        [ sh:datatype xsd:string ;
+            sh:description "Additional notes or context about this status" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:status_notes ] ;
+    sh:targetClass comp:ComplianceStatus .
+
+comp:DigitalSignature a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Digital signature information for evidence authenticity" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Type of digital signature" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:signature_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Person or entity who signed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:signatory ],
+        [ sh:datatype xsd:string ;
+            sh:description "Digital signature value or hash" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:signature_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to digital certificate" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:certificate_reference ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date of digital signature" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:signature_date ] ;
+    sh:targetClass comp:DigitalSignature .
+
+comp:DocumentAccess a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Information about document access and storage" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Checksum for integrity verification" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:checksum ],
+        [ sh:datatype xsd:string ;
+            sh:description "Where document is stored" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:storage_location ],
+        [ sh:datatype xsd:string ;
+            sh:description "Any access restrictions" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:access_restrictions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Format of the document" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:document_format ],
+        [ sh:datatype xsd:string ;
+            sh:description "How long document must be retained" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:retention_period ],
+        [ sh:datatype xsd:string ;
+            sh:description "URL where document can be accessed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:document_url ] ;
+    sh:targetClass comp:DocumentAccess .
+
+comp:EvidenceDocument a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A single piece of documentary evidence supporting compliance claims, with version tracking, digital signatures, and scope definition." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Language(s) of the document" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path comp:document_language ],
+        [ sh:class comp:IssuingAuthority ;
+            sh:description "Details about the issuing authority" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path comp:issuing_authority_details ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for this document" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:document_identifier ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date when document was issued" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:issue_date ],
+        [ sh:class comp:ScopeOfEvidence ;
+            sh:description "Scope covered by this evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path comp:scope_of_evidence ],
+        [ sh:class comp:ValidityPeriod ;
+            sh:description "Validity period of this evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path comp:validity_period ],
+        [ sh:datatype xsd:string ;
+            sh:description "Title of the document" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:document_title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Conformity assessment procedure used" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path comp:conformity_assessment_procedure ],
+        [ sh:class comp:DigitalSignature ;
+            sh:description "Digital signature information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path comp:digital_signature ],
+        [ sh:class comp:DocumentAccess ;
+            sh:description "Document access and storage information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 9 ;
+            sh:path comp:document_access ],
+        [ sh:description "Type of evidence document" ;
+            sh:in ( "DECLARATION_OF_CONFORMITY" "CERTIFICATE" "TEST_REPORT" "INSPECTION_REPORT" "MARKING" "ATTESTATION" "TYPE_EXAMINATION" "APPROVAL" "TECHNICAL_FILE" "VERIFICATION" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path comp:evidence_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Commitments that this evidence supports" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path comp:commitment_support ] ;
+    sh:targetClass comp:EvidenceDocument .
+
+comp:EvidenceReferences a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "References to evidence supporting a commitment" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Links to relevant certifications" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:certification_links ],
+        [ sh:datatype xsd:string ;
+            sh:description "URIs or identifiers of supporting documents" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:supporting_documents ],
+        [ sh:datatype xsd:string ;
+            sh:description "References to audit records" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:audit_records ],
+        [ sh:datatype xsd:string ;
+            sh:description "References to test reports" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:test_reports ] ;
+    sh:targetClass comp:EvidenceReferences .
+
+comp:ImprovementTarget a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "An improvement target" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Target value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:target_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Description of target" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:target_description ],
+        [ sh:datatype xsd:date ;
+            sh:description "Target achievement date" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:target_date ] ;
+    sh:targetClass comp:ImprovementTarget .
+
+comp:IssuingAuthority a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Details about the authority issuing evidence" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Notified body number if applicable" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:notified_body_number ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the issuing authority" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:authority_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for the authority" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:authority_identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Accreditation information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:accreditation_details ],
+        [ sh:datatype xsd:string ;
+            sh:description "Country of the authority" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:authority_country ],
+        [ sh:description "Type of authority" ;
+            sh:in ( "NOTIFIED_BODY" "CERTIFICATION_BODY" "TEST_LABORATORY" "INSPECTION_BODY" "MANUFACTURER" "AUTHORIZED_REPRESENTATIVE" "COMPETENT_AUTHORITY" "ACCREDITATION_BODY" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path comp:authority_type ] ;
+    sh:targetClass comp:IssuingAuthority .
+
+comp:KeyPerformanceIndicator a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A key performance indicator" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Period of measurement" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:measurement_period ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit of measurement" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:kpi_unit ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the KPI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:kpi_name ],
+        [ sh:datatype xsd:float ;
+            sh:description "Current value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:kpi_value ] ;
+    sh:targetClass comp:KeyPerformanceIndicator .
+
+comp:ManagementSystem a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A management system certification or implementation with audit history and performance tracking." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Links to related commitments" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:commitment_alignment ],
+        [ sh:class comp:CertificationDetails ;
+            sh:description "Certification information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path comp:certification_details ],
+        [ sh:class comp:StandardReference ;
+            sh:description "Reference to the standard" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path comp:standard_reference ],
+        [ sh:description "Type of management system" ;
+            sh:in ( "QMS" "EMS" "OHS" "ISMS" "ENERGY" "CSR" "FSMS" "BCM" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path comp:system_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Scope of the management system" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path comp:scope_description ],
+        [ sh:datatype xsd:string ;
+            sh:description "References to certificates and reports" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path comp:evidence_documents ],
+        [ sh:class comp:PerformanceMetrics ;
+            sh:description "Performance metrics and targets" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path comp:performance_metrics ],
+        [ sh:class comp:AuditRecord ;
+            sh:description "Audit history records" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path comp:audit_history ] ;
+    sh:targetClass comp:ManagementSystem .
+
+comp:PerformanceMetrics a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Performance metrics and improvement targets" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:KeyPerformanceIndicator ;
+            sh:description "Key performance indicators" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:kpis ],
+        [ sh:class comp:ImprovementTarget ;
+            sh:description "Improvement targets" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path comp:improvement_targets ] ;
+    sh:targetClass comp:PerformanceMetrics .
+
+comp:ProcessEvidence a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for management system and process-related evidence demonstrating organizational compliance capabilities." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:ManagementSystem ;
+            sh:description "List of management systems" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:management_systems ] ;
+    sh:targetClass comp:ProcessEvidence .
+
+comp:ProductCommitments a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for all product-related commitments, providing a flexible framework for regulatory, voluntary, and contractual obligations that can evolve over time and vary by jurisdiction." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:Commitment ;
+            sh:description "List of individual product commitments" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:commitments ] ;
+    sh:targetClass comp:ProductCommitments .
+
+comp:ProductEvidence a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for all documentary evidence supporting product compliance claims, including declarations, certificates, test reports, and markings." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:EvidenceDocument ;
+            sh:description "List of evidence documents" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:evidence_documents ] ;
+    sh:targetClass comp:ProductEvidence .
+
+comp:RegistrationNumber a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A registration number" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "The registration number" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:number_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Type of registration number" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:number_type ] ;
+    sh:targetClass comp:RegistrationNumber .
+
+comp:RegulatoryIdentifier a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A market-specific regulatory identifier" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Scope where this identifier is valid" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:validity_scope ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value of the identifier" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Type of identifier" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:identifier_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Authority that issued this identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:issuing_authority ] ;
+    sh:targetClass comp:RegulatoryIdentifier .
+
+comp:RegulatoryIdentifiers a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for regulatory identifiers" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:RegulatoryIdentifier ;
+            sh:description "Individual regulatory identifiers" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:identifiers ] ;
+    sh:targetClass comp:RegulatoryIdentifiers .
+
+comp:RegulatoryInformation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Structured regulatory information including safety warnings, usage instructions, compliance statements, responsible parties, and regulatory identifiers." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:ComplianceStatements ;
+            sh:description "Regulatory compliance statements" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path comp:compliance_statements ],
+        [ sh:class comp:RegulatoryIdentifiers ;
+            sh:description "Market-specific regulatory identifiers" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path comp:regulatory_identifiers ],
+        [ sh:class comp:SafetyInformation ;
+            sh:description "Safety warnings and instructions" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:safety_information ],
+        [ sh:class comp:UsageInstructions ;
+            sh:description "Product usage and maintenance instructions" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path comp:usage_instructions ],
+        [ sh:class comp:ResponsibleParties ;
+            sh:description "Responsible parties by jurisdiction" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path comp:responsible_parties ] ;
+    sh:targetClass comp:RegulatoryInformation .
+
+comp:RequirementEntry a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A single regulation, standard, or specification requirement with multi-jurisdictional applicability and version tracking." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:Amendment ;
+            sh:description "History of amendments to this requirement" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 12 ;
+            sh:path comp:amendment_history ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date when this requirement was published" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:publication_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "References to supporting evidence" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path comp:compliance_evidence_links ],
+        [ sh:datatype xsd:string ;
+            sh:description "Authority that issued this requirement" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:issuing_authority ],
+        [ sh:description "Type of requirement (regulation, standard, specification)" ;
+            sh:in ( "REGULATION" "DIRECTIVE" "STANDARD" "SPECIFICATION" "GUIDELINE" "TECHNICAL_REPORT" "CODE_OF_PRACTICE" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path comp:requirement_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version or revision of the requirement" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:version_value ],
+        [ sh:class comp:RequirementScope ;
+            sh:description "Scope and applicability details" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 10 ;
+            sh:path comp:requirement_scope ],
+        [ sh:class comp:ApplicabilityStatus ;
+            sh:description "Status of this requirement in different jurisdictions" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path comp:applicability_statuses ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to newer requirement if this is superseded" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path comp:successor_reference ],
+        [ sh:datatype xsd:string ;
+            sh:description "Official title of the requirement" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:title_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "List of harmonized or equivalent standards" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path comp:harmonized_standards ],
+        [ sh:datatype xsd:string ;
+            sh:description "References to related commitments" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path comp:commitment_links ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for this requirement" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:requirement_identifier ] ;
+    sh:targetClass comp:RequirementEntry .
+
+comp:RequirementScope a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Defines the scope and applicability of a requirement" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Technical domains covered (EMC, safety, environmental, etc.)" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:technical_domains ],
+        [ sh:datatype xsd:string ;
+            sh:description "Special conditions or limitations" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:special_conditions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Specific exclusions from scope" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:exclusions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Product categories covered by this requirement" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:product_categories ],
+        [ sh:datatype xsd:string ;
+            sh:description "Industry sectors where this applies" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:industry_sectors ] ;
+    sh:targetClass comp:RequirementScope .
+
+comp:ResponsibleParties a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for responsible parties" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:ResponsibleParty ;
+            sh:description "Individual responsible party entries" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:responsible_party_entries ] ;
+    sh:targetClass comp:ResponsibleParties .
+
+comp:ResponsibleParty a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A responsible party for a specific jurisdiction" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Jurisdiction for this responsible party" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:jurisdiction ],
+        [ sh:datatype xsd:string ;
+            sh:description "Registered address" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:registered_address ],
+        [ sh:class comp:RegistrationNumber ;
+            sh:description "Registration numbers (EORI, FDA, etc.)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path comp:registration_numbers ],
+        [ sh:datatype xsd:string ;
+            sh:description "Legal name of the entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:legal_entity_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Contact information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:contact_details ],
+        [ sh:description "Role of this party" ;
+            sh:in ( "MANUFACTURER" "IMPORTER" "AUTHORIZED_REPRESENTATIVE" "DISTRIBUTOR" "FULFILMENT_SERVICE_PROVIDER" "ECONOMIC_OPERATOR" "RESPONSIBLE_PERSON" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path comp:party_role ] ;
+    sh:targetClass comp:ResponsibleParty .
+
+comp:SafetyInformation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Container for safety warnings and instructions" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:SafetyItem ;
+            sh:description "Individual safety items" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path comp:safety_items ] ;
+    sh:targetClass comp:SafetyInformation .
+
+comp:SafetyItem a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A single safety warning, instruction, or prohibition" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Severity level if applicable" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:severity_level ],
+        [ sh:description "Type of safety item" ;
+            sh:in ( "WARNING" "INSTRUCTION" "PROHIBITION" "CAUTION" "DANGER" "NOTICE" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path comp:item_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to safety pictogram" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:pictogram_reference ],
+        [ sh:datatype xsd:string ;
+            sh:description "Languages for this safety item" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:languages ],
+        [ sh:datatype xsd:string ;
+            sh:description "Jurisdictions where this applies" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:applicable_jurisdictions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Content of the safety item" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:content_value ] ;
+    sh:targetClass comp:SafetyItem .
+
+comp:ScopeOfEvidence a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Defines what is covered by the evidence" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class comp:StandardVersion ;
+            sh:description "Specific versions of standards covered" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path comp:standards_versions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Technical specifications covered" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:technical_specifications ],
+        [ sh:datatype xsd:string ;
+            sh:description "References to specific requirements covered" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:requirement_references ],
+        [ sh:datatype xsd:string ;
+            sh:description "Assessment modules or procedures applied" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:modules_procedures ],
+        [ sh:datatype xsd:string ;
+            sh:description "What is explicitly excluded from scope" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:exclusions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Products or product families covered" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:products_covered ] ;
+    sh:targetClass comp:ScopeOfEvidence .
+
+comp:StakeholderScope a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Defines the scope of applicability for a commitment including markets, customer segments, and product variants." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Markets or regions where this commitment applies" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:applicable_markets ],
+        [ sh:datatype xsd:string ;
+            sh:description "Specific exclusions from scope" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:exclusions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Product variants or models covered by this commitment" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:product_variants ],
+        [ sh:datatype xsd:string ;
+            sh:description "Customer segments this commitment applies to" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:customer_segments ] ;
+    sh:targetClass comp:StakeholderScope .
+
+comp:StandardReference a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Reference to a management system standard" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Standard identifier (e.g., ISO 9001)" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:standard_identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version of the standard" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:standard_version ],
+        [ sh:datatype xsd:integer ;
+            sh:description "Year of the standard" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:standard_year ] ;
+    sh:targetClass comp:StandardReference .
+
+comp:StandardVersion a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Specific version of a standard" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Standard identifier" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:standard_identifier ],
+        [ sh:datatype xsd:integer ;
+            sh:description "Year of the standard" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:year ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version of the standard" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:version ] ;
+    sh:targetClass comp:StandardVersion .
+
+comp:UsageInstructions a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Product usage and maintenance instructions" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Intended use of the product" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:intended_use ],
+        [ sh:datatype xsd:string ;
+            sh:description "Operating guidelines" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:operating_guidelines ],
+        [ sh:datatype xsd:string ;
+            sh:description "Storage conditions" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path comp:storage_conditions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Disposal instructions" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path comp:disposal_instructions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Maintenance requirements" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:maintenance_requirements ],
+        [ sh:datatype xsd:string ;
+            sh:description "Emergency procedures" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path comp:emergency_procedures ] ;
+    sh:targetClass comp:UsageInstructions .
+
+comp:ValidityPeriod a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Time period during which something is valid" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:boolean ;
+            sh:description "Whether this has no defined end date" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path comp:is_perpetual ],
+        [ sh:datatype xsd:date ;
+            sh:description "End date of validity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path comp:end_date ],
+        [ sh:datatype xsd:date ;
+            sh:description "Start date of validity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path comp:start_date ] ;
+    sh:targetClass comp:ValidityPeriod .
+
+
