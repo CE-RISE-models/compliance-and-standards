@@ -7,7 +7,7 @@ description: >-
     documentary evidence, process evidence, and structured regulatory information sheets.
 
 license: https://creativecommons.org/licenses/by-nc/4.0/
-version: 0.1.0
+version: 0.0.1
 
 prefixes:
     linkml: https://w3id.org/linkml/
