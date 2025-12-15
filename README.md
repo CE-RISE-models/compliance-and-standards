@@ -33,12 +33,17 @@ ComplianceAndStandards (root)
 │       │   ├── Voluntary
 │       │   ├── Contractual
 │       │   ├── IndustryStandard
-│       │   └── CustomerRequirement
-│       ├── ComplianceStatus
+│       │   ├── CustomerRequirement
+│       │   ├── Environmental
+│       │   ├── Social
+│       │   └── Quality
+│       ├── ComplianceStatus (multivalued by jurisdiction)
 │       │   ├── Status (mandatory/voluntary/recommended/optional)
 │       │   ├── Jurisdiction
 │       │   ├── EffectiveDate
-│       │   └── ExpiryDate
+│       │   ├── ExpiryDate
+│       │   ├── StatusNotes
+│       │   └── IssuingAuthority
 │       ├── ValidityPeriod
 │       │   ├── StartDate
 │       │   └── EndDate
@@ -49,7 +54,8 @@ ComplianceAndStandards (root)
 │       └── EvidenceReferences
 │           ├── SupportingDocuments
 │           ├── CertificationLinks
-│           └── AuditRecords
+│           ├── AuditRecords
+│           └── TestReports
 ├── 2. ApplicableRegulationStandards
 │   └── RequirementEntry (repeatable)
 │       ├── RequirementIdentifier
@@ -57,14 +63,26 @@ ComplianceAndStandards (root)
 │       ├── Title
 │       ├── IssuingAuthority
 │       ├── Version
+│       ├── PublicationDate
 │       ├── ApplicabilityStatus (multivalued by jurisdiction)
 │       │   ├── Jurisdiction
 │       │   ├── Status (mandatory/voluntary/recommended/superseded)
 │       │   ├── EffectiveDate
-│       │   └── EndDate
+│       │   ├── EndDate
+│       │   ├── TransitionPeriod
+│       │   ├── EnforcementLevel
+│       │   └── Derogations
 │       ├── SuccessorReference (if superseded)
 │       ├── CommitmentLinks (references to related commitments)
-│       └── ComplianceEvidence (references to supporting evidence)
+│       ├── ComplianceEvidenceLinks (references to supporting evidence)
+│       ├── RequirementScope
+│       │   ├── ProductCategories
+│       │   ├── IndustrySectors
+│       │   ├── TechnicalDomains
+│       │   ├── Exclusions
+│       │   └── SpecialConditions
+│       ├── HarmonizedStandards
+│       └── AmendmentHistory
 ├── 3. ProductEvidence
 │   └── EvidenceDocument (repeatable)
 │       ├── EvidenceType (DoC/Certificate/TestReport/Marking/Other)
@@ -77,55 +95,78 @@ ComplianceAndStandards (root)
 │       ├── IssuingAuthority
 │       │   ├── AuthorityName
 │       │   ├── AuthorityType
-│       │   └── AccreditationDetails
+│       │   ├── AccreditationDetails
+│       │   ├── AuthorityIdentifier
+│       │   ├── AuthorityCountry
+│       │   └── NotifiedBodyNumber
 │       ├── ScopeOfEvidence
 │       │   ├── ProductsCovered
 │       │   ├── StandardsVersions (with specific versions)
-│       │   └── RequirementReferences
+│       │   ├── RequirementReferences
+│       │   ├── TechnicalSpecifications
+│       │   ├── ModulesProcedures
+│       │   └── Exclusions
 │       ├── CommitmentSupport (which commitments this proves)
+│       ├── ConformityAssessmentProcedure
+│       ├── DocumentLanguages
 │       ├── DigitalSignature
+│       │   ├── SignatureType
+│       │   ├── SignatureValue
+│       │   ├── SignatureDate
+│       │   ├── Signatory
+│       │   └── CertificateReference
 │       └── DocumentAccess
 │           ├── DocumentURL
 │           ├── AccessRestrictions
-│           └── RetentionPeriod
+│           ├── RetentionPeriod
+│           ├── DocumentFormat
+│           ├── Checksum
+│           └── StorageLocation
 ├── 4. ProcessEvidence
 │   └── ManagementSystem (repeatable)
-│       ├── SystemType (QMS/EMS/OHS/CSR/Other)
+│       ├── SystemType (QMS/EMS/OHS/ISMS/ENERGY/CSR/FSMS/BCM)
 │       ├── StandardReference
 │       │   ├── StandardIdentifier
-│       │   └── StandardVersion
+│       │   ├── StandardVersion
+│       │   └── StandardYear
 │       ├── CertificationDetails
 │       │   ├── CertificationStatus
 │       │   ├── CertificationBody
 │       │   ├── CertificateNumber
-│       │   └── ValidityPeriod
+│       │   ├── ValidityPeriod
+│       │   └── AccreditationDetails
 │       ├── AuditHistory
 │       │   ├── AuditDate
 │       │   ├── AuditType
 │       │   ├── Findings
-│       │   └── CorrectiveActions
+│       │   ├── CorrectiveActions
+│       │   ├── AuditResult
+│       │   └── Auditor
 │       ├── PerformanceMetrics
-│       │   ├── KPIs
-│       │   └── ImprovementTargets
+│       │   ├── KPIs (name/value/unit/period)
+│       │   └── ImprovementTargets (description/value/date)
 │       ├── CommitmentAlignment (links to related commitments)
-│       └── EvidenceDocuments (references to certificates/reports)
+│       ├── EvidenceDocuments (references to certificates/reports)
+│       └── ScopeDescription
 └── 5. RegulatoryInformation
     ├── SafetyInformation
     │   └── SafetyItem (repeatable)
-    │       ├── ItemType (Warning/Instruction/Prohibition)
-    │       ├── Content (text/pictogram)
-    │       ├── Severity (if applicable)
+    │       ├── ItemType (Warning/Instruction/Prohibition/Caution/Danger/Notice)
+    │       ├── Content (text)
+    │       ├── SeverityLevel (if applicable)
     │       ├── ApplicableJurisdictions
-    │       └── Languages
+    │       ├── Languages
+    │       └── PictogramReference
     ├── UsageInstructions
     │   ├── IntendedUse
     │   ├── OperatingGuidelines
     │   ├── MaintenanceRequirements
     │   ├── DisposalInstructions
-    │   └── EmergencyProcedures
+    │   ├── EmergencyProcedures
+    │   └── StorageConditions
     ├── ComplianceStatements
     │   └── Statement (repeatable)
-    │       ├── StatementType (EMC/Safety/Environmental/Other)
+    │       ├── StatementType (EMC/Safety/Environmental/Radio/Chemical/Energy/Privacy/Accessibility)
     │       ├── StatementContent
     │       ├── ApplicableStandards
     │       ├── TestReferences
@@ -209,9 +250,9 @@ Every data point in the model includes a `sql_identifier` annotation that serves
 **Examples:**
 - `comp_commit_regulatory_type` - Type of regulatory commitment
 - `comp_reg_standard_identifier` - Standard identification number
-- `comp_evid_doc_number` - Declaration of Conformity number
-- `comp_proc_qms_standard` - Quality management system standard
-- `comp_info_responsible_person_name` - EU responsible person name
+- `comp_evid_doc_id` - Evidence document identifier
+- `comp_mgmt_type` - Management system type
+- `comp_party_name` - Responsible party name
 
 This identifier system enables seamless integration with databases and ensures clear data model composition when combining with other CE-RISE data models.
 
@@ -221,11 +262,11 @@ This identifier system enables seamless integration with databases and ensures c
 
 | Step | Component | Criticalities Identified | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------------|----------------------|--------|--------------|
-| **1** | **ProductCommitments** | • Evolving regulatory landscape<br>• Multi-jurisdictional complexity<br>• Overlapping commitment categories<br>• Temporal status changes | • Flexible tagging system<br>• Multi-category support<br>• Jurisdiction-specific status<br>• Timeline tracking<br>• Generic commitment structure | **PLANNED** | • Automated status updates<br>• Regulatory change monitoring<br>• Cross-jurisdiction mapping |
-| **2** | **ApplicableRegulationStandards** | • Evolving requirements<br>• Multi-jurisdiction complexity<br>• Standards supersession<br>• Version tracking | • Flexible requirement structure<br>• Jurisdiction-specific status<br>• Successor references<br>• Commitment integration | **PLANNED** | • Regulatory change monitoring<br>• Automated supersession tracking<br>• Standards database APIs |
-| **3** | **ProductEvidence** | • Evidence-commitment linking<br>• Version specificity<br>• Digital authenticity<br>• Document lifecycle | • Generic evidence framework<br>• Commitment references<br>• Version-aware scope<br>• Digital signature support | **PLANNED** | • Automated commitment matching<br>• Blockchain anchoring<br>• Retention management |
-| **4** | **ProcessEvidence** | • System-commitment alignment<br>• Audit integration<br>• Performance tracking<br>• Multi-standard coverage | • Flexible system types<br>• Commitment linkage<br>• Audit trail capture<br>• KPI framework | **PLANNED** | • Management system APIs<br>• Automated KPI collection<br>• Audit scheduling |
-| **5** | **RegulatoryInformation** | • Global market support<br>• Flexible identifiers<br>• Multi-party roles<br>• Evolving requirements | • Market-agnostic structure<br>• Repeatable components<br>• Jurisdiction-aware parties<br>• Key-value identifiers | **PLANNED** | • Market requirement APIs<br>• Translation management<br>• Regulatory updates |
+| **1** | **ProductCommitments** | • Evolving regulatory landscape<br>• Multi-jurisdictional complexity<br>• Overlapping commitment categories<br>• Temporal status changes | • Flexible tagging system<br>• Multi-category support<br>• Jurisdiction-specific status<br>• Timeline tracking<br>• Generic commitment structure | **COMPLETED** | • Automated status updates<br>• Regulatory change monitoring<br>• Cross-jurisdiction mapping |
+| **2** | **ApplicableRegulationStandards** | • Evolving requirements<br>• Multi-jurisdiction complexity<br>• Standards supersession<br>• Version tracking | • Flexible requirement structure<br>• Jurisdiction-specific status<br>• Successor references<br>• Commitment integration | **COMPLETED** | • Regulatory change monitoring<br>• Automated supersession tracking<br>• Standards database APIs |
+| **3** | **ProductEvidence** | • Evidence-commitment linking<br>• Version specificity<br>• Digital authenticity<br>• Document lifecycle | • Generic evidence framework<br>• Commitment references<br>• Version-aware scope<br>• Digital signature support | **COMPLETED** | • Automated commitment matching<br>• Blockchain anchoring<br>• Retention management |
+| **4** | **ProcessEvidence** | • System-commitment alignment<br>• Audit integration<br>• Performance tracking<br>• Multi-standard coverage | • Flexible system types<br>• Commitment linkage<br>• Audit trail capture<br>• KPI framework | **COMPLETED** | • Management system APIs<br>• Automated KPI collection<br>• Audit scheduling |
+| **5** | **RegulatoryInformation** | • Global market support<br>• Flexible identifiers<br>• Multi-party roles<br>• Evolving requirements | • Market-agnostic structure<br>• Repeatable components<br>• Jurisdiction-aware parties<br>• Key-value identifiers | **COMPLETED** | • Market requirement APIs<br>• Translation management<br>• Regulatory updates |
 
 ### Integration Opportunities
 
