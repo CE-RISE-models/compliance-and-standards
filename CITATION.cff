@@ -3,7 +3,7 @@ title: CE-RISE Compliance and Standards
 message: >-
   v0.0.1 - Complete implementation of compliance and standards data model with 5 stages.
 type: software
-doi: xxx_to_be_obtained_xxx
+doi: 10.5281/zenodo.17938293
 authors:
   - given-names: Riccardo
     family-names: Boero
@@ -12,7 +12,7 @@ authors:
     affiliation: NILU
 identifiers:
   - type: doi
-    value: xxx_to_be_obtained_xxx
+    value: 10.5281/zenodo.17938293
     description: This DOI represents all software versions.
 repository-code: 'https://codeberg.org/CE-RISE-models/compliance-and-standards'
 url: 'https://ce-rise-models.codeberg.page/compliance-and-standards/'

@@ -1,6 +1,6 @@
 # CE-RISE Compliance and Standards
 
-[![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/compliance-and-standards/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17938293.svg)](https://doi.org/10.5281/zenodo.17938293) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/compliance-and-standards/)
 
 Repository for the data model covering regulatory compliance, standards, and conformity-related information for products, including applicable regulations and standards, product commitments, documentary evidence (e.g., DoC, certificates, CE marking), process evidence, and structured regulatory information sheets with safety warnings, legally required safe-use instructions, EMC statements, EU Responsible Person details, and market- or regulation-specific identifiers.
 
