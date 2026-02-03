@@ -1,0 +1,3665 @@
+WARNING:linkml.generators.owlgen:Ambiguous attribute: validity_period https://ce-rise-models.codeberg.page/compliance-and-standards/validity_period
+WARNING:linkml.generators.owlgen:Ambiguous attribute: jurisdiction https://ce-rise-models.codeberg.page/compliance-and-standards/jurisdiction
+WARNING:linkml.generators.owlgen:Ambiguous attribute: effective_date https://ce-rise-models.codeberg.page/compliance-and-standards/effective_date
+WARNING:linkml.generators.owlgen:Ambiguous attribute: issuing_authority https://ce-rise-models.codeberg.page/compliance-and-standards/issuing_authority
+WARNING:linkml.generators.owlgen:Ambiguous attribute: end_date https://ce-rise-models.codeberg.page/compliance-and-standards/end_date
+WARNING:linkml.generators.owlgen:Ambiguous attribute: exclusions https://ce-rise-models.codeberg.page/compliance-and-standards/exclusions
+WARNING:linkml.generators.owlgen:Ambiguous attribute: issuing_authority https://ce-rise-models.codeberg.page/compliance-and-standards/issuing_authority
+WARNING:linkml.generators.owlgen:Ambiguous attribute: jurisdiction https://ce-rise-models.codeberg.page/compliance-and-standards/jurisdiction
+WARNING:linkml.generators.owlgen:Ambiguous attribute: effective_date https://ce-rise-models.codeberg.page/compliance-and-standards/effective_date
+WARNING:linkml.generators.owlgen:Ambiguous attribute: end_date https://ce-rise-models.codeberg.page/compliance-and-standards/end_date
+WARNING:linkml.generators.owlgen:Ambiguous attribute: exclusions https://ce-rise-models.codeberg.page/compliance-and-standards/exclusions
+WARNING:linkml.generators.owlgen:Ambiguous attribute: evidence_documents https://ce-rise-models.codeberg.page/compliance-and-standards/evidence_documents
+WARNING:linkml.generators.owlgen:Ambiguous attribute: validity_period https://ce-rise-models.codeberg.page/compliance-and-standards/validity_period
+WARNING:linkml.generators.owlgen:Ambiguous attribute: accreditation_details https://ce-rise-models.codeberg.page/compliance-and-standards/accreditation_details
+WARNING:linkml.generators.owlgen:Ambiguous attribute: exclusions https://ce-rise-models.codeberg.page/compliance-and-standards/exclusions
+WARNING:linkml.generators.owlgen:Ambiguous attribute: standard_identifier https://ce-rise-models.codeberg.page/compliance-and-standards/standard_identifier
+WARNING:linkml.generators.owlgen:Ambiguous type for: evidence_documents
+WARNING:linkml.generators.owlgen:Ambiguous attribute: evidence_documents https://ce-rise-models.codeberg.page/compliance-and-standards/evidence_documents
+WARNING:linkml.generators.owlgen:Ambiguous attribute: standard_identifier https://ce-rise-models.codeberg.page/compliance-and-standards/standard_identifier
+WARNING:linkml.generators.owlgen:Ambiguous attribute: validity_period https://ce-rise-models.codeberg.page/compliance-and-standards/validity_period
+WARNING:linkml.generators.owlgen:Ambiguous attribute: accreditation_details https://ce-rise-models.codeberg.page/compliance-and-standards/accreditation_details
+WARNING:linkml.generators.owlgen:Ambiguous attribute: jurisdiction https://ce-rise-models.codeberg.page/compliance-and-standards/jurisdiction
+WARNING:linkml.generators.owlgen:Ambiguous attribute: issuing_authority https://ce-rise-models.codeberg.page/compliance-and-standards/issuing_authority
+@prefix comp: <https://ce-rise-models.codeberg.page/compliance-and-standards/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/.owl.ttl> a owl:Ontology ;
+    rdfs:label "compliance_and_standards" ;
+    dcterms:license "https://creativecommons.org/licenses/by-nc/4.0/" ;
+    dcterms:title "CE-RISE Compliance and Standards Data Model" ;
+    pav:version "0.0.3" ;
+    skos:definition "Data model for regulatory compliance, standards, and conformity-related information for products and materials, including applicable regulations and standards, commitments, documentary evidence, process evidence, and structured regulatory information sheets. Supports both Digital Product Passports (DPP) and Digital Material Passports (DMP)." .
+
+comp:ComplianceAndStandards a owl:Class ;
+    rdfs:label "ComplianceAndStandards" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:entity_evidence ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:process_evidence ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:regulatory_information ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:entity_commitments ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:RegulatoryInformation ;
+            owl:onProperty comp:regulatory_information ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:EntityCommitments ;
+            owl:onProperty comp:entity_commitments ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:entity_evidence ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ApplicableRegulationStandards ;
+            owl:onProperty comp:applicable_regulation_standards ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:applicable_regulation_standards ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:regulatory_information ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:EntityEvidence ;
+            owl:onProperty comp:entity_evidence ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ProcessEvidence ;
+            owl:onProperty comp:process_evidence ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:applicable_regulation_standards ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:process_evidence ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:entity_commitments ] ;
+    skos:definition "Root container for all compliance and standards related information for products and materials, encompassing commitments, requirements, evidence, and regulatory data." ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_root" .
+
+comp:Amendment a owl:Class ;
+    rdfs:label "Amendment" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:amendment_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:amendment_description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:amendment_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:amendment_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:amendment_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:amendment_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:amendment_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:amendment_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:amendment_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:amendment_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:amendment_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:amendment_type ] ;
+    skos:definition "Record of an amendment to a requirement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:Revision" ;
+    comp:sql_identifier "comp_amendment" .
+
+comp:ApplicabilityStatus a owl:Class ;
+    rdfs:label "ApplicabilityStatus" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:enforcement_level ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:RequirementStatusType ;
+            owl:onProperty comp:status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:effective_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:derogations ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:transition_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:derogations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:end_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:enforcement_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:jurisdiction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:effective_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:transition_period ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:enforcement_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:end_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:effective_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:end_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:jurisdiction ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:transition_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:jurisdiction ] ;
+    skos:definition "Jurisdiction-specific applicability status for a requirement, allowing tracking of how requirements apply differently across markets." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:GovernmentService" ;
+    comp:sql_identifier "comp_applicability_status" .
+
+comp:ApplicableRegulationStandards a owl:Class ;
+    rdfs:label "ApplicableRegulationStandards" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom comp:RequirementEntry ;
+            owl:onProperty comp:requirement_entries ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:requirement_entries ] ;
+    skos:definition "Container for all applicable regulations, standards, and specifications with jurisdiction-aware requirements tracking and version management." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:Legislation" ;
+    comp:sql_identifier "comp_applicable_regs" .
+
+comp:AuditRecord a owl:Class ;
+    rdfs:label "AuditRecord" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:auditor ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:corrective_actions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:audit_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:findings ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:audit_result ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:findings ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:audit_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:audit_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:audit_result ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:AuditType ;
+            owl:onProperty comp:audit_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:auditor ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:auditor ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:audit_result ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:corrective_actions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:audit_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:findings ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:audit_type ] ;
+    skos:definition "Record of an audit" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:Activity" ;
+    comp:sql_identifier "comp_audit_record" .
+
+comp:CertificationDetails a owl:Class ;
+    rdfs:label "CertificationDetails" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:certification_body ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:validity_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:certification_body ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:certification_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:certificate_number ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:certification_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:accreditation_details ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:accreditation_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:accreditation_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:CertificationStatusType ;
+            owl:onProperty comp:certification_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:certification_body ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ValidityPeriod ;
+            owl:onProperty comp:validity_period ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:validity_period ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:certificate_number ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:certificate_number ] ;
+    skos:definition "Details about management system certification" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:Certification" ;
+    comp:sql_identifier "comp_certification_details" .
+
+comp:Commitment a owl:Class ;
+    rdfs:label "Commitment" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:evidence_references ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:StakeholderScope ;
+            owl:onProperty comp:stakeholder_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:commitment_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ComplianceStatus ;
+            owl:onProperty comp:compliance_statuses ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:commitment_statement_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:version_info ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:commitment_description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:commitment_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:commitment_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:commitment_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ValidityPeriod ;
+            owl:onProperty comp:validity_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:commitment_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:evidence_references ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:commitment_categories ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:stakeholder_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:validity_period ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:last_updated ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:compliance_statuses ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:stakeholder_scope ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:CommitmentCategory ;
+            owl:onProperty comp:commitment_categories ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:last_updated ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:version_info ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:commitment_statement_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:validity_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:commitment_statement_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty comp:last_updated ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:EvidenceReferences ;
+            owl:onProperty comp:evidence_references ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:version_info ] ;
+    skos:definition "A single commitment representing any type of obligation for a product or material, including compliance requirements with flexible categorization and jurisdiction-specific status tracking." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:AgreeAction" ;
+    comp:sql_identifier "comp_commitment" .
+
+comp:CommitmentCategory a owl:Class ;
+    rdfs:label "CommitmentCategory" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:priority_level ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty comp:priority_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:category_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:CommitmentCategoryType ;
+            owl:onProperty comp:category_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:category_reference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:category_reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:category_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:priority_level ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:category_reference ] ;
+    skos:definition "Category or type of commitment with external standard references" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:category" ;
+    comp:sql_identifier "comp_commit_category" .
+
+comp:ComplianceStatement a owl:Class ;
+    rdfs:label "ComplianceStatement" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:statement_content ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:test_references ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:test_references ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:valid_for_jurisdictions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:applicable_standards ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:statement_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:StatementType ;
+            owl:onProperty comp:statement_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:statement_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:statement_content ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:valid_for_jurisdictions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:statement_content ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:applicable_standards ] ;
+    skos:definition "A regulatory compliance statement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:Statement" ;
+    comp:sql_identifier "comp_compliance_statement" .
+
+comp:ComplianceStatements a owl:Class ;
+    rdfs:label "ComplianceStatements" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom comp:ComplianceStatement ;
+            owl:onProperty comp:statements ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:statements ] ;
+    skos:definition "Container for compliance statements" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:ComplianceStatement" ;
+    comp:sql_identifier "comp_compliance_statements" .
+
+comp:ComplianceStatus a owl:Class ;
+    rdfs:label "ComplianceStatus" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:jurisdiction ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:effective_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:expiry_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:status_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:jurisdiction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:status_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:status_notes ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:jurisdiction ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:effective_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:expiry_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:status_notes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:expiry_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:effective_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:status_notes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ComplianceStatusType ;
+            owl:onProperty comp:status_value ] ;
+    skos:definition "Jurisdiction-specific compliance status for a commitment, allowing the same commitment to have different statuses in different markets." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:GovernmentPermit" ;
+    comp:sql_identifier "comp_compliance_status" .
+
+comp:DigitalSignature a owl:Class ;
+    rdfs:label "DigitalSignature" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:signature_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:signature_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:signature_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:signature_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:certificate_reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:signatory ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:signature_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:signature_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:signature_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:certificate_reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:certificate_reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:signatory ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty comp:signature_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:signatory ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:signature_type ] ;
+    skos:definition "Digital signature information for evidence authenticity" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:DigitalDocument" ;
+    comp:sql_identifier "comp_digital_signature" .
+
+comp:DocumentAccess a owl:Class ;
+    rdfs:label "DocumentAccess" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:retention_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:document_format ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:document_format ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:document_url ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:checksum ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:access_restrictions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:checksum ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:storage_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:retention_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:document_url ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:document_url ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:access_restrictions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:document_format ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:retention_period ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:storage_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:checksum ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:storage_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:access_restrictions ] ;
+    skos:definition "Information about document access and storage" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcat:Distribution" ;
+    comp:sql_identifier "comp_document_access" .
+
+comp:EntityCommitments a owl:Class ;
+    rdfs:label "EntityCommitments" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:commitments ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:Commitment ;
+            owl:onProperty comp:commitments ] ;
+    skos:definition "Container for all commitments related to products or materials, providing a flexible framework for regulatory, voluntary, and contractual obligations that can evolve over time and vary by jurisdiction." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:commitmentTo" ;
+    comp:sql_identifier "comp_commitments_container" .
+
+comp:EntityEvidence a owl:Class ;
+    rdfs:label "EntityEvidence" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom comp:EvidenceDocument ;
+            owl:onProperty comp:evidence_documents ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:evidence_documents ] ;
+    skos:definition "Container for all documentary evidence supporting compliance claims for products or materials, including declarations, certificates, test reports, and markings." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:Entity" ;
+    comp:sql_identifier "comp_entity_evidence" .
+
+comp:EvidenceDocument a owl:Class ;
+    rdfs:label "EvidenceDocument" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:digital_signature ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:commitment_support ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:document_access ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:issuing_authority_details ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:scope_of_evidence ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:document_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:issue_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:digital_signature ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:EvidenceType ;
+            owl:onProperty comp:evidence_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:issue_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:issuing_authority_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:issue_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ScopeOfEvidence ;
+            owl:onProperty comp:scope_of_evidence ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:validity_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:document_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:document_access ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ValidityPeriod ;
+            owl:onProperty comp:validity_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:conformity_assessment_procedure ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:evidence_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:DocumentAccess ;
+            owl:onProperty comp:document_access ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:commitment_support ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:document_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:DigitalSignature ;
+            owl:onProperty comp:digital_signature ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:scope_of_evidence ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:conformity_assessment_procedure ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:evidence_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:document_language ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:IssuingAuthority ;
+            owl:onProperty comp:issuing_authority_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:document_title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:conformity_assessment_procedure ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:document_title ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:document_language ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:document_title ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:validity_period ] ;
+    skos:definition "A single piece of documentary evidence supporting compliance claims, with version tracking, digital signatures, and scope definition." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "foaf:Document" ;
+    comp:sql_identifier "comp_evidence_document" .
+
+comp:EvidenceReferences a owl:Class ;
+    rdfs:label "EvidenceReferences" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:audit_records ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:audit_records ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:certification_links ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:test_reports ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:certification_links ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:test_reports ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:supporting_documents ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:supporting_documents ] ;
+    skos:definition "References to evidence supporting a commitment" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:wasGeneratedBy" ;
+    comp:sql_identifier "comp_evidence_refs" .
+
+comp:ImprovementTarget a owl:Class ;
+    rdfs:label "ImprovementTarget" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:target_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:target_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:target_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:target_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:target_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:target_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:target_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:target_description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty comp:target_value ] ;
+    skos:definition "An improvement target" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:targetValue" ;
+    comp:sql_identifier "comp_improvement_target" .
+
+comp:IssuingAuthority a owl:Class ;
+    rdfs:label "IssuingAuthority" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:accreditation_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:notified_body_number ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:accreditation_details ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:authority_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:authority_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:authority_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:authority_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:accreditation_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:authority_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:AuthorityType ;
+            owl:onProperty comp:authority_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:authority_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:authority_country ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:authority_country ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:authority_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:notified_body_number ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:authority_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:authority_country ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:notified_body_number ] ;
+    skos:definition "Details about the authority issuing evidence" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "org:Organization" ;
+    comp:sql_identifier "comp_issuing_authority" .
+
+comp:KeyPerformanceIndicator a owl:Class ;
+    rdfs:label "KeyPerformanceIndicator" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:measurement_period ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:measurement_period ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:kpi_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:kpi_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:measurement_period ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:kpi_unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty comp:kpi_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:kpi_unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:kpi_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:kpi_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:kpi_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:kpi_unit ] ;
+    skos:definition "A key performance indicator" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:measuredValue" ;
+    comp:sql_identifier "comp_kpi" .
+
+comp:ManagementSystem a owl:Class ;
+    rdfs:label "ManagementSystem" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom comp:CertificationDetails ;
+            owl:onProperty comp:certification_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:StandardReference ;
+            owl:onProperty comp:standard_reference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:PerformanceMetrics ;
+            owl:onProperty comp:performance_metrics ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:commitment_alignment ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:certification_details ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:scope_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:standard_reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:system_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:AuditRecord ;
+            owl:onProperty comp:audit_history ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:evidence_documents ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:scope_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:performance_metrics ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:standard_reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:audit_history ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:system_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:scope_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:performance_metrics ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:commitment_alignment ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:evidence_documents ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:certification_details ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ManagementSystemType ;
+            owl:onProperty comp:system_type ] ;
+    skos:definition "A management system certification or implementation with audit history and performance tracking." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "org:OrganizationalSystem" ;
+    comp:sql_identifier "comp_management_system" .
+
+comp:PerformanceMetrics a owl:Class ;
+    rdfs:label "PerformanceMetrics" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:improvement_targets ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ImprovementTarget ;
+            owl:onProperty comp:improvement_targets ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:KeyPerformanceIndicator ;
+            owl:onProperty comp:kpis ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:kpis ] ;
+    skos:definition "Performance metrics and improvement targets" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:QuantitativeValue" ;
+    comp:sql_identifier "comp_performance_metrics" .
+
+comp:ProcessEvidence a owl:Class ;
+    rdfs:label "ProcessEvidence" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom comp:ManagementSystem ;
+            owl:onProperty comp:management_systems ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:management_systems ] ;
+    skos:definition "Container for management system and process-related evidence demonstrating organizational compliance capabilities." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "org:OrganizationalProcess" ;
+    comp:sql_identifier "comp_process_evidence" .
+
+comp:RegistrationNumber a owl:Class ;
+    rdfs:label "RegistrationNumber" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:number_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:number_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:number_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:number_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:number_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:number_type ] ;
+    skos:definition "A registration number" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "org:identifier" ;
+    comp:sql_identifier "comp_registration_number" .
+
+comp:RegulatoryIdentifier a owl:Class ;
+    rdfs:label "RegulatoryIdentifier" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:identifier_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:identifier_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:validity_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:identifier_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:validity_scope ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:validity_scope ] ;
+    skos:definition "A market-specific regulatory identifier" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:PropertyValue" ;
+    comp:sql_identifier "comp_regulatory_identifier" .
+
+comp:RegulatoryIdentifiers a owl:Class ;
+    rdfs:label "RegulatoryIdentifiers" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:identifiers ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:RegulatoryIdentifier ;
+            owl:onProperty comp:identifiers ] ;
+    skos:definition "Container for regulatory identifiers" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:identifier" ;
+    comp:sql_identifier "comp_regulatory_identifiers" .
+
+comp:RegulatoryInformation a owl:Class ;
+    rdfs:label "RegulatoryInformation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:responsible_parties ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:usage_instructions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:usage_instructions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:regulatory_identifiers ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:RegulatoryIdentifiers ;
+            owl:onProperty comp:regulatory_identifiers ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:safety_information ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:SafetyInformation ;
+            owl:onProperty comp:safety_information ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ResponsibleParties ;
+            owl:onProperty comp:responsible_parties ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:UsageInstructions ;
+            owl:onProperty comp:usage_instructions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:responsible_parties ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:safety_information ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:compliance_statements ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:regulatory_identifiers ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:compliance_statements ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ComplianceStatements ;
+            owl:onProperty comp:compliance_statements ] ;
+    skos:definition "Structured regulatory information including safety warnings, usage instructions, compliance statements, responsible parties, and regulatory identifiers." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:RegulatoryInformation" ;
+    comp:sql_identifier "comp_regulatory_information" .
+
+comp:RequirementEntry a owl:Class ;
+    rdfs:label "RequirementEntry" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:compliance_evidence_links ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:successor_reference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:Amendment ;
+            owl:onProperty comp:amendment_history ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:title_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:requirement_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ApplicabilityStatus ;
+            owl:onProperty comp:applicability_statuses ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:compliance_evidence_links ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:publication_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:harmonized_standards ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:successor_reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:requirement_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:successor_reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:publication_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:RequirementType ;
+            owl:onProperty comp:requirement_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:title_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:version_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:harmonized_standards ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:requirement_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:amendment_history ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:issuing_authority ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:title_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:commitment_links ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:publication_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:requirement_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:applicability_statuses ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:requirement_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:requirement_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:version_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:commitment_links ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:RequirementScope ;
+            owl:onProperty comp:requirement_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:requirement_scope ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:version_value ] ;
+    skos:definition "A single regulation, standard, or specification requirement with multi-jurisdictional applicability and version tracking." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:Standard" ;
+    comp:sql_identifier "comp_requirement_entry" .
+
+comp:RequirementScope a owl:Class ;
+    rdfs:label "RequirementScope" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:entity_categories ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:exclusions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:entity_categories ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:industry_sectors ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:technical_domains ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:technical_domains ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:industry_sectors ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:special_conditions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:special_conditions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:exclusions ] ;
+    skos:definition "Defines the scope and applicability of a requirement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:coverage" ;
+    comp:sql_identifier "comp_requirement_scope" .
+
+comp:ResponsibleParties a owl:Class ;
+    rdfs:label "ResponsibleParties" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:responsible_party_entries ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:ResponsibleParty ;
+            owl:onProperty comp:responsible_party_entries ] ;
+    skos:definition "Container for responsible parties" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "org:ResponsibleParty" ;
+    comp:sql_identifier "comp_responsible_parties" .
+
+comp:ResponsibleParty a owl:Class ;
+    rdfs:label "ResponsibleParty" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:party_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:registered_address ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:contact_details ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:jurisdiction ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:PartyRoleType ;
+            owl:onProperty comp:party_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:registration_numbers ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:jurisdiction ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:RegistrationNumber ;
+            owl:onProperty comp:registration_numbers ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:legal_entity_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:registered_address ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:contact_details ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:contact_details ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:legal_entity_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:registered_address ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:party_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:jurisdiction ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:legal_entity_name ] ;
+    skos:definition "A responsible party for a specific jurisdiction" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "foaf:Agent" ;
+    comp:sql_identifier "comp_responsible_party" .
+
+comp:SafetyInformation a owl:Class ;
+    rdfs:label "SafetyInformation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:safety_items ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:SafetyItem ;
+            owl:onProperty comp:safety_items ] ;
+    skos:definition "Container for safety warnings and instructions" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:SafetyInformation" ;
+    comp:references "King et al.; CIRPASS; Jensen et al." ;
+    comp:sql_identifier "comp_safety_information" .
+
+comp:SafetyItem a owl:Class ;
+    rdfs:label "SafetyItem" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:item_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:severity_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:severity_level ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:content_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:applicable_jurisdictions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:severity_level ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:languages ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:languages ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:applicable_jurisdictions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:pictogram_reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:pictogram_reference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:pictogram_reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:item_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:content_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:SafetyItemType ;
+            owl:onProperty comp:item_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:content_value ] ;
+    skos:definition "A single safety warning, instruction, or prohibition" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:Warning" ;
+    comp:sql_identifier "comp_safety_item" .
+
+comp:ScopeOfEvidence a owl:Class ;
+    rdfs:label "ScopeOfEvidence" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:exclusions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:exclusions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:technical_specifications ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:requirement_references ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:entities_covered ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:standards_versions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:technical_specifications ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:batch_lot_identifiers ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom comp:StandardVersion ;
+            owl:onProperty comp:standards_versions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:batch_lot_identifiers ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:modules_procedures ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:entities_covered ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:modules_procedures ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:requirement_references ] ;
+    skos:definition "Defines what is covered by the evidence" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:coverage" ;
+    comp:sql_identifier "comp_scope_evidence" .
+
+comp:StakeholderScope a owl:Class ;
+    rdfs:label "StakeholderScope" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:applicable_markets ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:applicable_markets ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:entity_variants ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:customer_segments ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:exclusions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:exclusions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:entity_variants ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:customer_segments ] ;
+    skos:definition "Defines the scope of applicability for a commitment including markets, customer segments, and entity variants (products or materials)." ;
+    skos:inScheme comp: ;
+    comp:owl.filler "org:scope" ;
+    comp:sql_identifier "comp_stakeholder_scope" .
+
+comp:StandardReference a owl:Class ;
+    rdfs:label "StandardReference" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:standard_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:standard_year ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:standard_version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty comp:standard_year ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:standard_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:standard_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:standard_version ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:standard_version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:standard_year ] ;
+    skos:definition "Reference to a management system standard" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:Standard" ;
+    comp:sql_identifier "comp_standard_reference" .
+
+comp:StandardVersion a owl:Class ;
+    rdfs:label "StandardVersion" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty comp:year ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:version ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:standard_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:year ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:standard_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:year ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:standard_identifier ] ;
+    skos:definition "Specific version of a standard" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:Standard" ;
+    comp:sql_identifier "comp_standard_version" .
+
+comp:UsageInstructions a owl:Class ;
+    rdfs:label "UsageInstructions" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:operating_guidelines ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:storage_conditions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:operating_guidelines ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:maintenance_requirements ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:intended_use ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:operating_guidelines ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:emergency_procedures ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:emergency_procedures ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:storage_conditions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:disposal_instructions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:disposal_instructions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:emergency_procedures ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:intended_use ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:maintenance_requirements ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty comp:intended_use ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:storage_conditions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:disposal_instructions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:maintenance_requirements ] ;
+    skos:definition "Entity usage and maintenance instructions (for products or materials)" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:instructions" ;
+    comp:sql_identifier "comp_usage_instructions" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#CUSTOMER> a owl:Class ;
+    rdfs:label "CUSTOMER" ;
+    rdfs:subClassOf comp:AuditType ;
+    skos:definition "Customer audit" ;
+    comp:sql_identifier "comp_audittype_customer" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#INITIAL> a owl:Class ;
+    rdfs:label "INITIAL" ;
+    rdfs:subClassOf comp:AuditType ;
+    skos:definition "Initial certification audit" ;
+    comp:sql_identifier "comp_audittype_initial" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#INTERNAL> a owl:Class ;
+    rdfs:label "INTERNAL" ;
+    rdfs:subClassOf comp:AuditType ;
+    skos:definition "Internal audit" ;
+    comp:sql_identifier "comp_audittype_internal" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#RECERTIFICATION> a owl:Class ;
+    rdfs:label "RECERTIFICATION" ;
+    rdfs:subClassOf comp:AuditType ;
+    skos:definition "Recertification audit" ;
+    comp:sql_identifier "comp_audittype_recert" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#SPECIAL> a owl:Class ;
+    rdfs:label "SPECIAL" ;
+    rdfs:subClassOf comp:AuditType ;
+    skos:definition "Special or unscheduled audit" ;
+    comp:sql_identifier "comp_audittype_special" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#SURVEILLANCE> a owl:Class ;
+    rdfs:label "SURVEILLANCE" ;
+    rdfs:subClassOf comp:AuditType ;
+    skos:definition "Surveillance audit" ;
+    comp:sql_identifier "comp_audittype_surveillance" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#ACCREDITATION_BODY> a owl:Class ;
+    rdfs:label "ACCREDITATION_BODY" ;
+    rdfs:subClassOf comp:AuthorityType ;
+    skos:definition "Accreditation Body" ;
+    comp:sql_identifier "comp_authtype_accreditation" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#AUTHORIZED_REPRESENTATIVE> a owl:Class ;
+    rdfs:label "AUTHORIZED_REPRESENTATIVE" ;
+    rdfs:subClassOf comp:AuthorityType ;
+    skos:definition "Authorized Representative" ;
+    comp:sql_identifier "comp_authtype_auth_rep" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#CERTIFICATION_BODY> a owl:Class ;
+    rdfs:label "CERTIFICATION_BODY" ;
+    rdfs:subClassOf comp:AuthorityType ;
+    skos:definition "Certification Body" ;
+    comp:references "ESPR; CIRPASS; Battery Pass" ;
+    comp:sql_identifier "comp_authtype_cb" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#COMPETENT_AUTHORITY> a owl:Class ;
+    rdfs:label "COMPETENT_AUTHORITY" ;
+    rdfs:subClassOf comp:AuthorityType ;
+    skos:definition "Competent Authority" ;
+    comp:references "ESPR; CIRPASS" ;
+    comp:sql_identifier "comp_authtype_competent" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#INSPECTION_BODY> a owl:Class ;
+    rdfs:label "INSPECTION_BODY" ;
+    rdfs:subClassOf comp:AuthorityType ;
+    skos:definition "Inspection Body" ;
+    comp:sql_identifier "comp_authtype_inspection" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#MANUFACTURER> a owl:Class ;
+    rdfs:label "MANUFACTURER" ;
+    rdfs:subClassOf comp:AuthorityType ;
+    skos:definition "Manufacturer (self-declaration)" ;
+    comp:sql_identifier "comp_authtype_manufacturer" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#NOTIFIED_BODY> a owl:Class ;
+    rdfs:label "NOTIFIED_BODY" ;
+    rdfs:subClassOf comp:AuthorityType ;
+    skos:definition "Notified Body" ;
+    comp:sql_identifier "comp_authtype_nb" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#TEST_LABORATORY> a owl:Class ;
+    rdfs:label "TEST_LABORATORY" ;
+    rdfs:subClassOf comp:AuthorityType ;
+    skos:definition "Test Laboratory" ;
+    comp:references "King et al.; Battery Pass" ;
+    comp:sql_identifier "comp_authtype_lab" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#CERTIFIED> a owl:Class ;
+    rdfs:label "CERTIFIED" ;
+    rdfs:subClassOf comp:CertificationStatusType ;
+    skos:definition "Currently certified" ;
+    comp:sql_identifier "comp_certstat_certified" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#EXPIRED> a owl:Class ;
+    rdfs:label "EXPIRED" ;
+    rdfs:subClassOf comp:CertificationStatusType ;
+    skos:definition "Certification expired" ;
+    comp:sql_identifier "comp_certstat_expired" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#IN_PROGRESS> a owl:Class ;
+    rdfs:label "IN_PROGRESS" ;
+    rdfs:subClassOf comp:CertificationStatusType ;
+    skos:definition "Certification in progress" ;
+    comp:sql_identifier "comp_certstat_inprogress" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#PENDING> a owl:Class ;
+    rdfs:label "PENDING" ;
+    rdfs:subClassOf comp:CertificationStatusType ;
+    skos:definition "Certification pending" ;
+    comp:sql_identifier "comp_certstat_pending" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#SUSPENDED> a owl:Class ;
+    rdfs:label "SUSPENDED" ;
+    rdfs:subClassOf comp:CertificationStatusType ;
+    skos:definition "Certification suspended" ;
+    comp:sql_identifier "comp_certstat_suspended" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#WITHDRAWN> a owl:Class ;
+    rdfs:label "WITHDRAWN" ;
+    rdfs:subClassOf comp:CertificationStatusType ;
+    skos:definition "Certification withdrawn" ;
+    comp:sql_identifier "comp_certstat_withdrawn" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#CONTRACTUAL> a owl:Class ;
+    rdfs:label "CONTRACTUAL" ;
+    rdfs:subClassOf comp:CommitmentCategoryType ;
+    skos:definition "Commitment arising from contractual obligations" ;
+    comp:owl.filler "schema:Contract" ;
+    comp:sql_identifier "comp_cat_contractual" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#CUSTOMER_REQUIREMENT> a owl:Class ;
+    rdfs:label "CUSTOMER_REQUIREMENT" ;
+    rdfs:subClassOf comp:CommitmentCategoryType ;
+    skos:definition "Specific customer requirement" ;
+    comp:owl.filler "schema:customer" ;
+    comp:sql_identifier "comp_cat_customer" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#ENVIRONMENTAL> a owl:Class ;
+    rdfs:label "ENVIRONMENTAL" ;
+    rdfs:subClassOf comp:CommitmentCategoryType ;
+    skos:definition "Environmental commitment" ;
+    comp:owl.filler "envo:environmental_system" ;
+    comp:references "King et al.; Berger et al.; Battery Pass" ;
+    comp:sql_identifier "comp_cat_environmental" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#INDUSTRY_STANDARD> a owl:Class ;
+    rdfs:label "INDUSTRY_STANDARD" ;
+    rdfs:subClassOf comp:CommitmentCategoryType ;
+    skos:definition "Industry standard or best practice commitment" ;
+    comp:owl.filler "schema:industry" ;
+    comp:references "King et al.; Jensen et al." ;
+    comp:sql_identifier "comp_cat_industry" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#QUALITY> a owl:Class ;
+    rdfs:label "QUALITY" ;
+    rdfs:subClassOf comp:CommitmentCategoryType ;
+    skos:definition "Quality-related commitment" ;
+    comp:owl.filler "schema:quality" ;
+    comp:references "King et al.; CIRPASS" ;
+    comp:sql_identifier "comp_cat_quality" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#REGULATORY> a owl:Class ;
+    rdfs:label "REGULATORY" ;
+    rdfs:subClassOf comp:CommitmentCategoryType ;
+    skos:definition "Legally required regulatory commitment" ;
+    comp:owl.filler "schema:LegislationObject" ;
+    comp:references "ESPR; REACH Regulation (EC) No 1907/2006; RoHS Directive 2011/65/EU; Product Safety Directive; Ecodesign Directive 2009/125/EC; CLP Regulation (EC) No 1272/2008" ;
+    comp:sql_identifier "comp_cat_regulatory" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#SOCIAL> a owl:Class ;
+    rdfs:label "SOCIAL" ;
+    rdfs:subClassOf comp:CommitmentCategoryType ;
+    skos:definition "Social responsibility commitment" ;
+    comp:owl.filler "schema:socialResponsibility" ;
+    comp:references "King et al." ;
+    comp:sql_identifier "comp_cat_social" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#VOLUNTARY> a owl:Class ;
+    rdfs:label "VOLUNTARY" ;
+    rdfs:subClassOf comp:CommitmentCategoryType ;
+    skos:definition "Voluntary commitment beyond legal requirements" ;
+    comp:owl.filler "schema:voluntaryCommitment" ;
+    comp:references "King et al.; CIRPASS" ;
+    comp:sql_identifier "comp_cat_voluntary" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#MANDATORY> a owl:Class ;
+    rdfs:label "MANDATORY" ;
+    rdfs:subClassOf comp:ComplianceStatusType ;
+    skos:definition "Mandatory requirement in this jurisdiction" ;
+    comp:sql_identifier "comp_stat_mandatory" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#NOT_APPLICABLE> a owl:Class ;
+    rdfs:label "NOT_APPLICABLE" ;
+    rdfs:subClassOf comp:ComplianceStatusType ;
+    skos:definition "Not applicable in this jurisdiction" ;
+    comp:sql_identifier "comp_stat_na" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#OPTIONAL> a owl:Class ;
+    rdfs:label "OPTIONAL" ;
+    rdfs:subClassOf comp:ComplianceStatusType ;
+    skos:definition "Optional requirement" ;
+    comp:sql_identifier "comp_stat_optional" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#PENDING> a owl:Class ;
+    rdfs:label "PENDING" ;
+    rdfs:subClassOf comp:ComplianceStatusType ;
+    skos:definition "Pending regulatory decision" ;
+    comp:sql_identifier "comp_stat_pending" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#RECOMMENDED> a owl:Class ;
+    rdfs:label "RECOMMENDED" ;
+    rdfs:subClassOf comp:ComplianceStatusType ;
+    skos:definition "Recommended but not required" ;
+    comp:sql_identifier "comp_stat_recommended" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#SUPERSEDED> a owl:Class ;
+    rdfs:label "SUPERSEDED" ;
+    rdfs:subClassOf comp:ComplianceStatusType ;
+    skos:definition "Superseded by newer requirement" ;
+    comp:sql_identifier "comp_stat_superseded" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#TRANSITIONAL> a owl:Class ;
+    rdfs:label "TRANSITIONAL" ;
+    rdfs:subClassOf comp:ComplianceStatusType ;
+    skos:definition "In transitional period" ;
+    comp:sql_identifier "comp_stat_transitional" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#VOLUNTARY> a owl:Class ;
+    rdfs:label "VOLUNTARY" ;
+    rdfs:subClassOf comp:ComplianceStatusType ;
+    skos:definition "Voluntary in this jurisdiction" ;
+    comp:sql_identifier "comp_stat_voluntary" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#APPROVAL> a owl:Class ;
+    rdfs:label "APPROVAL" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Type, product, or material approval" ;
+    comp:owl.filler "schema:Approval" ;
+    comp:sql_identifier "comp_evidtype_approval" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#ATTESTATION> a owl:Class ;
+    rdfs:label "ATTESTATION" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Attestation of conformity" ;
+    comp:owl.filler "schema:Attestation" ;
+    comp:sql_identifier "comp_evidtype_attestation" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#CERTIFICATE> a owl:Class ;
+    rdfs:label "CERTIFICATE" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Certificate from third party" ;
+    comp:owl.filler "schema:Certificate" ;
+    comp:references "ESPR; Regulation (EC) No 765/2008 for Notified Body accreditation" ;
+    comp:sql_identifier "comp_evidtype_cert" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#CHEMICAL_ANALYSIS> a owl:Class ;
+    rdfs:label "CHEMICAL_ANALYSIS" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Chemical composition analysis report" ;
+    comp:comment "Chemical analysis per ISO/IEC 17025 accredited laboratories" ;
+    comp:owl.filler "chebi:CHEBI_33893" ;
+    comp:references "ISO/IEC 17025; ASTM E1019 (carbon/sulfur); ASTM E1479 (spectrometry)" ;
+    comp:sql_identifier "comp_evidtype_chemical_analysis" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#DECLARATION_OF_CONFORMITY> a owl:Class ;
+    rdfs:label "DECLARATION_OF_CONFORMITY" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Declaration of Conformity (DoC)" ;
+    comp:owl.filler "schema:ConformityDeclaration" ;
+    comp:references "ESPR; EU Declaration of Conformity per Decision No 768/2008/EC" ;
+    comp:sql_identifier "comp_evidtype_doc" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#GRADE_CERTIFICATE> a owl:Class ;
+    rdfs:label "GRADE_CERTIFICATE" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Material grade verification certificate" ;
+    comp:comment "Material grade certificates per ISO/ASTM/EN standards" ;
+    comp:owl.filler "bfo:BFO_0000030" ;
+    comp:references "ASTM A1058; ISO 10474; EN 10168" ;
+    comp:sql_identifier "comp_evidtype_grade_cert" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#INSPECTION_REPORT> a owl:Class ;
+    rdfs:label "INSPECTION_REPORT" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Inspection report" ;
+    comp:owl.filler "schema:InspectionReport" ;
+    comp:sql_identifier "comp_evidtype_inspection" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MARKING> a owl:Class ;
+    rdfs:label "MARKING" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Conformity marking (CE, UKCA, etc.)" ;
+    comp:comment "Mandatory: current mandatory information" ;
+    comp:owl.filler "schema:ConformityMark" ;
+    comp:references "CIRPASS; ESPR" ;
+    comp:sql_identifier "comp_evidtype_marking" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_CERTIFICATE> a owl:Class ;
+    rdfs:label "MATERIAL_CERTIFICATE" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Material certificate or mill test report (e.g., EN 10204 3.1, 3.2 certificates)" ;
+    comp:comment "Material certificates per EN 10204 types 2.1, 2.2, 3.1, 3.2" ;
+    comp:owl.filler "bfo:BFO_0000030" ;
+    comp:references "EN 10204:2004; ASTM E2819; ISO 10474" ;
+    comp:sql_identifier "comp_evidtype_material_cert" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_DATASHEET> a owl:Class ;
+    rdfs:label "MATERIAL_DATASHEET" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Technical material datasheet or material specification sheet" ;
+    comp:comment "Technical data sheets following industry standards" ;
+    comp:owl.filler "dcat:Dataset" ;
+    comp:references "ISO 10303 (STEP); IPC-4101 (material datasheets)" ;
+    comp:sql_identifier "comp_evidtype_material_datasheet" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_PROPERTIES_TEST> a owl:Class ;
+    rdfs:label "MATERIAL_PROPERTIES_TEST" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Material properties test report (tensile strength, hardness, purity, etc.)" ;
+    comp:comment "Mechanical and physical property testing per ISO/ASTM/EN standards" ;
+    comp:owl.filler "bfo:BFO_0000015" ;
+    comp:references "ASTM E8 (tensile); ASTM E18 (hardness); ISO 6892 (tensile); ISO 6508 (Rockwell); EN 10002" ;
+    comp:sql_identifier "comp_evidtype_properties_test" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#ORIGIN_CERTIFICATE> a owl:Class ;
+    rdfs:label "ORIGIN_CERTIFICATE" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Certificate of origin for materials (conflict minerals, sustainable sourcing)" ;
+    comp:comment "Certificates for conflict minerals (3TG) and sustainable sourcing verification" ;
+    comp:owl.filler "prov:Entity" ;
+    comp:references "EU Conflict Minerals Regulation 2017/821; EUTR 995/2010; OECD Due Diligence Guidance; Dodd-Frank Act Section 1502" ;
+    comp:sql_identifier "comp_evidtype_origin_cert" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#SAFETY_DATA_SHEET> a owl:Class ;
+    rdfs:label "SAFETY_DATA_SHEET" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Safety Data Sheet (SDS/MSDS) for hazardous materials" ;
+    comp:comment "SDS following GHS 16-section format" ;
+    comp:owl.filler "chebi:CHEBI_33250" ;
+    comp:references "REACH Regulation (EC) No 1907/2006 Annex II; UN GHS Rev.9; ISO 11014; OSHA HCS 29 CFR 1910.1200" ;
+    comp:sql_identifier "comp_evidtype_sds" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TECHNICAL_FILE> a owl:Class ;
+    rdfs:label "TECHNICAL_FILE" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Technical documentation file" ;
+    comp:owl.filler "schema:TechnicalSpecification" ;
+    comp:references "King et al.; ESPR" ;
+    comp:sql_identifier "comp_evidtype_tech_file" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TEST_REPORT> a owl:Class ;
+    rdfs:label "TEST_REPORT" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Test report" ;
+    comp:owl.filler "schema:Report" ;
+    comp:references "ESPR; Battery Pass" ;
+    comp:sql_identifier "comp_evidtype_test" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TYPE_EXAMINATION> a owl:Class ;
+    rdfs:label "TYPE_EXAMINATION" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Type examination certificate" ;
+    comp:owl.filler "schema:TypeExamination" ;
+    comp:sql_identifier "comp_evidtype_type_exam" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#VERIFICATION> a owl:Class ;
+    rdfs:label "VERIFICATION" ;
+    rdfs:subClassOf comp:EvidenceType ;
+    skos:definition "Verification document" ;
+    comp:owl.filler "prov:qualifiedVerification" ;
+    comp:sql_identifier "comp_evidtype_verification" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#BCM> a owl:Class ;
+    rdfs:label "BCM" ;
+    rdfs:subClassOf comp:ManagementSystemType ;
+    skos:definition "Business Continuity Management" ;
+    comp:owl.filler "schema:BusinessContinuity" ;
+    comp:sql_identifier "comp_mstype_bcm" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#CSR> a owl:Class ;
+    rdfs:label "CSR" ;
+    rdfs:subClassOf comp:ManagementSystemType ;
+    skos:definition "Corporate Social Responsibility" ;
+    comp:owl.filler "schema:SocialResponsibility" ;
+    comp:references "King et al.; Battery Pass" ;
+    comp:sql_identifier "comp_mstype_csr" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#EMS> a owl:Class ;
+    rdfs:label "EMS" ;
+    rdfs:subClassOf comp:ManagementSystemType ;
+    skos:definition "Environmental Management System" ;
+    comp:owl.filler "envo:environmental_management" ;
+    comp:references "Berger et al.; King et al." ;
+    comp:sql_identifier "comp_mstype_ems" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#ENERGY> a owl:Class ;
+    rdfs:label "ENERGY" ;
+    rdfs:subClassOf comp:ManagementSystemType ;
+    skos:definition "Energy Management System" ;
+    comp:owl.filler "schema:EnergyManagement" ;
+    comp:sql_identifier "comp_mstype_energy" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#FSMS> a owl:Class ;
+    rdfs:label "FSMS" ;
+    rdfs:subClassOf comp:ManagementSystemType ;
+    skos:definition "Food Safety Management System" ;
+    comp:owl.filler "schema:FoodSafety" ;
+    comp:sql_identifier "comp_mstype_fsms" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#ISMS> a owl:Class ;
+    rdfs:label "ISMS" ;
+    rdfs:subClassOf comp:ManagementSystemType ;
+    skos:definition "Information Security Management System" ;
+    comp:owl.filler "schema:InformationSecurity" ;
+    comp:sql_identifier "comp_mstype_isms" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#OHS> a owl:Class ;
+    rdfs:label "OHS" ;
+    rdfs:subClassOf comp:ManagementSystemType ;
+    skos:definition "Occupational Health and Safety" ;
+    comp:owl.filler "schema:OccupationalHealth" ;
+    comp:sql_identifier "comp_mstype_ohs" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#QMS> a owl:Class ;
+    rdfs:label "QMS" ;
+    rdfs:subClassOf comp:ManagementSystemType ;
+    skos:definition "Quality Management System" ;
+    comp:owl.filler "schema:QualityManagement" ;
+    comp:references "CIRPASS; King et al." ;
+    comp:sql_identifier "comp_mstype_qms" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#AUTHORIZED_REPRESENTATIVE> a owl:Class ;
+    rdfs:label "AUTHORIZED_REPRESENTATIVE" ;
+    rdfs:subClassOf comp:PartyRoleType ;
+    skos:definition "Authorized Representative" ;
+    comp:references "ESPR; CIRPASS" ;
+    comp:sql_identifier "comp_roletype_auth_rep" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#DISTRIBUTOR> a owl:Class ;
+    rdfs:label "DISTRIBUTOR" ;
+    rdfs:subClassOf comp:PartyRoleType ;
+    skos:definition "Distributor" ;
+    comp:sql_identifier "comp_roletype_distributor" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#ECONOMIC_OPERATOR> a owl:Class ;
+    rdfs:label "ECONOMIC_OPERATOR" ;
+    rdfs:subClassOf comp:PartyRoleType ;
+    skos:definition "Economic operator" ;
+    comp:references "ESPR Art 11; CIRPASS" ;
+    comp:sql_identifier "comp_roletype_economic" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#FULFILMENT_SERVICE_PROVIDER> a owl:Class ;
+    rdfs:label "FULFILMENT_SERVICE_PROVIDER" ;
+    rdfs:subClassOf comp:PartyRoleType ;
+    skos:definition "Fulfilment service provider" ;
+    comp:sql_identifier "comp_roletype_fulfilment" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#IMPORTER> a owl:Class ;
+    rdfs:label "IMPORTER" ;
+    rdfs:subClassOf comp:PartyRoleType ;
+    skos:definition "Importer" ;
+    comp:references "ESPR Annex III g); CIRPASS" ;
+    comp:sql_identifier "comp_roletype_importer" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#MANUFACTURER> a owl:Class ;
+    rdfs:label "MANUFACTURER" ;
+    rdfs:subClassOf comp:PartyRoleType ;
+    skos:definition "Manufacturer" ;
+    comp:references "ESPR Art 21 6.; CIRPASS; Battery Pass" ;
+    comp:sql_identifier "comp_roletype_manufacturer" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#RESPONSIBLE_PERSON> a owl:Class ;
+    rdfs:label "RESPONSIBLE_PERSON" ;
+    rdfs:subClassOf comp:PartyRoleType ;
+    skos:definition "Responsible person" ;
+    comp:references "ESPR; CIRPASS; Battery Pass" ;
+    comp:sql_identifier "comp_roletype_responsible" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#DRAFT> a owl:Class ;
+    rdfs:label "DRAFT" ;
+    rdfs:subClassOf comp:RequirementStatusType ;
+    skos:definition "Draft status" ;
+    comp:sql_identifier "comp_reqstat_draft" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#MANDATORY> a owl:Class ;
+    rdfs:label "MANDATORY" ;
+    rdfs:subClassOf comp:RequirementStatusType ;
+    skos:definition "Mandatory requirement" ;
+    comp:sql_identifier "comp_reqstat_mandatory" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#PRESUMPTION_OF_CONFORMITY> a owl:Class ;
+    rdfs:label "PRESUMPTION_OF_CONFORMITY" ;
+    rdfs:subClassOf comp:RequirementStatusType ;
+    skos:definition "Provides presumption of conformity" ;
+    comp:sql_identifier "comp_reqstat_presumption" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#RECOMMENDED> a owl:Class ;
+    rdfs:label "RECOMMENDED" ;
+    rdfs:subClassOf comp:RequirementStatusType ;
+    skos:definition "Recommended but not mandatory" ;
+    comp:sql_identifier "comp_reqstat_recommended" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#SUPERSEDED> a owl:Class ;
+    rdfs:label "SUPERSEDED" ;
+    rdfs:subClassOf comp:RequirementStatusType ;
+    skos:definition "Superseded by newer requirement" ;
+    comp:sql_identifier "comp_reqstat_superseded" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#UNDER_REVIEW> a owl:Class ;
+    rdfs:label "UNDER_REVIEW" ;
+    rdfs:subClassOf comp:RequirementStatusType ;
+    skos:definition "Under review or revision" ;
+    comp:sql_identifier "comp_reqstat_review" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#VOLUNTARY> a owl:Class ;
+    rdfs:label "VOLUNTARY" ;
+    rdfs:subClassOf comp:RequirementStatusType ;
+    skos:definition "Voluntary standard" ;
+    comp:sql_identifier "comp_reqstat_voluntary" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#WITHDRAWN> a owl:Class ;
+    rdfs:label "WITHDRAWN" ;
+    rdfs:subClassOf comp:RequirementStatusType ;
+    skos:definition "Withdrawn requirement" ;
+    comp:sql_identifier "comp_reqstat_withdrawn" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#CODE_OF_PRACTICE> a owl:Class ;
+    rdfs:label "CODE_OF_PRACTICE" ;
+    rdfs:subClassOf comp:RequirementType ;
+    skos:definition "Code of practice" ;
+    comp:owl.filler "schema:Code" ;
+    comp:sql_identifier "comp_reqtype_code" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#DIRECTIVE> a owl:Class ;
+    rdfs:label "DIRECTIVE" ;
+    rdfs:subClassOf comp:RequirementType ;
+    skos:definition "Legal directive" ;
+    comp:owl.filler "schema:LegislationObject" ;
+    comp:references "Ecodesign Directive; Energy Labelling Directive" ;
+    comp:sql_identifier "comp_reqtype_directive" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#GUIDELINE> a owl:Class ;
+    rdfs:label "GUIDELINE" ;
+    rdfs:subClassOf comp:RequirementType ;
+    skos:definition "Guideline or guidance document" ;
+    comp:owl.filler "schema:Guide" ;
+    comp:sql_identifier "comp_reqtype_guideline" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#REGULATION> a owl:Class ;
+    rdfs:label "REGULATION" ;
+    rdfs:subClassOf comp:RequirementType ;
+    skos:definition "Legal regulation" ;
+    comp:owl.filler "schema:Legislation" ;
+    comp:references "ESPR; Product Safety Directive" ;
+    comp:sql_identifier "comp_reqtype_regulation" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#SPECIFICATION> a owl:Class ;
+    rdfs:label "SPECIFICATION" ;
+    rdfs:subClassOf comp:RequirementType ;
+    skos:definition "Technical specification" ;
+    comp:owl.filler "schema:TechArticle" ;
+    comp:sql_identifier "comp_reqtype_specification" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#STANDARD> a owl:Class ;
+    rdfs:label "STANDARD" ;
+    rdfs:subClassOf comp:RequirementType ;
+    skos:definition "Technical standard" ;
+    comp:owl.filler "dcterms:Standard" ;
+    comp:references "ISO standards; EN standards" ;
+    comp:sql_identifier "comp_reqtype_standard" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#TECHNICAL_REPORT> a owl:Class ;
+    rdfs:label "TECHNICAL_REPORT" ;
+    rdfs:subClassOf comp:RequirementType ;
+    skos:definition "Technical report" ;
+    comp:owl.filler "schema:Report" ;
+    comp:references "King et al.; Battery Pass" ;
+    comp:sql_identifier "comp_reqtype_tech_report" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#CAUTION> a owl:Class ;
+    rdfs:label "CAUTION" ;
+    rdfs:subClassOf comp:SafetyItemType ;
+    skos:definition "Caution notice" ;
+    comp:sql_identifier "comp_safetytype_caution" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#DANGER> a owl:Class ;
+    rdfs:label "DANGER" ;
+    rdfs:subClassOf comp:SafetyItemType ;
+    skos:definition "Danger notice" ;
+    comp:sql_identifier "comp_safetytype_danger" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#INSTRUCTION> a owl:Class ;
+    rdfs:label "INSTRUCTION" ;
+    rdfs:subClassOf comp:SafetyItemType ;
+    skos:definition "Safety instruction" ;
+    comp:sql_identifier "comp_safetytype_instruction" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#NOTICE> a owl:Class ;
+    rdfs:label "NOTICE" ;
+    rdfs:subClassOf comp:SafetyItemType ;
+    skos:definition "General safety notice" ;
+    comp:sql_identifier "comp_safetytype_notice" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#PROHIBITION> a owl:Class ;
+    rdfs:label "PROHIBITION" ;
+    rdfs:subClassOf comp:SafetyItemType ;
+    skos:definition "Prohibition or restriction" ;
+    comp:sql_identifier "comp_safetytype_prohibition" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#WARNING> a owl:Class ;
+    rdfs:label "WARNING" ;
+    rdfs:subClassOf comp:SafetyItemType ;
+    skos:definition "Safety warning" ;
+    comp:sql_identifier "comp_safetytype_warning" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ACCESSIBILITY> a owl:Class ;
+    rdfs:label "ACCESSIBILITY" ;
+    rdfs:subClassOf comp:StatementType ;
+    skos:definition "Accessibility statement" ;
+    comp:sql_identifier "comp_stmttype_accessibility" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#CHEMICAL> a owl:Class ;
+    rdfs:label "CHEMICAL" ;
+    rdfs:subClassOf comp:StatementType ;
+    skos:definition "Chemical compliance statement" ;
+    comp:comment "Includes REACH and RoHS compliance; substances of concern above 0.1% weight by weight per SCIP database requirements" ;
+    comp:references "REACH; ROHS; King et al." ;
+    comp:sql_identifier "comp_stmttype_chemical" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#EMC> a owl:Class ;
+    rdfs:label "EMC" ;
+    rdfs:subClassOf comp:StatementType ;
+    skos:definition "Electromagnetic compatibility statement" ;
+    comp:references "King et al." ;
+    comp:sql_identifier "comp_stmttype_emc" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ENERGY> a owl:Class ;
+    rdfs:label "ENERGY" ;
+    rdfs:subClassOf comp:StatementType ;
+    skos:definition "Energy efficiency statement" ;
+    comp:references "King et al.; Energy Labelling Directive" ;
+    comp:sql_identifier "comp_stmttype_energy" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ENVIRONMENTAL> a owl:Class ;
+    rdfs:label "ENVIRONMENTAL" ;
+    rdfs:subClassOf comp:StatementType ;
+    skos:definition "Environmental statement" ;
+    comp:references "King et al.; Berger et al." ;
+    comp:sql_identifier "comp_stmttype_environmental" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#PRIVACY> a owl:Class ;
+    rdfs:label "PRIVACY" ;
+    rdfs:subClassOf comp:StatementType ;
+    skos:definition "Privacy and data protection statement" ;
+    comp:sql_identifier "comp_stmttype_privacy" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#RADIO> a owl:Class ;
+    rdfs:label "RADIO" ;
+    rdfs:subClassOf comp:StatementType ;
+    skos:definition "Radio equipment statement" ;
+    comp:sql_identifier "comp_stmttype_radio" .
+
+<https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#SAFETY> a owl:Class ;
+    rdfs:label "SAFETY" ;
+    rdfs:subClassOf comp:StatementType ;
+    skos:definition "Safety statement" ;
+    comp:references "King et al.; CIRPASS; Jensen et al." ;
+    comp:sql_identifier "comp_stmttype_safety" .
+
+comp:amendment_history a owl:ObjectProperty ;
+    rdfs:label "amendment_history" ;
+    skos:definition "History of amendments to this requirement" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_req_amendments" .
+
+comp:applicability_statuses a owl:ObjectProperty ;
+    rdfs:label "applicability_statuses" ;
+    skos:definition "Status of this requirement in different jurisdictions" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_req_app_statuses" .
+
+comp:applicable_jurisdictions a owl:DatatypeProperty ;
+    rdfs:label "applicable_jurisdictions" ;
+    skos:definition "Jurisdictions where this applies" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:addressCountry" ;
+    comp:references "ESPR Annex III; CIRPASS" ;
+    comp:sql_identifier "comp_safety_jurisdictions" .
+
+comp:applicable_markets a owl:DatatypeProperty ;
+    rdfs:label "applicable_markets" ;
+    skos:definition "Markets or regions where this commitment applies" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:areaServed" ;
+    comp:sql_identifier "comp_scope_markets" .
+
+comp:applicable_standards a owl:DatatypeProperty ;
+    rdfs:label "applicable_standards" ;
+    skos:definition "Standards this statement relates to" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:conformsTo" ;
+    comp:sql_identifier "comp_statement_standards" .
+
+comp:audit_history a owl:ObjectProperty ;
+    rdfs:label "audit_history" ;
+    skos:definition "Audit history records" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_mgmt_audits" .
+
+comp:audit_records a owl:DatatypeProperty ;
+    rdfs:label "audit_records" ;
+    skos:definition "References to audit records" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:wasInfluencedBy" ;
+    comp:sql_identifier "comp_evid_ref_audits" .
+
+comp:batch_lot_identifiers a owl:DatatypeProperty ;
+    rdfs:label "batch_lot_identifiers" ;
+    skos:definition "Batch or lot numbers covered by this evidence (for materials tracked at batch level)" ;
+    skos:inScheme comp: ;
+    comp:comment "Batch/lot tracking per ISO 22000 traceability requirements" ;
+    comp:owl.filler "bfo:BFO_0000040" ;
+    comp:references "ISO 22000 (traceability); GS1 GTIN allocation rules" ;
+    comp:sql_identifier "comp_scope_batch_lot" .
+
+comp:certification_links a owl:DatatypeProperty ;
+    rdfs:label "certification_links" ;
+    skos:definition "Links to relevant certifications" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:hasCertification" ;
+    comp:sql_identifier "comp_evid_ref_certs" .
+
+comp:commitment_alignment a owl:DatatypeProperty ;
+    rdfs:label "commitment_alignment" ;
+    skos:definition "Links to related commitments" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:relation" ;
+    comp:sql_identifier "comp_mgmt_commit_align" .
+
+comp:commitment_categories a owl:ObjectProperty ;
+    rdfs:label "commitment_categories" ;
+    skos:definition "Categories this commitment belongs to (can be multiple)" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_commit_categories" .
+
+comp:commitment_links a owl:DatatypeProperty ;
+    rdfs:label "commitment_links" ;
+    skos:definition "References to related commitments" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:relation" ;
+    comp:sql_identifier "comp_req_commit_links" .
+
+comp:commitment_support a owl:DatatypeProperty ;
+    rdfs:label "commitment_support" ;
+    skos:definition "Commitments that this evidence supports" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:wasUsedBy" ;
+    comp:sql_identifier "comp_evid_commit_support" .
+
+comp:commitments a owl:ObjectProperty ;
+    rdfs:label "commitments" ;
+    skos:definition "List of individual commitments for products or materials" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_commit_list" .
+
+comp:compliance_evidence_links a owl:DatatypeProperty ;
+    rdfs:label "compliance_evidence_links" ;
+    skos:definition "References to supporting evidence" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:hadPrimarySource" ;
+    comp:sql_identifier "comp_req_evidence_links" .
+
+comp:compliance_statuses a owl:ObjectProperty ;
+    rdfs:label "compliance_statuses" ;
+    skos:definition "Status of this commitment in different jurisdictions" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_commit_statuses" .
+
+comp:corrective_actions a owl:DatatypeProperty ;
+    rdfs:label "corrective_actions" ;
+    skos:definition "Corrective actions taken" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:potentialAction" ;
+    comp:sql_identifier "comp_audit_actions" .
+
+comp:customer_segments a owl:DatatypeProperty ;
+    rdfs:label "customer_segments" ;
+    skos:definition "Customer segments this commitment applies to" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:audience" ;
+    comp:sql_identifier "comp_scope_customers" .
+
+comp:derogations a owl:DatatypeProperty ;
+    rdfs:label "derogations" ;
+    skos:definition "Any derogations or exemptions" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:exceptDate" ;
+    comp:sql_identifier "comp_app_derogations" .
+
+comp:document_language a owl:DatatypeProperty ;
+    rdfs:label "document_language" ;
+    skos:definition "Language(s) of the document" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:language" ;
+    comp:sql_identifier "comp_evid_languages" .
+
+comp:entities_covered a owl:DatatypeProperty ;
+    rdfs:label "entities_covered" ;
+    skos:definition "Products, materials, batches, or families covered" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:Product" ;
+    comp:sql_identifier "comp_scope_entities_covered" .
+
+comp:entity_categories a owl:DatatypeProperty ;
+    rdfs:label "entity_categories" ;
+    skos:definition "Entity categories (product categories, material types) covered by this requirement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:category" ;
+    comp:sql_identifier "comp_scope_entities" .
+
+comp:entity_variants a owl:DatatypeProperty ;
+    rdfs:label "entity_variants" ;
+    skos:definition "Entity variants (product models, material grades, batches) covered by this commitment" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:model" ;
+    comp:sql_identifier "comp_scope_variants" .
+
+comp:harmonized_standards a owl:DatatypeProperty ;
+    rdfs:label "harmonized_standards" ;
+    skos:definition "List of harmonized or equivalent standards" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:conformsTo" ;
+    comp:sql_identifier "comp_req_harmonized" .
+
+comp:identifiers a owl:ObjectProperty ;
+    rdfs:label "identifiers" ;
+    skos:definition "Individual regulatory identifiers" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_identifiers_list" .
+
+comp:improvement_targets a owl:ObjectProperty ;
+    rdfs:label "improvement_targets" ;
+    skos:definition "Improvement targets" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_perf_targets" .
+
+comp:industry_sectors a owl:DatatypeProperty ;
+    rdfs:label "industry_sectors" ;
+    skos:definition "Industry sectors where this applies" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:industry" ;
+    comp:sql_identifier "comp_scope_sectors" .
+
+comp:kpis a owl:ObjectProperty ;
+    rdfs:label "kpis" ;
+    skos:definition "Key performance indicators" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_perf_kpis" .
+
+comp:languages a owl:DatatypeProperty ;
+    rdfs:label "languages" ;
+    skos:definition "Languages for this safety item" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:language" ;
+    comp:sql_identifier "comp_safety_languages" .
+
+comp:management_systems a owl:ObjectProperty ;
+    rdfs:label "management_systems" ;
+    skos:definition "List of management systems" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_proc_mgmt_systems" .
+
+comp:modules_procedures a owl:DatatypeProperty ;
+    rdfs:label "modules_procedures" ;
+    skos:definition "Assessment modules or procedures applied" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:procedure" ;
+    comp:sql_identifier "comp_scope_modules" .
+
+comp:registration_numbers a owl:ObjectProperty ;
+    rdfs:label "registration_numbers" ;
+    skos:definition "Registration numbers (EORI, FDA, etc.)" ;
+    skos:inScheme comp: ;
+    comp:comment "EORI number for EU import/export" ;
+    comp:references "ESPR Annex III g); CIRPASS" ;
+    comp:sql_identifier "comp_party_reg_numbers" .
+
+comp:requirement_entries a owl:ObjectProperty ;
+    rdfs:label "requirement_entries" ;
+    skos:definition "List of applicable requirements (regulations, standards, specifications)" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_req_entries" .
+
+comp:requirement_references a owl:DatatypeProperty ;
+    rdfs:label "requirement_references" ;
+    skos:definition "References to specific requirements covered" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:conformsTo" ;
+    comp:references "ESPR Art 7 5.; ESPR Annex I" ;
+    comp:sql_identifier "comp_scope_requirements" .
+
+comp:responsible_party_entries a owl:ObjectProperty ;
+    rdfs:label "responsible_party_entries" ;
+    skos:definition "Individual responsible party entries" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_parties_list" .
+
+comp:safety_items a owl:ObjectProperty ;
+    rdfs:label "safety_items" ;
+    skos:definition "Individual safety items" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_safety_items" .
+
+comp:special_conditions a owl:DatatypeProperty ;
+    rdfs:label "special_conditions" ;
+    skos:definition "Special conditions or limitations" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:conditionsOfAccess" ;
+    comp:sql_identifier "comp_scope_conditions" .
+
+comp:standards_versions a owl:ObjectProperty ;
+    rdfs:label "standards_versions" ;
+    skos:definition "Specific versions of standards covered" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_scope_standards" .
+
+comp:statements a owl:ObjectProperty ;
+    rdfs:label "statements" ;
+    skos:definition "Individual compliance statements" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_statements_list" .
+
+comp:supporting_documents a owl:DatatypeProperty ;
+    rdfs:label "supporting_documents" ;
+    skos:definition "URIs or identifiers of supporting documents" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:references" ;
+    comp:sql_identifier "comp_evid_ref_docs" .
+
+comp:technical_domains a owl:DatatypeProperty ;
+    rdfs:label "technical_domains" ;
+    skos:definition "Technical domains covered (EMC, safety, environmental, etc.)" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:subject" ;
+    comp:sql_identifier "comp_scope_domains" .
+
+comp:technical_specifications a owl:DatatypeProperty ;
+    rdfs:label "technical_specifications" ;
+    skos:definition "Technical specifications covered" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:specification" ;
+    comp:sql_identifier "comp_scope_tech_specs" .
+
+comp:test_references a owl:DatatypeProperty ;
+    rdfs:label "test_references" ;
+    skos:definition "References to supporting tests" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:wasInformedBy" ;
+    comp:sql_identifier "comp_statement_tests" .
+
+comp:test_reports a owl:DatatypeProperty ;
+    rdfs:label "test_reports" ;
+    skos:definition "References to test reports" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:measuredValue" ;
+    comp:sql_identifier "comp_evid_ref_tests" .
+
+comp:valid_for_jurisdictions a owl:DatatypeProperty ;
+    rdfs:label "valid_for_jurisdictions" ;
+    skos:definition "Jurisdictions where valid" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:addressCountry" ;
+    comp:sql_identifier "comp_statement_jurisdictions" .
+
+comp:ValidityPeriod a owl:Class ;
+    rdfs:label "ValidityPeriod" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:end_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty comp:is_perpetual ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:start_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty comp:is_perpetual ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:start_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:is_perpetual ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty comp:end_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty comp:start_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty comp:end_date ] ;
+    skos:definition "Time period during which something is valid" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "time:Interval" ;
+    comp:sql_identifier "comp_validity_period" .
+
+comp:access_restrictions a owl:DatatypeProperty ;
+    rdfs:label "access_restrictions" ;
+    skos:definition "Any access restrictions" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:accessRights" ;
+    comp:sql_identifier "comp_doc_restrictions" .
+
+comp:amendment_date a owl:DatatypeProperty ;
+    rdfs:label "amendment_date" ;
+    skos:definition "Date of amendment" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:dateSubmitted" ;
+    comp:sql_identifier "comp_amend_date" .
+
+comp:amendment_description a owl:DatatypeProperty ;
+    rdfs:label "amendment_description" ;
+    skos:definition "Description of changes" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:description" ;
+    comp:sql_identifier "comp_amend_description" .
+
+comp:amendment_id a owl:DatatypeProperty ;
+    rdfs:label "amendment_id" ;
+    skos:definition "Amendment identifier" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:identifier" ;
+    comp:sql_identifier "comp_amend_id" .
+
+comp:amendment_type a owl:DatatypeProperty ;
+    rdfs:label "amendment_type" ;
+    skos:definition "Type of amendment (correction, supplement, revision)" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:qualifiedRevision" ;
+    comp:sql_identifier "comp_amend_type" .
+
+comp:applicable_regulation_standards a owl:ObjectProperty ;
+    rdfs:label "applicable_regulation_standards" ;
+    skos:definition "Applicable regulations, standards, and specifications" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_applicable_regulations" .
+
+comp:audit_date a owl:DatatypeProperty ;
+    rdfs:label "audit_date" ;
+    skos:definition "Date of audit" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:atTime" ;
+    comp:sql_identifier "comp_audit_date" .
+
+comp:audit_result a owl:DatatypeProperty ;
+    rdfs:label "audit_result" ;
+    skos:definition "Overall audit result" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:outcome" ;
+    comp:sql_identifier "comp_audit_result" .
+
+comp:audit_type a owl:ObjectProperty ;
+    rdfs:label "audit_type" ;
+    skos:definition "Type of audit" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_audit_type" .
+
+comp:auditor a owl:DatatypeProperty ;
+    rdfs:label "auditor" ;
+    skos:definition "Auditor or audit organization" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:wasAssociatedWith" ;
+    comp:sql_identifier "comp_audit_auditor" .
+
+comp:authority_country a owl:DatatypeProperty ;
+    rdfs:label "authority_country" ;
+    skos:definition "Country of the authority" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "vcard:country-name" ;
+    comp:sql_identifier "comp_auth_country" .
+
+comp:authority_identifier a owl:DatatypeProperty ;
+    rdfs:label "authority_identifier" ;
+    skos:definition "Unique identifier for the authority" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "org:identifier" ;
+    comp:sql_identifier "comp_auth_id" .
+
+comp:authority_name a owl:DatatypeProperty ;
+    rdfs:label "authority_name" ;
+    skos:definition "Name of the issuing authority" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "foaf:name" ;
+    comp:references "ESPR; CIRPASS" ;
+    comp:sql_identifier "comp_auth_name" .
+
+comp:authority_type a owl:ObjectProperty ;
+    rdfs:label "authority_type" ;
+    skos:definition "Type of authority" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_auth_type" .
+
+comp:category_reference a owl:DatatypeProperty ;
+    rdfs:label "category_reference" ;
+    skos:definition "External ontology or standard reference for this category" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:conformsTo" ;
+    comp:sql_identifier "comp_commit_cat_ref" .
+
+comp:category_type a owl:ObjectProperty ;
+    rdfs:label "category_type" ;
+    skos:definition "Type of commitment category" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_commit_cat_type" .
+
+comp:certificate_number a owl:DatatypeProperty ;
+    rdfs:label "certificate_number" ;
+    skos:definition "Certificate number" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:identifier" ;
+    comp:sql_identifier "comp_cert_number" .
+
+comp:certificate_reference a owl:DatatypeProperty ;
+    rdfs:label "certificate_reference" ;
+    skos:definition "Reference to digital certificate" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:hasCertification" ;
+    comp:sql_identifier "comp_sig_cert_ref" .
+
+comp:certification_body a owl:DatatypeProperty ;
+    rdfs:label "certification_body" ;
+    skos:definition "Name of certification body" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "org:Organization" ;
+    comp:sql_identifier "comp_cert_body" .
+
+comp:certification_details a owl:ObjectProperty ;
+    rdfs:label "certification_details" ;
+    skos:definition "Certification information" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_mgmt_cert_details" .
+
+comp:certification_status a owl:ObjectProperty ;
+    rdfs:label "certification_status" ;
+    skos:definition "Current certification status" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_cert_status" .
+
+comp:checksum a owl:DatatypeProperty ;
+    rdfs:label "checksum" ;
+    skos:definition "Checksum for integrity verification" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:contentHash" ;
+    comp:sql_identifier "comp_doc_checksum" .
+
+comp:commitment_description a owl:DatatypeProperty ;
+    rdfs:label "commitment_description" ;
+    skos:definition "Detailed description or context of the commitment" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:abstract" ;
+    comp:sql_identifier "comp_commit_description" .
+
+comp:commitment_identifier a owl:DatatypeProperty ;
+    rdfs:label "commitment_identifier" ;
+    skos:definition "Unique identifier for this commitment" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:identifier" ;
+    comp:references "ESPR Art 7; CIRPASS" ;
+    comp:sql_identifier "comp_commit_id" .
+
+comp:commitment_statement_value a owl:DatatypeProperty ;
+    rdfs:label "commitment_statement_value" ;
+    skos:definition "The actual commitment statement or text" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:description" ;
+    comp:references "King et al.; ESPR" ;
+    comp:sql_identifier "comp_commit_statement" .
+
+comp:compliance_statements a owl:ObjectProperty ;
+    rdfs:label "compliance_statements" ;
+    skos:definition "Regulatory compliance statements" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_reg_statements" .
+
+comp:conformity_assessment_procedure a owl:DatatypeProperty ;
+    rdfs:label "conformity_assessment_procedure" ;
+    skos:definition "Conformity assessment procedure used" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:assessmentProcedure" ;
+    comp:references "ESPR; Battery Pass" ;
+    comp:sql_identifier "comp_evid_ca_procedure" .
+
+comp:contact_details a owl:DatatypeProperty ;
+    rdfs:label "contact_details" ;
+    skos:definition "Contact information" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:contactPoint" ;
+    comp:sql_identifier "comp_party_contact" .
+
+comp:content_value a owl:DatatypeProperty ;
+    rdfs:label "content_value" ;
+    skos:definition "Content of the safety item" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:text" ;
+    comp:references "ESPR Art 7 5. d); King et al." ;
+    comp:sql_identifier "comp_safety_content" .
+
+comp:digital_signature a owl:ObjectProperty ;
+    rdfs:label "digital_signature" ;
+    skos:definition "Digital signature information" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_evid_signature" .
+
+comp:disposal_instructions a owl:DatatypeProperty ;
+    rdfs:label "disposal_instructions" ;
+    skos:definition "Disposal instructions" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "envo:disposal_process" ;
+    comp:references "ESPR Art 7 (2) b) ii); ESPR Art 7 (2) b) iii); King et al.; Jensen et al." ;
+    comp:sql_identifier "comp_usage_disposal" .
+
+comp:document_access a owl:ObjectProperty ;
+    rdfs:label "document_access" ;
+    skos:definition "Document access and storage information" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_evid_access" .
+
+comp:document_format a owl:DatatypeProperty ;
+    rdfs:label "document_format" ;
+    skos:definition "Format of the document" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:format" ;
+    comp:sql_identifier "comp_doc_format" .
+
+comp:document_identifier a owl:DatatypeProperty ;
+    rdfs:label "document_identifier" ;
+    skos:definition "Unique identifier for this document" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:identifier" ;
+    comp:references "ESPR Art 9 1.; Battery Pass" ;
+    comp:sql_identifier "comp_evid_doc_id" .
+
+comp:document_title a owl:DatatypeProperty ;
+    rdfs:label "document_title" ;
+    skos:definition "Title of the document" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:title" ;
+    comp:sql_identifier "comp_evid_doc_title" .
+
+comp:document_url a owl:DatatypeProperty ;
+    rdfs:label "document_url" ;
+    skos:definition "URL where document can be accessed" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcat:accessURL" ;
+    comp:sql_identifier "comp_doc_url" .
+
+comp:emergency_procedures a owl:DatatypeProperty ;
+    rdfs:label "emergency_procedures" ;
+    skos:definition "Emergency procedures" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:emergencyProcedure" ;
+    comp:references "King et al.; ESPR" ;
+    comp:sql_identifier "comp_usage_emergency" .
+
+comp:enforcement_level a owl:DatatypeProperty ;
+    rdfs:label "enforcement_level" ;
+    skos:definition "Level of enforcement in this jurisdiction" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:enforceability" ;
+    comp:sql_identifier "comp_app_enforcement" .
+
+comp:entity_commitments a owl:ObjectProperty ;
+    rdfs:label "entity_commitments" ;
+    skos:definition "All commitments for products or materials (regulatory, voluntary, contractual)" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_entity_commitments" .
+
+comp:entity_evidence a owl:ObjectProperty ;
+    rdfs:label "entity_evidence" ;
+    skos:definition "Documentary evidence supporting compliance claims for products or materials" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_entity_evidence" .
+
+comp:evidence_references a owl:ObjectProperty ;
+    rdfs:label "evidence_references" ;
+    skos:definition "References to supporting evidence for this commitment" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_commit_evidence_refs" .
+
+comp:evidence_type a owl:ObjectProperty ;
+    rdfs:label "evidence_type" ;
+    skos:definition "Type of evidence document" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_evid_type" .
+
+comp:expiry_date a owl:DatatypeProperty ;
+    rdfs:label "expiry_date" ;
+    skos:definition "Date when this status expires or changes" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:validThrough" ;
+    comp:sql_identifier "comp_status_expiry" .
+
+comp:findings a owl:DatatypeProperty ;
+    rdfs:label "findings" ;
+    skos:definition "Audit findings" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:result" ;
+    comp:sql_identifier "comp_audit_findings" .
+
+comp:identifier_type a owl:DatatypeProperty ;
+    rdfs:label "identifier_type" ;
+    skos:definition "Type of identifier" ;
+    skos:inScheme comp: ;
+    comp:comment "GTIN-14, ISO/IEC 15459-6, TARIC code" ;
+    comp:owl.filler "schema:propertyID" ;
+    comp:references "ESPR Art 9 1.; CIRPASS" ;
+    comp:sql_identifier "comp_id_type" .
+
+comp:identifier_value a owl:DatatypeProperty ;
+    rdfs:label "identifier_value" ;
+    skos:definition "Value of the identifier" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:value" ;
+    comp:sql_identifier "comp_id_value" .
+
+comp:intended_use a owl:DatatypeProperty ;
+    rdfs:label "intended_use" ;
+    skos:definition "Intended use of the product or material" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:intendedUse" ;
+    comp:references "King et al.; ESPR" ;
+    comp:sql_identifier "comp_usage_intended" .
+
+comp:is_perpetual a owl:DatatypeProperty ;
+    rdfs:label "is_perpetual" ;
+    skos:definition "Whether this has no defined end date" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_valid_perpetual" .
+
+comp:issue_date a owl:DatatypeProperty ;
+    rdfs:label "issue_date" ;
+    skos:definition "Date when document was issued" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:issued" ;
+    comp:references "CIRPASS; Battery Pass" ;
+    comp:sql_identifier "comp_evid_issue_date" .
+
+comp:issuing_authority_details a owl:ObjectProperty ;
+    rdfs:label "issuing_authority_details" ;
+    skos:definition "Details about the issuing authority" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_evid_authority" .
+
+comp:item_type a owl:ObjectProperty ;
+    rdfs:label "item_type" ;
+    skos:definition "Type of safety item" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_safety_type" .
+
+comp:kpi_name a owl:DatatypeProperty ;
+    rdfs:label "kpi_name" ;
+    skos:definition "Name of the KPI" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:name" ;
+    comp:sql_identifier "comp_kpi_name" .
+
+comp:kpi_unit a owl:DatatypeProperty ;
+    rdfs:label "kpi_unit" ;
+    skos:definition "Unit of measurement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "qudt:unit" ;
+    comp:sql_identifier "comp_kpi_unit" .
+
+comp:kpi_value a owl:DatatypeProperty ;
+    rdfs:label "kpi_value" ;
+    skos:definition "Current value" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:value" ;
+    comp:sql_identifier "comp_kpi_value" .
+
+comp:last_updated a owl:DatatypeProperty ;
+    rdfs:label "last_updated" ;
+    skos:definition "Last update timestamp for this commitment" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:modified" ;
+    comp:sql_identifier "comp_commit_updated" .
+
+comp:legal_entity_name a owl:DatatypeProperty ;
+    rdfs:label "legal_entity_name" ;
+    skos:definition "Legal name of the entity" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "foaf:name" ;
+    comp:references "ESPR Art 21 6.; CIRPASS" ;
+    comp:sql_identifier "comp_party_name" .
+
+comp:maintenance_requirements a owl:DatatypeProperty ;
+    rdfs:label "maintenance_requirements" ;
+    skos:definition "Maintenance requirements" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:maintenanceSchedule" ;
+    comp:references "King et al.; ESPR Annex I" ;
+    comp:sql_identifier "comp_usage_maintenance" .
+
+comp:measurement_period a owl:DatatypeProperty ;
+    rdfs:label "measurement_period" ;
+    skos:definition "Period of measurement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "time:hasTime" ;
+    comp:sql_identifier "comp_kpi_period" .
+
+comp:notified_body_number a owl:DatatypeProperty ;
+    rdfs:label "notified_body_number" ;
+    skos:definition "Notified body number if applicable" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:identifier" ;
+    comp:references "ESPR Annex III g)" ;
+    comp:sql_identifier "comp_auth_nb_number" .
+
+comp:number_type a owl:DatatypeProperty ;
+    rdfs:label "number_type" ;
+    skos:definition "Type of registration number" ;
+    skos:inScheme comp: ;
+    comp:comment "EORI number for EU import/export" ;
+    comp:owl.filler "dcterms:type" ;
+    comp:references "ESPR Annex III g); CIRPASS" ;
+    comp:sql_identifier "comp_regnum_type" .
+
+comp:number_value a owl:DatatypeProperty ;
+    rdfs:label "number_value" ;
+    skos:definition "The registration number" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:identifier" ;
+    comp:sql_identifier "comp_regnum_value" .
+
+comp:operating_guidelines a owl:DatatypeProperty ;
+    rdfs:label "operating_guidelines" ;
+    skos:definition "Operating guidelines" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:operatingGuidelines" ;
+    comp:references "King et al.; ESPR; CIRPASS; Jensen et al.; Deliverable 1.1" ;
+    comp:sql_identifier "comp_usage_operating" .
+
+comp:party_role a owl:ObjectProperty ;
+    rdfs:label "party_role" ;
+    skos:definition "Role of this party" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_party_role" .
+
+comp:performance_metrics a owl:ObjectProperty ;
+    rdfs:label "performance_metrics" ;
+    skos:definition "Performance metrics and targets" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_mgmt_performance" .
+
+comp:pictogram_reference a owl:DatatypeProperty ;
+    rdfs:label "pictogram_reference" ;
+    skos:definition "Reference to safety pictogram" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:image" ;
+    comp:sql_identifier "comp_safety_pictogram" .
+
+comp:priority_level a owl:DatatypeProperty ;
+    rdfs:label "priority_level" ;
+    skos:definition "Priority or importance level of this category" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:position" ;
+    comp:sql_identifier "comp_commit_cat_priority" .
+
+comp:process_evidence a owl:ObjectProperty ;
+    rdfs:label "process_evidence" ;
+    skos:definition "Management system and process-related evidence" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_process_evidence" .
+
+comp:publication_date a owl:DatatypeProperty ;
+    rdfs:label "publication_date" ;
+    skos:definition "Date when this requirement was published" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:issued" ;
+    comp:sql_identifier "comp_req_pub_date" .
+
+comp:registered_address a owl:DatatypeProperty ;
+    rdfs:label "registered_address" ;
+    skos:definition "Registered address" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "vcard:hasAddress" ;
+    comp:references "ESPR Art 21 6.; CIRPASS" ;
+    comp:sql_identifier "comp_party_address" .
+
+comp:regulatory_identifiers a owl:ObjectProperty ;
+    rdfs:label "regulatory_identifiers" ;
+    skos:definition "Market-specific regulatory identifiers" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_reg_identifiers" .
+
+comp:regulatory_information a owl:ObjectProperty ;
+    rdfs:label "regulatory_information" ;
+    skos:definition "Structured regulatory information including safety, instructions, and identifiers" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_regulatory_info" .
+
+comp:requirement_identifier a owl:DatatypeProperty ;
+    rdfs:label "requirement_identifier" ;
+    skos:definition "Unique identifier for this requirement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:identifier" ;
+    comp:references "ESPR Art 9 1.; ESPR Art 11; ESPR Art 21 6." ;
+    comp:sql_identifier "comp_req_id" .
+
+comp:requirement_scope a owl:ObjectProperty ;
+    rdfs:label "requirement_scope" ;
+    skos:definition "Scope and applicability details" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_req_scope" .
+
+comp:requirement_type a owl:ObjectProperty ;
+    rdfs:label "requirement_type" ;
+    skos:definition "Type of requirement (regulation, standard, specification)" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_req_type" .
+
+comp:responsible_parties a owl:ObjectProperty ;
+    rdfs:label "responsible_parties" ;
+    skos:definition "Responsible parties by jurisdiction" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_reg_parties" .
+
+comp:retention_period a owl:DatatypeProperty ;
+    rdfs:label "retention_period" ;
+    skos:definition "How long document must be retained" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:extent" ;
+    comp:sql_identifier "comp_doc_retention" .
+
+comp:safety_information a owl:ObjectProperty ;
+    rdfs:label "safety_information" ;
+    skos:definition "Safety warnings and instructions" ;
+    skos:inScheme comp: ;
+    comp:references "ESPR Art 7 5. d); King et al.; CIRPASS" ;
+    comp:sql_identifier "comp_reg_safety" .
+
+comp:scope_description a owl:DatatypeProperty ;
+    rdfs:label "scope_description" ;
+    skos:definition "Scope of the management system" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:coverage" ;
+    comp:sql_identifier "comp_mgmt_scope" .
+
+comp:scope_of_evidence a owl:ObjectProperty ;
+    rdfs:label "scope_of_evidence" ;
+    skos:definition "Scope covered by this evidence" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_evid_scope" .
+
+comp:severity_level a owl:DatatypeProperty ;
+    rdfs:label "severity_level" ;
+    skos:definition "Severity level if applicable" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:severityLevel" ;
+    comp:sql_identifier "comp_safety_severity" .
+
+comp:signatory a owl:DatatypeProperty ;
+    rdfs:label "signatory" ;
+    skos:definition "Person or entity who signed" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:creator" ;
+    comp:sql_identifier "comp_sig_signatory" .
+
+comp:signature_date a owl:DatatypeProperty ;
+    rdfs:label "signature_date" ;
+    skos:definition "Date of digital signature" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:created" ;
+    comp:sql_identifier "comp_sig_date" .
+
+comp:signature_type a owl:DatatypeProperty ;
+    rdfs:label "signature_type" ;
+    skos:definition "Type of digital signature" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:encodingFormat" ;
+    comp:sql_identifier "comp_sig_type" .
+
+comp:signature_value a owl:DatatypeProperty ;
+    rdfs:label "signature_value" ;
+    skos:definition "Digital signature value or hash" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:hash" ;
+    comp:sql_identifier "comp_sig_value" .
+
+comp:stakeholder_scope a owl:ObjectProperty ;
+    rdfs:label "stakeholder_scope" ;
+    skos:definition "Scope of applicability for this commitment" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_commit_scope" .
+
+comp:standard_reference a owl:ObjectProperty ;
+    rdfs:label "standard_reference" ;
+    skos:definition "Reference to the standard" ;
+    skos:inScheme comp: ;
+    comp:references "King et al.; CIRPASS" ;
+    comp:sql_identifier "comp_mgmt_standard_ref" .
+
+comp:standard_version a owl:DatatypeProperty ;
+    rdfs:label "standard_version" ;
+    skos:definition "Version of the standard" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:hasVersion" ;
+    comp:sql_identifier "comp_stdref_version" .
+
+comp:standard_year a owl:DatatypeProperty ;
+    rdfs:label "standard_year" ;
+    skos:definition "Year of the standard" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:date" ;
+    comp:sql_identifier "comp_stdref_year" .
+
+comp:start_date a owl:DatatypeProperty ;
+    rdfs:label "start_date" ;
+    skos:definition "Start date of validity" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "time:hasBeginning" ;
+    comp:sql_identifier "comp_valid_start" .
+
+comp:statement_content a owl:DatatypeProperty ;
+    rdfs:label "statement_content" ;
+    skos:definition "Content of the statement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:text" ;
+    comp:sql_identifier "comp_statement_content" .
+
+comp:statement_type a owl:ObjectProperty ;
+    rdfs:label "statement_type" ;
+    skos:definition "Type of statement" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_statement_type" .
+
+comp:status a owl:ObjectProperty ;
+    rdfs:label "status" ;
+    skos:definition "Status in this jurisdiction" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_app_status" .
+
+comp:status_notes a owl:DatatypeProperty ;
+    rdfs:label "status_notes" ;
+    skos:definition "Additional notes or context about this status" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:comment" ;
+    comp:sql_identifier "comp_status_notes" .
+
+comp:status_value a owl:ObjectProperty ;
+    rdfs:label "status_value" ;
+    skos:definition "Current status in this jurisdiction" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_status_value" .
+
+comp:storage_conditions a owl:DatatypeProperty ;
+    rdfs:label "storage_conditions" ;
+    skos:definition "Storage conditions" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:storageRequirements" ;
+    comp:references "King et al." ;
+    comp:sql_identifier "comp_usage_storage" .
+
+comp:storage_location a owl:DatatypeProperty ;
+    rdfs:label "storage_location" ;
+    skos:definition "Where document is stored" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:contentLocation" ;
+    comp:sql_identifier "comp_doc_storage" .
+
+comp:successor_reference a owl:DatatypeProperty ;
+    rdfs:label "successor_reference" ;
+    skos:definition "Reference to newer requirement if this is superseded" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:isReplacedBy" ;
+    comp:sql_identifier "comp_req_successor" .
+
+comp:system_type a owl:ObjectProperty ;
+    rdfs:label "system_type" ;
+    skos:definition "Type of management system" ;
+    skos:inScheme comp: ;
+    comp:sql_identifier "comp_mgmt_type" .
+
+comp:target_date a owl:DatatypeProperty ;
+    rdfs:label "target_date" ;
+    skos:definition "Target achievement date" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:targetDate" ;
+    comp:sql_identifier "comp_target_date" .
+
+comp:target_description a owl:DatatypeProperty ;
+    rdfs:label "target_description" ;
+    skos:definition "Description of target" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:description" ;
+    comp:sql_identifier "comp_target_desc" .
+
+comp:target_value a owl:DatatypeProperty ;
+    rdfs:label "target_value" ;
+    skos:definition "Target value" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "schema:value" ;
+    comp:sql_identifier "comp_target_value" .
+
+comp:title_value a owl:DatatypeProperty ;
+    rdfs:label "title_value" ;
+    skos:definition "Official title of the requirement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:title" ;
+    comp:references "ESPR; CIRPASS" ;
+    comp:sql_identifier "comp_req_title" .
+
+comp:transition_period a owl:DatatypeProperty ;
+    rdfs:label "transition_period" ;
+    skos:definition "Transition period details if applicable" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "time:hasDurationDescription" ;
+    comp:sql_identifier "comp_app_transition" .
+
+comp:usage_instructions a owl:ObjectProperty ;
+    rdfs:label "usage_instructions" ;
+    skos:definition "Entity usage and maintenance instructions (for products or materials)" ;
+    skos:inScheme comp: ;
+    comp:references "ESPR Art 7 (2) b); King et al.; Jensen et al." ;
+    comp:sql_identifier "comp_reg_usage" .
+
+comp:validity_scope a owl:DatatypeProperty ;
+    rdfs:label "validity_scope" ;
+    skos:definition "Scope where this identifier is valid" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:spatial" ;
+    comp:sql_identifier "comp_id_scope" .
+
+comp:version a owl:DatatypeProperty ;
+    rdfs:label "version" ;
+    skos:definition "Version of the standard" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:hasVersion" ;
+    comp:sql_identifier "comp_std_version" .
+
+comp:version_info a owl:DatatypeProperty ;
+    rdfs:label "version_info" ;
+    skos:definition "Version tracking for this commitment" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "prov:generatedAtTime" ;
+    comp:sql_identifier "comp_commit_version" .
+
+comp:version_value a owl:DatatypeProperty ;
+    rdfs:label "version_value" ;
+    skos:definition "Version or revision of the requirement" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:hasVersion" ;
+    comp:sql_identifier "comp_req_version" .
+
+comp:year a owl:DatatypeProperty ;
+    rdfs:label "year" ;
+    skos:definition "Year of the standard" ;
+    skos:inScheme comp: ;
+    comp:owl.filler "dcterms:date" ;
+    comp:sql_identifier "comp_std_year" .
+
+comp:evidence_documents a owl:DatatypeProperty,
+        owl:ObjectProperty .
+
+comp:accreditation_details a owl:DatatypeProperty .
+
+comp:effective_date a owl:DatatypeProperty .
+
+comp:end_date a owl:DatatypeProperty .
+
+comp:exclusions a owl:DatatypeProperty .
+
+comp:standard_identifier a owl:DatatypeProperty .
+
+comp:AuditType a owl:Class ;
+    rdfs:label "AuditType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#INITIAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#SURVEILLANCE> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#RECERTIFICATION> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#SPECIAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#INTERNAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#CUSTOMER> ) ;
+    skos:definition "Types of audits" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#CUSTOMER>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#INITIAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#INTERNAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#RECERTIFICATION>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#SPECIAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuditType#SURVEILLANCE> .
+
+comp:CertificationStatusType a owl:Class ;
+    rdfs:label "CertificationStatusType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#CERTIFIED> <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#PENDING> <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#EXPIRED> <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#SUSPENDED> <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#WITHDRAWN> <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#IN_PROGRESS> ) ;
+    skos:definition "Status of certification" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#CERTIFIED>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#EXPIRED>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#IN_PROGRESS>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#PENDING>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#SUSPENDED>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CertificationStatusType#WITHDRAWN> .
+
+comp:SafetyItemType a owl:Class ;
+    rdfs:label "SafetyItemType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#WARNING> <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#INSTRUCTION> <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#PROHIBITION> <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#CAUTION> <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#DANGER> <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#NOTICE> ) ;
+    skos:definition "Types of safety items" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#CAUTION>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#DANGER>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#INSTRUCTION>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#NOTICE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#PROHIBITION>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/SafetyItemType#WARNING> .
+
+comp:PartyRoleType a owl:Class ;
+    rdfs:label "PartyRoleType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#MANUFACTURER> <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#IMPORTER> <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#AUTHORIZED_REPRESENTATIVE> <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#DISTRIBUTOR> <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#FULFILMENT_SERVICE_PROVIDER> <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#ECONOMIC_OPERATOR> <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#RESPONSIBLE_PERSON> ) ;
+    skos:definition "Types of party roles" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#AUTHORIZED_REPRESENTATIVE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#DISTRIBUTOR>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#ECONOMIC_OPERATOR>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#FULFILMENT_SERVICE_PROVIDER>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#IMPORTER>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#MANUFACTURER>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/PartyRoleType#RESPONSIBLE_PERSON> .
+
+comp:RequirementType a owl:Class ;
+    rdfs:label "RequirementType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#REGULATION> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#DIRECTIVE> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#STANDARD> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#SPECIFICATION> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#GUIDELINE> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#TECHNICAL_REPORT> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#CODE_OF_PRACTICE> ) ;
+    skos:definition "Types of requirements" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#CODE_OF_PRACTICE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#DIRECTIVE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#GUIDELINE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#REGULATION>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#SPECIFICATION>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#STANDARD>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementType#TECHNICAL_REPORT> .
+
+comp:AuthorityType a owl:Class ;
+    rdfs:label "AuthorityType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#NOTIFIED_BODY> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#CERTIFICATION_BODY> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#TEST_LABORATORY> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#INSPECTION_BODY> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#MANUFACTURER> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#AUTHORIZED_REPRESENTATIVE> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#COMPETENT_AUTHORITY> <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#ACCREDITATION_BODY> ) ;
+    skos:definition "Types of issuing authorities" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#ACCREDITATION_BODY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#AUTHORIZED_REPRESENTATIVE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#CERTIFICATION_BODY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#COMPETENT_AUTHORITY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#INSPECTION_BODY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#MANUFACTURER>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#NOTIFIED_BODY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/AuthorityType#TEST_LABORATORY> .
+
+comp:CommitmentCategoryType a owl:Class ;
+    rdfs:label "CommitmentCategoryType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#REGULATORY> <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#VOLUNTARY> <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#CONTRACTUAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#INDUSTRY_STANDARD> <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#CUSTOMER_REQUIREMENT> <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#ENVIRONMENTAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#SOCIAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#QUALITY> ) ;
+    skos:definition "Types of commitment categories" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#CONTRACTUAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#CUSTOMER_REQUIREMENT>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#ENVIRONMENTAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#INDUSTRY_STANDARD>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#QUALITY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#REGULATORY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#SOCIAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/CommitmentCategoryType#VOLUNTARY> .
+
+comp:ComplianceStatusType a owl:Class ;
+    rdfs:label "ComplianceStatusType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#MANDATORY> <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#VOLUNTARY> <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#RECOMMENDED> <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#OPTIONAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#NOT_APPLICABLE> <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#PENDING> <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#SUPERSEDED> <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#TRANSITIONAL> ) ;
+    skos:definition "Types of compliance status" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#MANDATORY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#NOT_APPLICABLE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#OPTIONAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#PENDING>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#RECOMMENDED>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#SUPERSEDED>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#TRANSITIONAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ComplianceStatusType#VOLUNTARY> .
+
+comp:ManagementSystemType a owl:Class ;
+    rdfs:label "ManagementSystemType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#QMS> <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#EMS> <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#OHS> <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#ISMS> <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#ENERGY> <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#CSR> <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#FSMS> <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#BCM> ) ;
+    skos:definition "Types of management systems" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#BCM>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#CSR>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#EMS>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#ENERGY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#FSMS>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#ISMS>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#OHS>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/ManagementSystemType#QMS> .
+
+comp:RequirementStatusType a owl:Class ;
+    rdfs:label "RequirementStatusType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#MANDATORY> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#PRESUMPTION_OF_CONFORMITY> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#RECOMMENDED> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#VOLUNTARY> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#SUPERSEDED> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#WITHDRAWN> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#DRAFT> <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#UNDER_REVIEW> ) ;
+    skos:definition "Status types for requirements in different jurisdictions" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#DRAFT>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#MANDATORY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#PRESUMPTION_OF_CONFORMITY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#RECOMMENDED>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#SUPERSEDED>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#UNDER_REVIEW>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#VOLUNTARY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/RequirementStatusType#WITHDRAWN> .
+
+comp:StatementType a owl:Class ;
+    rdfs:label "StatementType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#EMC> <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#SAFETY> <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ENVIRONMENTAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#RADIO> <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#CHEMICAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ENERGY> <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#PRIVACY> <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ACCESSIBILITY> ) ;
+    skos:definition "Types of compliance statements" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ACCESSIBILITY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#CHEMICAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#EMC>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ENERGY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#ENVIRONMENTAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#PRIVACY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#RADIO>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/StatementType#SAFETY> .
+
+comp:issuing_authority a owl:DatatypeProperty .
+
+comp:jurisdiction a owl:DatatypeProperty .
+
+comp:validity_period a owl:ObjectProperty .
+
+comp:EvidenceType a owl:Class ;
+    rdfs:label "EvidenceType" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#DECLARATION_OF_CONFORMITY> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#CERTIFICATE> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TEST_REPORT> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#INSPECTION_REPORT> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MARKING> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#ATTESTATION> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TYPE_EXAMINATION> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#APPROVAL> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TECHNICAL_FILE> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#VERIFICATION> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_CERTIFICATE> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_DATASHEET> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#SAFETY_DATA_SHEET> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#GRADE_CERTIFICATE> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#CHEMICAL_ANALYSIS> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#ORIGIN_CERTIFICATE> <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_PROPERTIES_TEST> ) ;
+    skos:definition "Types of evidence documents" ;
+    skos:inScheme comp: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#APPROVAL>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#ATTESTATION>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#CERTIFICATE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#CHEMICAL_ANALYSIS>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#DECLARATION_OF_CONFORMITY>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#GRADE_CERTIFICATE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#INSPECTION_REPORT>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MARKING>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_CERTIFICATE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_DATASHEET>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#MATERIAL_PROPERTIES_TEST>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#ORIGIN_CERTIFICATE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#SAFETY_DATA_SHEET>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TECHNICAL_FILE>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TEST_REPORT>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#TYPE_EXAMINATION>,
+        <https://ce-rise-models.codeberg.page/compliance-and-standards/EvidenceType#VERIFICATION> .
+
+
