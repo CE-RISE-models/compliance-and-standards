@@ -2,14 +2,16 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17938293.svg)](https://doi.org/10.5281/zenodo.17938293) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/compliance-and-standards/)
 
-Repository for the data model covering regulatory compliance, standards, and conformity-related information for products, including applicable regulations and standards, product commitments, documentary evidence (e.g., DoC, certificates, CE marking), process evidence, and structured regulatory information sheets with safety warnings, legally required safe-use instructions, EMC statements, EU Responsible Person details, and market- or regulation-specific identifiers.
+Repository for the data model covering regulatory compliance, standards, and conformity-related information for products and materials, including applicable regulations and standards, commitments, documentary evidence (e.g., DoC, certificates, CE marking), process evidence, and structured regulatory information sheets with safety warnings, legally required safe-use instructions, EMC statements, EU Responsible Person details, and market- or regulation-specific identifiers.
+
+**Applicability**: This model supports both **Digital Product Passports (DPP)** and **Digital Material Passports (DMP)**, providing a flexible framework for compliance and regulatory requirements regardless of whether the assessed entity is a finished product, raw material, material batch, or commodity.
 
 
 ---
 
 ## Data Model Structure
 
-The Compliance and Standards data model provides a comprehensive framework for capturing all regulatory, certification, and normative requirements for products. It enables tracking of legal compliance across different markets, documentation of conformity assessments, management of certifications and declarations, and structured storage of legally required information including safety instructions, responsible person details, and market-specific regulatory identifiers.
+The Compliance and Standards data model provides a comprehensive framework for capturing all regulatory, certification, and normative requirements for products and materials. It enables tracking of legal compliance across different markets, documentation of conformity assessments, management of certifications and declarations, and structured storage of legally required information including safety instructions, responsible person details, and market-specific regulatory identifiers.
 
 ### Key Design Principles
 
@@ -22,8 +24,8 @@ The Compliance and Standards data model provides a comprehensive framework for c
 ### Core Hierarchy
 
 ```
-ComplianceAndStandards (root)
-├── 1. ProductCommitments
+ComplianceAndStandards (root - for products and materials)
+├── 1. EntityCommitments
 │   └── Commitment (repeatable)
 │       ├── CommitmentIdentifier
 │       ├── CommitmentStatement
@@ -50,13 +52,13 @@ ComplianceAndStandards (root)
 │       ├── StakeholderScope
 │       │   ├── ApplicableMarkets
 │       │   ├── CustomerSegments
-│       │   └── ProductVariants
+│       │   └── EntityVariants (product models, material grades, batches)
 │       └── EvidenceReferences
 │           ├── SupportingDocuments
 │           ├── CertificationLinks
 │           ├── AuditRecords
 │           └── TestReports
-├── 2. ApplicableRegulationStandards
+├── 2. ApplicableRegulationStandards (Products and Materials)
 │   └── RequirementEntry (repeatable)
 │       ├── RequirementIdentifier
 │       ├── RequirementType (Regulation/Standard/Specification)
@@ -76,16 +78,16 @@ ComplianceAndStandards (root)
 │       ├── CommitmentLinks (references to related commitments)
 │       ├── ComplianceEvidenceLinks (references to supporting evidence)
 │       ├── RequirementScope
-│       │   ├── ProductCategories
+│       │   ├── EntityCategories (product categories, material types)
 │       │   ├── IndustrySectors
 │       │   ├── TechnicalDomains
 │       │   ├── Exclusions
 │       │   └── SpecialConditions
 │       ├── HarmonizedStandards
 │       └── AmendmentHistory
-├── 3. ProductEvidence
+├── 3. EntityEvidence
 │   └── EvidenceDocument (repeatable)
-│       ├── EvidenceType (DoC/Certificate/TestReport/Marking/Other)
+│       ├── EvidenceType (DoC/Certificate/TestReport/MaterialCertificate/SDS/GradeCertificate/ChemicalAnalysis/OriginCertificate/MaterialPropertiesTest/Marking/Other)
 │       ├── DocumentIdentifier
 │       ├── DocumentTitle
 │       ├── IssueDate
@@ -100,7 +102,8 @@ ComplianceAndStandards (root)
 │       │   ├── AuthorityCountry
 │       │   └── NotifiedBodyNumber
 │       ├── ScopeOfEvidence
-│       │   ├── ProductsCovered
+│       │   ├── EntitiesCovered (products, materials, batches, families)
+│       │   ├── BatchLotIdentifiers (for materials tracked at batch level)
 │       │   ├── StandardsVersions (with specific versions)
 │       │   ├── RequirementReferences
 │       │   ├── TechnicalSpecifications
@@ -189,13 +192,13 @@ ComplianceAndStandards (root)
 
 ### Workflow Sequence
 
-#### **Step 1: ProductCommitments**
-Flexible framework for all types of product-related commitments:
+#### **Step 1: EntityCommitments**
+Flexible framework for all types of commitments for products or materials:
 - **Commitment Structure**: Generic, repeatable commitment container
 - **Multi-Category Support**: Each commitment can be tagged as regulatory, voluntary, contractual, or multiple categories simultaneously
 - **Jurisdictional Flexibility**: Same commitment can have different statuses in different markets
 - **Temporal Evolution**: Tracks how commitment status changes over time (voluntary becoming regulatory)
-- **Stakeholder Scope**: Defines which markets, customers, or product variants the commitment applies to
+- **Stakeholder Scope**: Defines which markets, customers, or entity variants (product models, material grades) the commitment applies to
 - **Evidence Linking**: Direct references to supporting documentation and certifications
 
 #### **Step 2: ApplicableRegulationStandards**
@@ -206,20 +209,21 @@ Flexible framework for all types of requirements with jurisdictional awareness:
 - **Commitment Integration**: Links requirements to related commitments and evidence
 - **Evolution Support**: Tracks effective dates and end dates for changing requirements
 
-#### **Step 3: ProductEvidence**
-Unified evidence framework supporting multiple document types:
-- **EvidenceDocument**: Generic structure for any type of compliance evidence
+#### **Step 3: EntityEvidence**
+Unified evidence framework supporting multiple document types for products and materials:
+- **EvidenceDocument**: Generic structure for any type of compliance evidence including material-specific types (material certificates, safety data sheets, grade certificates, chemical analysis, origin certificates, material property tests)
 - **Version-Aware**: Links to specific versions of standards/regulations
 - **Commitment Linkage**: Explicitly references which commitments the evidence supports
 - **Digital Trust**: Includes digital signature and document retention information
-- **Flexible Scope**: Can cover products, processes, or organizational compliance
+- **Flexible Scope**: Can cover products, materials, batches/lots, processes, or organizational compliance
+- **Batch/Lot Tracking**: Supports batch or lot-level compliance tracking for materials
 
 #### **Step 4: ProcessEvidence**
 Integrated management systems evidence with commitment alignment:
 - **ManagementSystem**: Flexible structure for any management system type
 - **Audit Trail**: Complete audit history with findings and corrective actions
 - **Performance Tracking**: KPIs and improvement targets
-- **Commitment Links**: Shows how management systems support product commitments
+- **Commitment Links**: Shows how management systems support commitments for products or materials
 - **Evidence Integration**: References to supporting certificates and documents
 
 #### **Step 5: RegulatoryInformation**

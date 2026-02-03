@@ -2,6 +2,24 @@
 
 All notable changes to the CE-RISE Compliance and Standards Data Model will be documented in this file.
 
+## [0.0.3] - 2026-02-03
+
+### Breaking Changes
+- **BREAKING**: Renamed classes and fields from "product" to "entity" terminology (`ProductCommitments` → `EntityCommitments`, `ProductEvidence` → `EntityEvidence`, `product_variants` → `entity_variants`, etc.)
+- **BREAKING**: Updated SQL identifiers to reflect entity terminology
+
+### Added
+- Explicit support for Digital Material Passports (DMP) alongside Digital Product Passports (DPP)
+- Unified "entity" terminology supporting products, materials, batches, and commodities
+- DMP-related keywords to citation metadata
+- Material-specific evidence types: MATERIAL_CERTIFICATE, MATERIAL_DATASHEET, SAFETY_DATA_SHEET, GRADE_CERTIFICATE, CHEMICAL_ANALYSIS, ORIGIN_CERTIFICATE, MATERIAL_PROPERTIES_TEST
+- Batch/lot identifier tracking in ScopeOfEvidence for materials tracked at batch level
+- Enhanced ontology references: BFO, CHEBI, DCAT for material-specific evidence types
+- Standard references: EN 10204, ISO 10474, ISO/IEC 17025, ASTM E-series, UN GHS, REACH Annex II, ISO 22000, OECD Due Diligence Guidance
+
+### Changed
+- All documentation now uses "entity" or "products and materials" terminology
+
 ## [0.0.2] - 2025-12-15
 
 ### Added

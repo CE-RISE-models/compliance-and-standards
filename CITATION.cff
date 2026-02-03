@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: CE-RISE Compliance and Standards
 message: >-
-  v0.0.2 - Added refs from Beta data model release.
+  v0.0.3 - Updated to support both Digital Product Passports (DPP) and Digital Material Passports (DMP) with unified entity terminology.
 type: software
 doi: 10.5281/zenodo.17938293
 authors:
@@ -18,8 +18,9 @@ repository-code: 'https://codeberg.org/CE-RISE-models/compliance-and-standards'
 url: 'https://ce-rise-models.codeberg.page/compliance-and-standards/'
 abstract: >-
   Data model for regulatory compliance, standards, and conformity-related information
-  for products, including applicable regulations and standards, product commitments,
+  for products and materials, including applicable regulations and standards, commitments,
   documentary evidence, process evidence, and structured regulatory information sheets.
+  Supports both Digital Product Passports (DPP) and Digital Material Passports (DMP).
 keywords:
   - CE-RISE
   - Compliance
@@ -27,6 +28,9 @@ keywords:
   - Regulatory
   - Conformity
   - Digital Product Passport
+  - DPP
+  - Digital Material Passport
+  - DMP
   - LinkML
   - Ontology
 license: CC-BY-NC-4.0

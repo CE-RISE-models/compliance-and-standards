@@ -3,11 +3,12 @@ name: compliance_and_standards
 title: CE-RISE Compliance and Standards Data Model
 description: >-
     Data model for regulatory compliance, standards, and conformity-related information
-    for products, including applicable regulations and standards, product commitments,
+    for products and materials, including applicable regulations and standards, commitments,
     documentary evidence, process evidence, and structured regulatory information sheets.
+    Supports both Digital Product Passports (DPP) and Digital Material Passports (DMP).
 
 license: https://creativecommons.org/licenses/by-nc/4.0/
-version: 0.0.1
+version: 0.0.3
 
 prefixes:
     linkml: https://w3id.org/linkml/
@@ -26,6 +27,8 @@ prefixes:
     time: http://www.w3.org/2006/time#
     dcat: http://www.w3.org/ns/dcat#
     void: http://rdfs.org/ns/void#
+    gs1: https://www.gs1.org/voc/
+    iso: http://iso.org/tc184/sc4/
 
 imports:
     - linkml:types
@@ -41,26 +44,26 @@ classes:
     # Root Container Class
     ComplianceAndStandards:
         description: >-
-            Root container for all compliance and standards related information,
+            Root container for all compliance and standards related information for products and materials,
             encompassing commitments, requirements, evidence, and regulatory data.
         annotations:
             sql_identifier: comp_root
         attributes:
-            product_commitments:
-                description: All product-related commitments (regulatory, voluntary, contractual)
-                range: ProductCommitments
+            entity_commitments:
+                description: All commitments for products or materials (regulatory, voluntary, contractual)
+                range: EntityCommitments
                 annotations:
-                    sql_identifier: comp_product_commitments
+                    sql_identifier: comp_entity_commitments
             applicable_regulation_standards:
                 description: Applicable regulations, standards, and specifications
                 range: ApplicableRegulationStandards
                 annotations:
                     sql_identifier: comp_applicable_regulations
-            product_evidence:
-                description: Documentary evidence supporting compliance claims
-                range: ProductEvidence
+            entity_evidence:
+                description: Documentary evidence supporting compliance claims for products or materials
+                range: EntityEvidence
                 annotations:
-                    sql_identifier: comp_product_evidence
+                    sql_identifier: comp_entity_evidence
             process_evidence:
                 description: Management system and process-related evidence
                 range: ProcessEvidence
@@ -73,12 +76,12 @@ classes:
                     sql_identifier: comp_regulatory_info
 
     # ================================================================================
-    # STAGE 1: PRODUCT COMMITMENTS
+    # STAGE 1: ENTITY COMMITMENTS (Products and Materials)
     # ================================================================================
 
-    ProductCommitments:
+    EntityCommitments:
         description: >-
-            Container for all product-related commitments, providing a flexible framework
+            Container for all commitments related to products or materials, providing a flexible framework
             for regulatory, voluntary, and contractual obligations that can evolve over time
             and vary by jurisdiction.
         annotations:
@@ -86,7 +89,7 @@ classes:
             owl.filler: schema:commitmentTo
         attributes:
             commitments:
-                description: List of individual product commitments
+                description: List of individual commitments for products or materials
                 multivalued: true
                 range: Commitment
                 annotations:
@@ -94,8 +97,8 @@ classes:
 
     Commitment:
         description: >-
-            A single commitment representing any type of product-related obligation,
-            promise, or compliance requirement with flexible categorization and
+            A single commitment representing any type of obligation for a product or material,
+            including compliance requirements with flexible categorization and
             jurisdiction-specific status tracking.
         annotations:
             sql_identifier: comp_commitment
@@ -262,7 +265,7 @@ classes:
     StakeholderScope:
         description: >-
             Defines the scope of applicability for a commitment including markets,
-            customer segments, and product variants.
+            customer segments, and entity variants (products or materials).
         annotations:
             sql_identifier: comp_stakeholder_scope
             owl.filler: org:scope
@@ -281,8 +284,8 @@ classes:
                 annotations:
                     sql_identifier: comp_scope_customers
                     owl.filler: schema:audience
-            product_variants:
-                description: Product variants or models covered by this commitment
+            entity_variants:
+                description: Entity variants (product models, material grades, batches) covered by this commitment
                 multivalued: true
                 range: string
                 annotations:
@@ -503,12 +506,12 @@ classes:
             sql_identifier: comp_requirement_scope
             owl.filler: dcterms:coverage
         attributes:
-            product_categories:
-                description: Product categories covered by this requirement
+            entity_categories:
+                description: Entity categories (product categories, material types) covered by this requirement
                 multivalued: true
                 range: string
                 annotations:
-                    sql_identifier: comp_scope_products
+                    sql_identifier: comp_scope_entities
                     owl.filler: schema:category
             industry_sectors:
                 description: Industry sectors where this applies
@@ -572,12 +575,12 @@ classes:
                     sql_identifier: comp_amend_type
                     owl.filler: prov:qualifiedRevision
 
-    ProductEvidence:
+    EntityEvidence:
         description: >-
-            Container for all documentary evidence supporting product compliance claims,
+            Container for all documentary evidence supporting compliance claims for products or materials,
             including declarations, certificates, test reports, and markings.
         annotations:
-            sql_identifier: comp_product_evidence
+            sql_identifier: comp_entity_evidence
             owl.filler: prov:Entity
         attributes:
             evidence_documents:
@@ -722,13 +725,22 @@ classes:
             sql_identifier: comp_scope_evidence
             owl.filler: dcterms:coverage
         attributes:
-            products_covered:
-                description: Products or product families covered
+            entities_covered:
+                description: Products, materials, batches, or families covered
                 multivalued: true
                 range: string
                 annotations:
-                    sql_identifier: comp_scope_products_covered
+                    sql_identifier: comp_scope_entities_covered
                     owl.filler: schema:Product
+            batch_lot_identifiers:
+                description: Batch or lot numbers covered by this evidence (for materials tracked at batch level)
+                multivalued: true
+                range: string
+                annotations:
+                    sql_identifier: comp_scope_batch_lot
+                    owl.filler: bfo:BFO_0000040
+                    references: "ISO 22000 (traceability); GS1 GTIN allocation rules"
+                    comment: "Batch/lot tracking per ISO 22000 traceability requirements"
             standards_versions:
                 description: Specific versions of standards covered
                 multivalued: true
@@ -1141,7 +1153,7 @@ classes:
                     sql_identifier: comp_reg_safety
                     references: "ESPR Art 7 5. d); King et al.; CIRPASS"
             usage_instructions:
-                description: Product usage and maintenance instructions
+                description: Entity usage and maintenance instructions (for products or materials)
                 range: UsageInstructions
                 annotations:
                     sql_identifier: comp_reg_usage
@@ -1225,13 +1237,13 @@ classes:
                     owl.filler: schema:image
 
     UsageInstructions:
-        description: Product usage and maintenance instructions
+        description: Entity usage and maintenance instructions (for products or materials)
         annotations:
             sql_identifier: comp_usage_instructions
             owl.filler: schema:instructions
         attributes:
             intended_use:
-                description: Intended use of the product
+                description: Intended use of the product or material
                 range: string
                 annotations:
                     sql_identifier: comp_usage_intended
@@ -1675,7 +1687,7 @@ enums:
                     sql_identifier: comp_evidtype_type_exam
                     owl.filler: schema:TypeExamination
             APPROVAL:
-                description: Type or product approval
+                description: Type, product, or material approval
                 annotations:
                     sql_identifier: comp_evidtype_approval
                     owl.filler: schema:Approval
@@ -1690,6 +1702,55 @@ enums:
                 annotations:
                     sql_identifier: comp_evidtype_verification
                     owl.filler: prov:qualifiedVerification
+            MATERIAL_CERTIFICATE:
+                description: Material certificate or mill test report (e.g., EN 10204 3.1, 3.2 certificates)
+                annotations:
+                    sql_identifier: comp_evidtype_material_cert
+                    owl.filler: bfo:BFO_0000030
+                    references: "EN 10204:2004; ASTM E2819; ISO 10474"
+                    comment: "Material certificates per EN 10204 types 2.1, 2.2, 3.1, 3.2"
+            MATERIAL_DATASHEET:
+                description: Technical material datasheet or material specification sheet
+                annotations:
+                    sql_identifier: comp_evidtype_material_datasheet
+                    owl.filler: dcat:Dataset
+                    references: "ISO 10303 (STEP); IPC-4101 (material datasheets)"
+                    comment: "Technical data sheets following industry standards"
+            SAFETY_DATA_SHEET:
+                description: Safety Data Sheet (SDS/MSDS) for hazardous materials
+                annotations:
+                    sql_identifier: comp_evidtype_sds
+                    owl.filler: chebi:CHEBI_33250
+                    references: "REACH Regulation (EC) No 1907/2006 Annex II; UN GHS Rev.9; ISO 11014; OSHA HCS 29 CFR 1910.1200"
+                    comment: "SDS following GHS 16-section format"
+            GRADE_CERTIFICATE:
+                description: Material grade verification certificate
+                annotations:
+                    sql_identifier: comp_evidtype_grade_cert
+                    owl.filler: bfo:BFO_0000030
+                    references: "ASTM A1058; ISO 10474; EN 10168"
+                    comment: "Material grade certificates per ISO/ASTM/EN standards"
+            CHEMICAL_ANALYSIS:
+                description: Chemical composition analysis report
+                annotations:
+                    sql_identifier: comp_evidtype_chemical_analysis
+                    owl.filler: chebi:CHEBI_33893
+                    references: "ISO/IEC 17025; ASTM E1019 (carbon/sulfur); ASTM E1479 (spectrometry)"
+                    comment: "Chemical analysis per ISO/IEC 17025 accredited laboratories"
+            ORIGIN_CERTIFICATE:
+                description: Certificate of origin for materials (conflict minerals, sustainable sourcing)
+                annotations:
+                    sql_identifier: comp_evidtype_origin_cert
+                    owl.filler: prov:Entity
+                    references: "EU Conflict Minerals Regulation 2017/821; EUTR 995/2010; OECD Due Diligence Guidance; Dodd-Frank Act Section 1502"
+                    comment: "Certificates for conflict minerals (3TG) and sustainable sourcing verification"
+            MATERIAL_PROPERTIES_TEST:
+                description: Material properties test report (tensile strength, hardness, purity, etc.)
+                annotations:
+                    sql_identifier: comp_evidtype_properties_test
+                    owl.filler: bfo:BFO_0000015
+                    references: "ASTM E8 (tensile); ASTM E18 (hardness); ISO 6892 (tensile); ISO 6508 (Rockwell); EN 10002"
+                    comment: "Mechanical and physical property testing per ISO/ASTM/EN standards"
 
     AuthorityType:
         description: Types of issuing authorities
