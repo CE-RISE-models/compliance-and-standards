@@ -2,6 +2,15 @@
 
 All notable changes to the CE-RISE Compliance and Standards Data Model will be documented in this file.
 
+## [0.1.0] - 2026-05-12
+
+### Added
+- Optional links from compliance commitments, status decisions, requirement entries, evidence documents, certification details, audit records, KPIs, and compliance statements to the CE-RISE uncertainty quantification, metrological traceability, and data quality framework utility models.
+- Utility-model fields are optional, so existing records that do not include uncertainty, traceability, or data quality details remain valid.
+
+### Changed
+- Disambiguated pre-existing duplicate `sql_identifier` annotations for root evidence/process slots and stakeholder-scope exclusions.
+
 ## [0.0.3] - 2026-02-03
 
 ### Breaking Changes

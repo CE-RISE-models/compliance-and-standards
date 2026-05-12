@@ -266,9 +266,9 @@ This identifier system enables seamless integration with databases and ensures c
 
 | Step | Component | Criticalities Identified | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------------|----------------------|--------|--------------|
-| **1** | **ProductCommitments** | • Evolving regulatory landscape<br>• Multi-jurisdictional complexity<br>• Overlapping commitment categories<br>• Temporal status changes | • Flexible tagging system<br>• Multi-category support<br>• Jurisdiction-specific status<br>• Timeline tracking<br>• Generic commitment structure | **COMPLETED** | • Automated status updates<br>• Regulatory change monitoring<br>• Cross-jurisdiction mapping |
+| **1** | **EntityCommitments** | • Evolving regulatory landscape<br>• Multi-jurisdictional complexity<br>• Overlapping commitment categories<br>• Temporal status changes | • Flexible tagging system<br>• Multi-category support<br>• Jurisdiction-specific status<br>• Timeline tracking<br>• Generic commitment structure | **COMPLETED** | • Automated status updates<br>• Regulatory change monitoring<br>• Cross-jurisdiction mapping |
 | **2** | **ApplicableRegulationStandards** | • Evolving requirements<br>• Multi-jurisdiction complexity<br>• Standards supersession<br>• Version tracking | • Flexible requirement structure<br>• Jurisdiction-specific status<br>• Successor references<br>• Commitment integration | **COMPLETED** | • Regulatory change monitoring<br>• Automated supersession tracking<br>• Standards database APIs |
-| **3** | **ProductEvidence** | • Evidence-commitment linking<br>• Version specificity<br>• Digital authenticity<br>• Document lifecycle | • Generic evidence framework<br>• Commitment references<br>• Version-aware scope<br>• Digital signature support | **COMPLETED** | • Automated commitment matching<br>• Blockchain anchoring<br>• Retention management |
+| **3** | **EntityEvidence** | • Evidence-commitment linking<br>• Version specificity<br>• Digital authenticity<br>• Document lifecycle | • Generic evidence framework<br>• Commitment references<br>• Version-aware scope<br>• Digital signature support | **COMPLETED** | • Automated commitment matching<br>• Blockchain anchoring<br>• Retention management |
 | **4** | **ProcessEvidence** | • System-commitment alignment<br>• Audit integration<br>• Performance tracking<br>• Multi-standard coverage | • Flexible system types<br>• Commitment linkage<br>• Audit trail capture<br>• KPI framework | **COMPLETED** | • Management system APIs<br>• Automated KPI collection<br>• Audit scheduling |
 | **5** | **RegulatoryInformation** | • Global market support<br>• Flexible identifiers<br>• Multi-party roles<br>• Evolving requirements | • Market-agnostic structure<br>• Repeatable components<br>• Jurisdiction-aware parties<br>• Key-value identifiers | **COMPLETED** | • Market requirement APIs<br>• Translation management<br>• Regulatory updates |
 
@@ -281,6 +281,7 @@ This identifier system enables seamless integration with databases and ensures c
 - **Document Management**: Digital signature platforms, blockchain notarization services
 - **Translation Services**: Multi-language compliance documentation systems
 - **Market Surveillance**: RAPEX, CPSC, product recall databases
+- **CE-RISE Utility Models**: Compliance commitments, status decisions, requirement entries, evidence documents, certifications, audits, KPIs, and compliance statements can optionally reference `uncertainty-quantification`, `metrological-traceability`, and `data-quality-framework` records where relevant
 
 
 ---

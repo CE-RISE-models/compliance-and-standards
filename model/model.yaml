@@ -8,7 +8,7 @@ description: >-
     Supports both Digital Product Passports (DPP) and Digital Material Passports (DMP).
 
 license: https://creativecommons.org/licenses/by-nc/4.0/
-version: 0.0.3
+version: 0.1.0
 
 prefixes:
     linkml: https://w3id.org/linkml/
@@ -29,9 +29,15 @@ prefixes:
     void: http://rdfs.org/ns/void#
     gs1: https://www.gs1.org/voc/
     iso: http://iso.org/tc184/sc4/
+    uq: https://ce-rise-models.codeberg.page/uncertainty-quantification/
+    mt: https://ce-rise-models.codeberg.page/metrological-traceability/
+    dqf: https://ce-rise-models.codeberg.page/data-quality-framework/
 
 imports:
     - linkml:types
+    - https://codeberg.org/CE-RISE-models/uncertainty-quantification/raw/tag/pages-v0.0.3/generated/schema
+    - https://codeberg.org/CE-RISE-models/metrological-traceability/raw/tag/pages-v0.0.3/generated/schema
+    - https://codeberg.org/CE-RISE-models/data-quality-framework/raw/tag/pages-v0.0.3/generated/schema
 
 default_prefix: comp
 default_range: string
@@ -63,12 +69,12 @@ classes:
                 description: Documentary evidence supporting compliance claims for products or materials
                 range: EntityEvidence
                 annotations:
-                    sql_identifier: comp_entity_evidence
+                    sql_identifier: comp_root_entity_evidence
             process_evidence:
                 description: Management system and process-related evidence
                 range: ProcessEvidence
                 annotations:
-                    sql_identifier: comp_process_evidence
+                    sql_identifier: comp_root_process_evidence
             regulatory_information:
                 description: Structured regulatory information including safety, instructions, and identifiers
                 range: RegulatoryInformation
@@ -153,6 +159,16 @@ classes:
                 range: EvidenceReferences
                 annotations:
                     sql_identifier: comp_commit_evidence_refs
+            commitment_data_quality_assessments:
+                description: Optional data quality assessments for commitment evidence, provenance, legal-source mapping, or completeness
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_commit_data_quality_assessments
+                    owl.filler: dqf:dataQualityAssessment
             version_info:
                 description: Version tracking for this commitment
                 range: string
@@ -236,6 +252,16 @@ classes:
                 annotations:
                     sql_identifier: comp_status_authority
                     owl.filler: schema:provider
+            compliance_status_data_quality_assessments:
+                description: Optional data quality assessments for jurisdiction-specific status determinations, authority references, effective dates, or applicability evidence
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_status_data_quality_assessments
+                    owl.filler: dqf:dataQualityAssessment
 
     ValidityPeriod:
         description: Time period during which something is valid
@@ -296,7 +322,7 @@ classes:
                 multivalued: true
                 range: string
                 annotations:
-                    sql_identifier: comp_scope_exclusions
+                    sql_identifier: comp_stakeholder_scope_exclusions
                     owl.filler: schema:exceptDate
 
     EvidenceReferences:
@@ -446,6 +472,16 @@ classes:
                 range: Amendment
                 annotations:
                     sql_identifier: comp_req_amendments
+            requirement_data_quality_assessments:
+                description: Optional data quality assessments for regulatory source metadata, version tracking, jurisdictional applicability, or standards mapping
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_req_data_quality_assessments
+                    owl.filler: dqf:dataQualityAssessment
 
     ApplicabilityStatus:
         description: >-
@@ -673,6 +709,36 @@ classes:
                 annotations:
                     sql_identifier: comp_evid_languages
                     owl.filler: dcterms:language
+            evidence_uncertainty_statements:
+                description: Optional uncertainty statements for measured, tested, calculated, or declared values reported by this evidence document
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_evid_uncertainty_statements
+                    owl.filler: uq:uncertaintyStatement
+            evidence_metrological_traceability_statements:
+                description: Optional metrological traceability statements for test methods, calibration chains, reference materials, measurement standards, or accredited procedures supporting this evidence document
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_evid_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            evidence_data_quality_assessments:
+                description: Optional data quality assessments for evidence provenance, completeness, representativeness, document integrity, or fitness for purpose
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_evid_data_quality_assessments
+                    owl.filler: dqf:dataQualityAssessment
 
     IssuingAuthority:
         description: Details about the authority issuing evidence
@@ -1016,6 +1082,16 @@ classes:
                 annotations:
                     sql_identifier: comp_cert_accreditation
                     owl.filler: org:hasAccreditation
+            certification_data_quality_assessments:
+                description: Optional data quality assessments for certification status, certification body accreditation, certificate validity, or evidence completeness
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_cert_data_quality_assessments
+                    owl.filler: dqf:dataQualityAssessment
 
     AuditRecord:
         description: Record of an audit
@@ -1060,6 +1136,16 @@ classes:
                 annotations:
                     sql_identifier: comp_audit_auditor
                     owl.filler: prov:wasAssociatedWith
+            audit_data_quality_assessments:
+                description: Optional data quality assessments for audit findings, corrective action evidence, audit scope, auditor provenance, or result reliability
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_audit_data_quality_assessments
+                    owl.filler: dqf:dataQualityAssessment
 
     PerformanceMetrics:
         description: Performance metrics and improvement targets
@@ -1111,6 +1197,36 @@ classes:
                 annotations:
                     sql_identifier: comp_kpi_period
                     owl.filler: time:hasTime
+            kpi_uncertainty_statements:
+                description: Optional uncertainty statements for KPI values, aggregation methods, assumptions, or measurement variability
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_kpi_uncertainty_statements
+                    owl.filler: uq:uncertaintyStatement
+            kpi_metrological_traceability_statements:
+                description: Optional metrological traceability statements for KPI measurements, data sources, calculation chains, standards, or boundary definitions
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_kpi_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            kpi_data_quality_assessments:
+                description: Optional data quality assessments for KPI data, provenance, completeness, representativeness, or fitness for compliance use
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_kpi_data_quality_assessments
+                    owl.filler: dqf:dataQualityAssessment
 
     ImprovementTarget:
         description: An improvement target
@@ -1338,6 +1454,36 @@ classes:
                 annotations:
                     sql_identifier: comp_statement_jurisdictions
                     owl.filler: schema:addressCountry
+            statement_uncertainty_statements:
+                description: Optional uncertainty statements for measured, tested, calculated, or declared values used in this compliance statement
+                range: UncertaintyStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_statement_uncertainty_statements
+                    owl.filler: uq:uncertaintyStatement
+            statement_metrological_traceability_statements:
+                description: Optional metrological traceability statements for tests, standards, methods, calibrations, or reference materials supporting this compliance statement
+                range: TraceabilityStatement
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_statement_metrological_traceability
+                    owl.filler: mt:traceabilityStatement
+            statement_data_quality_assessments:
+                description: Optional data quality assessments for statement evidence, provenance, completeness, jurisdictional validity, or fitness for purpose
+                range: DataQualityAssessment
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: comp_statement_data_quality_assessments
+                    owl.filler: dqf:dataQualityAssessment
 
     ResponsibleParties:
         description: Container for responsible parties
